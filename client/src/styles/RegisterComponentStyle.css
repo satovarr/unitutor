@@ -8,6 +8,7 @@
 }
 
 .RegisterCard {
+    max-height: 780px;
     background-color: var(--blueGrey-color-white);
     border-radius: 10px;
     box-shadow: var(--card-box-shadow-big);
@@ -35,13 +36,8 @@
     width: 100%;
 }
 
-img{
-    margin: auto;
-    width: 60%;
-}
-
 form{
-    margin: auto;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,6 +87,116 @@ form{
 .button {
     width: 100%;
 }
+
+.imageSelection {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-color-80);
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.imageSelection img{
+    display: block;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+}
+
+#profilepic {
+    display: none;
+}
+
+.imageSelection .icon {
+    position: absolute;
+    top: 55%;
+    right: 0;
+    stroke: var(--secondary-color-300); 
+    stroke-width:2;
+    z-index: 2;
+    opacity: 70%;
+}
+
+.imageSelection:hover::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    opacity: 30%;
+    background-color: var(--primary-color-200);
+    z-index: 1;
+}
+
+.imageSelection:hover .icon {
+    opacity: 100%;
+}
+
+.second-form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.pink_button {
+    background-color: var(--secondary-color-300);
+}
+
+.pink_button:hover {
+    background-color: var(--secondary-color-400);
+}
+
+#image-load-modal.hidden {
+    visibility: hidden;
+}
+
+#image-load-modal {
+    visibility: visible;
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-card {
+    padding: 50px;
+    background-color: var(--blueGrey-color-white);
+    border-radius: 20px;
+    font-size: 16px;
+    color: var(--ink-color-100);
+}
+
+.modal-card img {
+    height: 80px;
+    margin-bottom: 20px;
+    animation: rotation 1.2s linear infinite;
+}
+
+/* Animation for spinner */
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 /* Media queries */
 

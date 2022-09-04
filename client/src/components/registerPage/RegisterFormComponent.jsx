@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FormFirstStepComponent } from './FormFirstStepComponent';
 import { FormSecondStepComponent } from './FormSecondStepComponent';
+import ProgressBar from './ProgressBar';
 
 export const RegisterFormComponent = () => {
 
@@ -21,27 +22,29 @@ export const RegisterFormComponent = () => {
       setName("")
     }
   }
-
   return (
     <form onSubmit={onSubmit}>
-      <h1>{name}</h1>
-      {
-        firstStep? 
-        <FormFirstStepComponent
-          email={email}
-          setEmail={setEmail}
-          emailValidation={emailValidation}
-          setFirstStep={setFirstStep}
-        /> 
-        :
-        <FormSecondStepComponent
-          name={name}
-          tel={tel}
-          setName={setName}
-          setTel={setTel}
-          setFirstStep={setFirstStep}
-        />
-      }
+      <ProgressBar percentage={firstStep ? 50 : 100} />
+      <div>
+        <h1>{name}</h1>
+        {
+          firstStep ?
+            <FormFirstStepComponent
+              email={email}
+              setEmail={setEmail}
+              emailValidation={emailValidation}
+              setFirstStep={setFirstStep}
+            />
+            :
+            <FormSecondStepComponent
+              name={name}
+              tel={tel}
+              setName={setName}
+              setTel={setTel}
+              setFirstStep={setFirstStep}
+            />
+        }
+      </div>
     </form>
     
   )

@@ -1,16 +1,16 @@
 import GoogleIcon from '../../imgs/Google.svg'
 
-const Button = ({ type, text, handleClick }) => {
+const Button = ({ htmlType, type, text, additionalClass, handleClick }) => {
     return (
-        <button className={`button button__${type}`} onClick={handleClick}> 
+        <button type={htmlType} className={`button button__${type} ${additionalClass || ''}`} onClick={handleClick}> 
             {text}
         </button>
     )
 }
 
-export const GoogleButton = ({ text, type, handleClick }) => {
+export const GoogleButton = ({ htmlType, text, type, additionalClass, handleClick }) => {
     return (
-        <button className={`button button__${type} button__Google`} onClick={handleClick}>
+        <button type={htmlType} className={`button button__${type} ${additionalClass || ''} button__Google`} onClick={handleClick}>
             <span className='icon'>
                 <img src={GoogleIcon} alt='googleLogo'/>
             </span>
