@@ -1,0 +1,44 @@
+.button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-radius: 8px;
+
+    width: 250px;
+    min-height: 44px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    transition: background-color .2s ease-in-out;
+}
+
+.button__Primary {
+    border: none;
+    background: var(--primary-color-300);
+    color: var(--blueGrey-color-100);
+}
+
+.button .icon {
+    height: 24px;
+}
+
+.button .icon img{
+    height: 24px;
+    width: 24px;
+}
+
+.button__Google {
+    background-color: var(--secondary-color-300);
+}
+
+/* Adding state properties */
+.button__Primary:hover {
+    background-color: var(--primary-color-400);
+}
+
+.button__Google:hover {
+    background-color: var(--secondary-color-400);
+}

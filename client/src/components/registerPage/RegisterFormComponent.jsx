@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FormFirstStepComponent } from './FormFirstStepComponent';
 import { FormSecondStepComponent } from './FormSecondStepComponent';
-import '../../styles/RegisterComponentStyle.css';
 
 export const RegisterFormComponent = () => {
 

@@ -1,0 +1,56 @@
+.input {
+    width: 250px;
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 14px 16px;
+    gap: 10px;
+    background: var(--blueGrey-color-white);
+    border: 2px solid var(--blueGrey-color-400);
+    border-radius: 8px;
+    color: var(--blueGrey-500);
+    transition: border-color .2s ease-in-out;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-group label {
+    font-size: 12px;
+    line-height: 24px;
+    color: var(--ink-color-80);
+    font-weight: 500;
+}
+
+.input__Password {
+    position: relative;
+}
+
+.input__Password .icon {
+    position: absolute;
+    display: block;
+    width: 24px;
+    height: 24px;
+    right: 16px;
+    top: 10px;
+
+    stroke: #848996;
+    stroke-width: 2;
+}
+
+/* Animations */
+.input:hover {
+    border-color: var(--primary-color-200);
+}
+
+.input__Password .icon:hover {
+    stroke: var(--primary-color-200);
+}
+
+.input:focus {
+    outline-color: var(--primary-color-300);
+}
