@@ -30,19 +30,25 @@ export const RegisterFormComponent = () => {
   return (
     <form onSubmit={onSubmit} autoComplete="off">
       <ProgressBar percentage={firstStep ? 50 : 100} />
-      <FormFirstStepComponent
-        info={info}
-        setInfo={setInfo}
-        setFirstStep={setFirstStep}
-        display={firstStep}
-      /> 
+      {
+      firstStep?
+        <FormFirstStepComponent
+          info={info}
+          setInfo={setInfo}
+          setFirstStep={setFirstStep}
+          display={firstStep}
+        /> 
+      :
+        <FormSecondStepComponent
+          info={info}
+          setInfo={setInfo}
+          setFirstStep={setFirstStep}
+          display={firstStep}
+        />
+      }
+      
 
-      <FormSecondStepComponent
-        info={info}
-        setInfo={setInfo}
-        setFirstStep={setFirstStep}
-        display={firstStep}
-      />
+      
     </form>
     
   )
