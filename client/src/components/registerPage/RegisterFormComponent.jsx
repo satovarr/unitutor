@@ -5,7 +5,7 @@ import ProgressBar from './ProgressBar';
 
 export const RegisterFormComponent = () => {
 
-  // Info object
+  // Initial info object
   const initialState = {
     email: '',
     pass: '',
@@ -25,7 +25,11 @@ export const RegisterFormComponent = () => {
   const onSubmit = ( event ) => {
     event.preventDefault();
     console.log(info);
+    //
+    //
     //TODO: SEND INFO TO BACK.
+    //
+    //
   }
   return (
     <form onSubmit={onSubmit} autoComplete="off">
