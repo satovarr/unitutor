@@ -4,7 +4,7 @@ import Button from './Button';
 import { InputGroup } from './InputGroup'
 import Loader from '../../imgs/loader.svg'
 
-export const FormSecondStepComponent = ( {name, setName, tel, setTel, setFirstStep} ) => {
+export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} ) => {
     const [image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
 
     const handleImageChange = ( {target} ) => {
@@ -18,12 +18,20 @@ export const FormSecondStepComponent = ( {name, setName, tel, setTel, setFirstSt
         //TODO: Handle picture upload and use modal to
         //wait for upload to be completed successfully
         setTimeout(() => { modal.classList.toggle('hidden') }, 2000)
-        
+        setInfo({...info, profilePic: target.files[0] });
     }
 
     const handleClick = ( event ) => {
         event.preventDefault()
         setFirstStep(true)
+    }
+
+    const onNameChange = ( { target } ) => setInfo({ ...info, name: target.value.trim() });
+
+    const onTelChange = ( { target } ) => {
+        if(/^\d*$/.test(target.value) && target.value.length <= 10){
+            setInfo({ ...info, tel: target.value });
+        }
     }
 
     return (
@@ -47,23 +55,28 @@ export const FormSecondStepComponent = ( {name, setName, tel, setTel, setFirstSt
                 <p>Foto de perfil</p>
             </label>
             <div className="second-form-inputs">
-                <InputGroup
-                    label="Nombre"
-                    id="name"
-                    placeholder="Ingresa nombre completo"
-                    type="text"
-                    state={name}
-                    setState={setName}
-                />
-
-                <InputGroup
-                    label="Número de teléfono (opcional)"
-                    id="tel"
-                    placeholder="Ingresa número de teléfono"
-                    type="text"
-                    state={tel}
-                    setState={setTel}
-                />
+                <div>
+                    <label htmlFor="name">Nombre</label>
+                    <input
+                        type="text" 
+                        value={info.name}
+                        placeholder="Ingresa nombre completo"
+                        id="name"
+                        name="name"
+                        onChange={onNameChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="name">Teléfono</label>
+                    <input
+                        type="text" 
+                        value={info.tel}
+                        placeholder="(+57) | 3001231111"
+                        id="tel"
+                        name="tel"
+                        onChange={onTelChange}
+                    />
+                </div>
             </div>
             
             <div className="buttonsContainer">

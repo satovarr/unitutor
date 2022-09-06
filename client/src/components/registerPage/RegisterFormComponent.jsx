@@ -5,46 +5,44 @@ import ProgressBar from './ProgressBar';
 
 export const RegisterFormComponent = () => {
 
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [tel, setTel] = useState("");
+  // Info object
+  const initialState = {
+    email: '',
+    pass: '',
+    passConfirm: '',
+    profilePic: '',
+    tel: '',
+    name: ''
+  }
+
+  //Info state
+  const [info, setInfo] = useState(initialState);
+
+  //This state is for alternate between the two steps of the form
   const [firstStep, setFirstStep] = useState(true);
 
+  //Handle submit of the fom.
   const onSubmit = ( event ) => {
     event.preventDefault();
-    console.log(event)
-  }
-
-  const emailValidation = ( {target} ) => {
-    if(!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(target.value))){
-      setName("HOLA")
-    } else {
-      setName("")
-    }
+    console.log(info);
+    //TODO: SEND INFO TO BACK.
   }
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} autoComplete="off">
       <ProgressBar percentage={firstStep ? 50 : 100} />
-      <div>
-        <h1>{name}</h1>
-        {
-          firstStep ?
-            <FormFirstStepComponent
-              email={email}
-              setEmail={setEmail}
-              emailValidation={emailValidation}
-              setFirstStep={setFirstStep}
-            />
-            :
-            <FormSecondStepComponent
-              name={name}
-              tel={tel}
-              setName={setName}
-              setTel={setTel}
-              setFirstStep={setFirstStep}
-            />
-        }
-      </div>
+      <FormFirstStepComponent
+        info={info}
+        setInfo={setInfo}
+        setFirstStep={setFirstStep}
+        display={firstStep}
+      /> 
+
+      <FormSecondStepComponent
+        info={info}
+        setInfo={setInfo}
+        setFirstStep={setFirstStep}
+        display={firstStep}
+      />
     </form>
     
   )

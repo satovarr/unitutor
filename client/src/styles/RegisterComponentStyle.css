@@ -20,6 +20,13 @@
     width: fit-content;
 }
 
+.FormSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .form-header {
     font-size: 18px;
     color: var(--ink-color-80);
@@ -31,6 +38,8 @@
     width: 100%;
     margin-bottom: 30px;
 }
+
+
 
 .ProgressBar{
     width: 100%;
