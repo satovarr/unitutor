@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const PasswordInput = ({ placeholder, id }) => {
+const PasswordInput = ({ placeholder, id, name, onChange }) => {
     //State to hide/show password
     const [showPass, setShowPass]  = useState(false)
 
@@ -10,7 +10,14 @@ const PasswordInput = ({ placeholder, id }) => {
 
     return (
         < div className='input__Password' >
-            <input id={id} type={showPass ? '': 'password'} placeholder={placeholder} className="input input__Password" />
+            <input
+                id={id}
+                type={showPass ? '': 'password'}
+                placeholder={placeholder}
+                className="input input__Password"
+                name={name}
+                onChange={onChange}
+            />
             <span className='icon' onClick={togglePassword}>
                 {
                     showPass

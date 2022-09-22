@@ -228,4 +228,8 @@ form{
     .input {
         width: 374px !important; 
     }
+
+    #passError {
+        width: 374px !important;
+    }
 }

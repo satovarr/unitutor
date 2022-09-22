@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Button from './Button'
+import { PasswordField } from './PasswordField'
+import { InputGroup } from './InputGroup'
 import { GoogleButton } from './Button'
 
 export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) => {  
@@ -53,7 +55,7 @@ export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) 
     //Password validation
     useEffect(() => {
         //Must have at least 8 characters, 1upper case letter, 1lower case letter, 1 number and an special character.
-        if( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(info.pass) ){
+        if ( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+-^_])[A-Za-z\d@$!%*?&+-^_]{8,}$/.test(info.pass) ){
             if( (info.pass && info.passConfirm) && (info.pass === info.passConfirm)){
                 setIsValid({...isValid, pass: true});
             } else {
@@ -75,21 +77,25 @@ export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) 
     }, [info.pass, info.passConfirm])
     
   return (
-    <div  className="FormSection form-mail-input" style={display? {display: "flex"}:{display: "none"}}>
-        <div>
-            <label htmlFor="email">Correo Electrónico</label>
-            <input
-                type="text" 
-                value={info.email}
-                placeholder="Ej: deivid232@gmail.com"
+    <div>
+        <div className='form-mail-input'>
+            <InputGroup
+                label="Correo electrónico"
                 id="email"
-                name="email"
+                placeholder="Ej: deivid232@gmail.com"
+                type="text"
+                value={info.email}
                 onChange={onInputChange}
+                name={'email'}
             />
-            <p id='emailError'>Correo inválido</p>
-        </div>
+        </div>    
 
-        <div>
+        <PasswordField 
+            onChange={onInputChange}
+            values={[info.pass, info.passConfirm]}
+            names={['pass', 'passConfirm']}
+        />
+        {/* <div>
             <label htmlFor="pass">Contraseña</label>
             <input
                 type="password" 
@@ -109,7 +115,7 @@ export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) 
                 onChange={onInputChange}
             />
             <p id='confirmPassError'>Las contraseñas no coinciden</p>
-        </div>
+        </div> */}
 
         <div className='buttonsContainer'>
                 <Button text={'Continuar con el correo'}

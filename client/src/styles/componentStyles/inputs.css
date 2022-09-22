@@ -42,6 +42,13 @@
     stroke-width: 2;
 }
 
+#passError, #confirmPassError {
+    width: 250px;
+    font-size: 12px;
+    color: var(--error-color-300);
+    text-align: start;
+}
+
 /* Animations */
 .input:hover {
     border-color: var(--primary-color-200);
