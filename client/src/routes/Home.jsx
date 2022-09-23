@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import '../styles/Home.css'
 import Navbar from "../components/Navbar"
+import Banner from "../components/homePage/Banner"
+
 const Home = () => {
 
     const navigate = useNavigate()
@@ -26,9 +28,7 @@ const Home = () => {
     return (
         <div className="home_body">
             <Navbar goRegister={goToRegister} session={activeSession} handleLogin={handleLogin} handleLogout={handleLogout}/>
-            <p>Aquí va la home page</p>
-            <Link to={'/register'}>Ir a registro</Link>
-            <div className='test'>Test</div>
+            <Banner />
         </div>
     )
 }
