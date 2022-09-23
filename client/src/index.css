@@ -37,12 +37,12 @@
   --blueGrey-color-700: #1A233E;
 
   /* Card Box shadows */
-  --card-box-shadow-big: 0px 0px 0px 1px #E8E8E8,
-    0px 0px 2px rgba(0, 0, 0, 0.12),
-    0px 20px 20px rgba(0, 0, 0, 0.08);
-  --card-box-shadow-small: 1px 1px 1px rgba(0, 0, 0, 0.08),
-    0px 2px 4px rgba(44, 43, 42, 0.1),
-    inset 0px -14px 62px rgba(0, 0, 0, 0.03);
+  --card-box-shadow-big-1: 0px 0px 0px 1px #E8E8E8;
+  --card-box-shadow-big-2: 0px 0px 2px rgba(0, 0, 0, 0.12);
+  --card-box-shadow-big-3: 0px 20px 20px rgba(0, 0, 0, 0.08);
+  --card-box-shadow-small-1: 1px 1px 1px rgba(0, 0, 0, 0.08);
+  --card-box-shadow-small-2: 0px 2px 4px rgba(44, 43, 42, 0.1);
+  --card-box-shadow-small-3: inset 0px -14px 62px rgba(0, 0, 0, 0.03);
 }
 
 /* Other base config */

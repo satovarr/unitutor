@@ -1,6 +1,6 @@
-import GoogleIcon from '../../imgs/Google.svg'
+import GoogleIcon from '../imgs/Google.svg'
 
-const Button = ({ htmlType, type, text, additionalClass, handleClick, disabled }) => {
+const Button = ({ htmlType, type='Primary', text, additionalClass, handleClick, disabled }) => {
     return (
         <button type={htmlType} className={`button button__${type} ${additionalClass || ''}`} disabled={disabled} onClick={handleClick}> 
             {text}

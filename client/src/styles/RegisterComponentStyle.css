@@ -254,7 +254,7 @@ form{
 }
 
 @media (min-width: 560px) {
-    .input {
+    .reg_input {
         width: 374px !important; 
     }
 

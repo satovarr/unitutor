@@ -11,7 +11,7 @@ export const InputGroup = ({label, id, placeholder, type="text", value='', onCha
                     onChange={onChange}
                     placeholder={placeholder}
                     id={id}
-                    className={`input input__${variant}`}
+                    className={`input input__${variant} reg_input`}
                     name={name}
                 />
             </div>

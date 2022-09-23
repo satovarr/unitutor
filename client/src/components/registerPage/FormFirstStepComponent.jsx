@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Button from './Button'
+import Button from '../Button'
 import { PasswordField } from './PasswordField'
 import { InputGroup } from './InputGroup'
-import { GoogleButton } from './Button'
+import { GoogleButton } from '../Button'
 
 export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) => {  
   

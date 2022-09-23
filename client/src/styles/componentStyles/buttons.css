@@ -21,6 +21,12 @@
     color: var(--blueGrey-color-100);
 }
 
+.button__Secondary {
+    border: 1px solid var(--primary-color-300);
+    background: var(--blueGrey-color-white);
+    color: var(--primary-color-300);
+}
+
 .button .icon {
     height: 24px;
 }
@@ -37,6 +43,12 @@
 /* Adding state properties */
 .button__Primary:hover {
     background-color: var(--primary-color-400);
+}
+
+.button__Secondary:hover {
+    background-color: var(--primary-color-100);
+    color: var(--primary-color-400);
+    border-color: var(--primary-color-400);
 }
 
 .button__Google:hover {

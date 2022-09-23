@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import Button from './Button';
+import Button from '../Button';
 import { InputGroup } from './InputGroup'
 import Loader from '../../imgs/loader.svg'
 

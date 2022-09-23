@@ -14,7 +14,7 @@ const PasswordInput = ({ placeholder, id, name, onChange }) => {
                 id={id}
                 type={showPass ? '': 'password'}
                 placeholder={placeholder}
-                className="input input__Password"
+                className="input input__Password reg_input"
                 name={name}
                 onChange={onChange}
             />
