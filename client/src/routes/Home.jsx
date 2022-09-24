@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import '../styles/Home.css'
 import Navbar from "../components/Navbar"
 import Banner from "../components/homePage/Banner"
+import HowItWorks from "../components/homePage/HowItWorks"
 
 const Home = () => {
 
@@ -29,6 +30,7 @@ const Home = () => {
         <div className="home_body">
             <Navbar goRegister={goToRegister} session={activeSession} handleLogin={handleLogin} handleLogout={handleLogout}/>
             <Banner />
+            <HowItWorks />
         </div>
     )
 }
