@@ -1,0 +1,87 @@
+.main_subcategorie {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    height: max-content;
+
+    box-shadow: var(--card-box-shadow-small-1),
+    var(--card-box-shadow-small-2),
+    var(--card-box-shadow-small-3);
+
+    border-radius: 10px;
+    transition: .3s all ease-in-out;
+}
+
+.main_subcategorie img {
+    display: block;
+    width: 300px;
+    height: 150px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    pointer-events: none;
+}
+
+.main_subcategorie p {
+    position: relative;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink-color-80);
+    padding: 20px;
+    pointer-events: none;
+    width: 100%;
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all .3s ease-in-out;
+}
+
+.main_subcategorie p::after {
+    content: url('../../imgs/arrow-right.svg');
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 22px;
+    left: 125px;
+    opacity: 0;
+    transition: left .3s ease-in-out;
+}
+
+.main_subcategorie a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main_subcategorie:hover {
+    transform: scale(1.1)
+}
+
+.main_subcategorie:hover p {
+    background-color: var(--primary-color-100);
+}
+
+.main_subcategorie:hover p::after {
+    opacity: 1;
+    left: 140px;
+}
+
+/* Media queries */
+@media (max-width: 1023px){
+    .main_subcategorie img {
+        width: 250px;
+        height: 125px;
+    }
+}
+
+@media (min-width: 510px) and (max-width: 600px) {
+    .main_subcategorie img {
+        width: 200px;
+        height: 100px;
+    }
+}

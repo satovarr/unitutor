@@ -1,9 +1,11 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import '../styles/Home.css'
 import Navbar from "../components/Navbar"
 import Banner from "../components/homePage/Banner"
 import HowItWorks from "../components/homePage/HowItWorks"
+import MainCategories from "../components/homePage/MainCategories"
+import Footer from "../components/Footer"
 
 const Home = () => {
 
@@ -31,6 +33,8 @@ const Home = () => {
             <Navbar goRegister={goToRegister} session={activeSession} handleLogin={handleLogin} handleLogout={handleLogout}/>
             <Banner />
             <HowItWorks />
+            <MainCategories />
+            <Footer />
         </div>
     )
 }
