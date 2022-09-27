@@ -1,6 +1,7 @@
 import '../../styles/componentStyles/mainCategories.css'
 import Category from './Category'
 import testPic2 from '../../imgs/testing_pic2.jpg'
+import { Link } from 'react-router-dom'
 
 const MainCategories = () => {
     
@@ -41,6 +42,7 @@ const MainCategories = () => {
                 category_name={testCategories[1].category_name}
                 subcategories={testCategories[1].subcategories}
             />
+            <Link to='/category' className='view_all'>Ver todas las categorías</Link>
         </section>
     )
 }

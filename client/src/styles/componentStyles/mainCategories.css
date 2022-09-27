@@ -24,6 +24,21 @@
     background-color: var(--secondary-color-300);
 }
 
+.mainCategories a {
+    color: var(--secondary-color-300);
+    text-decoration: none;
+}
+
+.mainCategories a:hover {
+    color: var(--secondary-color-400);
+}
+
+.mainCategories .view_all {
+    display: block;
+    margin-top: 40px;
+    text-align: center;
+}
+
 /* Media queries */
 @media (max-width: 375px) {
     .mainCategories h3 {

@@ -26,6 +26,12 @@
   --error-color-300: #CF0000;
   --error-color-400: #9E0000;
 
+  /* Success color shade */
+    --success-color-100: #ECFBF4;
+    --success-color-200: #94D8C5;
+    --success-color-300: #00825F;
+    --success-color-400: #005F45;
+
   /* Blue grey shade */
   --blueGrey-color-white: #FFFFFF;
   --blueGrey-color-100: #FBFBFB;

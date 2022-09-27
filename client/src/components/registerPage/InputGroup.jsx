@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InputGroup = ({label, id, placeholder, type="text", value='', onChange, variant="Default", name }) => {
+export const InputGroup = ({label, id, placeholder, type="text", value='', onChange, variant="Default", name, error, onBlur }) => {
   
     return (
             <div className='input-group'>
@@ -13,7 +13,11 @@ export const InputGroup = ({label, id, placeholder, type="text", value='', onCha
                     id={id}
                     className={`input input__${variant} reg_input`}
                     name={name}
+                    onBlur={onBlur}
                 />
+            <p id='mailError' className='inputError' style={{ 'display': error ? '' : 'none' }}>
+                    {error || ''}
+                </p>
             </div>
             )
 }

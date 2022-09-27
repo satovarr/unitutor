@@ -1,20 +1,22 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD4-kilj9A_bZOMTkWWbrwAzhD3lcOQWiY",
-  authDomain: "unitutor-f0c21.firebaseapp.com",
-  projectId: "unitutor-f0c21",
-  storageBucket: "unitutor-f0c21.appspot.com",
-  messagingSenderId: "1030142318033",
-  appId: "1:1030142318033:web:581b7fb9ec412406efbcf0",
-  measurementId: "G-V9L8BKF2P9"
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
-export {app, analytics, auth};
+export { app, analytics, auth, ref, storage, createUserWithEmailAndPassword, updateProfile, uploadBytesResumable, getDownloadURL };

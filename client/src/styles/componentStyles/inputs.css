@@ -60,8 +60,7 @@
 }
 
 
-#passError, #confirmPassError {
-    width: 250px;
+.inputError {
     font-size: 12px;
     color: var(--error-color-300);
     text-align: start;

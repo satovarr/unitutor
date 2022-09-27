@@ -1,7 +1,13 @@
 import React from 'react'
 import PasswordInput from './PasswordInput'
 
-export const PasswordField = ({onChange, names=['form-password', 'form-password-confirm'], values=['', '']}) => {
+export const PasswordField = ({
+  onChange, 
+  names = ['form-password', 'form-password-confirm'], 
+  values=['', ''], 
+  password_error,
+  confirmation_error
+}) => {
   return (
     <div className='password-field'>
       <div className='input-group'>
@@ -13,7 +19,9 @@ export const PasswordField = ({onChange, names=['form-password', 'form-password-
           value={values[0]}
           onChange={onChange}
         />
-        <p id='passError'>Tu contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un caracter especial.</p>
+        <p id='passError' className='inputError' style={{'display': password_error ? '' : 'none'}}>
+          {password_error || ''}
+        </p>
       </div>
       <div>
         <PasswordInput
@@ -23,7 +31,9 @@ export const PasswordField = ({onChange, names=['form-password', 'form-password-
           value={values[1]}
           onChange={onChange}
         />
-        <p id='confirmPassError'>Las contraseñas no coinciden</p>
+        <p id='confirmPassError' className='inputError' style={{ 'display': confirmation_error ? '' : 'none' }}>
+          {confirmation_error || ''}
+        </p>
       </div>
     </ div>
   )

@@ -2,7 +2,7 @@ import GoogleIcon from '../imgs/Google.svg'
 
 const Button = ({ htmlType, type='Primary', text, additionalClass, handleClick, disabled }) => {
     return (
-        <button type={htmlType} className={`button button__${type} ${additionalClass || ''}`} disabled={disabled} onClick={handleClick}> 
+        <button type={htmlType} className={`button button__${type} ${additionalClass || ''} ${disabled? 'disabled' : ''}`} onClick={handleClick}> 
             {text}
         </button>
     )

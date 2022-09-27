@@ -103,8 +103,8 @@ form{
     flex-direction: column;
     align-items: center;
     position: relative;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 600;
     color: var(--ink-color-80);
     margin: 0 auto;
     margin-top: 25px;
@@ -115,6 +115,7 @@ form{
     width: 125px;
     height: 125px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 #profilepic {
@@ -135,7 +136,7 @@ form{
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: 5px;
     width: 125px;
     height: 125px;
     border-radius: 50%;
@@ -174,6 +175,7 @@ form{
     top: 0;
     left: 0;
     width: 100%;
+    min-height: 780px;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
@@ -182,11 +184,12 @@ form{
     
 }
 
-.modal-card {
+#modal-card {
     padding: 50px;
     background-color: var(--blueGrey-color-white);
     border-radius: 20px;
     font-size: 16px;
+    font-weight: 600;
     color: var(--ink-color-100);
     display: flex;
     flex-direction: column;
@@ -194,11 +197,61 @@ form{
     align-items: center;
 }
 
-.modal-card img {
+#modal-card img {
     height: 80px;
     margin-bottom: 20px;
     animation: rotation 1.2s linear infinite;
+    display: none;
 }
+
+#modal-card.image-load img {
+    display: block;
+}
+
+#modal-card .button {
+    display: none;
+    transition: none;
+}
+
+#modal-card.image-load-error .button {
+    display: block;
+    margin-top: 30px;
+}
+
+.image-load-error p {
+    padding-top: 100px;
+    color: var(--error-color-300);
+}
+
+.image-load-error p::after {
+    width: 80px;
+    height: 80px;
+    content: '';
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 40px);
+    background: url('../imgs/error.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.image-load-success p {
+    padding-top: 100px;
+    color: var(--success-color-400);
+}
+
+.image-load-success p::after {
+    width: 80px;
+    height: 80px;
+    content: '';
+    position: absolute;
+    top: calc(50% - 70px);
+    left: calc(50% - 40px);
+    background: url('../imgs/check.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 
 #register_logo {
     cursor: pointer;
