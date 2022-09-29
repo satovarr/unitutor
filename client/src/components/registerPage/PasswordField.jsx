@@ -1,5 +1,5 @@
 import React from 'react'
-import PasswordInput from './PasswordInput'
+import PasswordInput from '../PasswordInput'
 
 export const PasswordField = ({
   onChange, 

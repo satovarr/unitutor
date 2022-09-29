@@ -3,7 +3,8 @@ import Button from '../Button'
 import { PasswordField } from './PasswordField'
 import { InputGroup } from './InputGroup'
 import { GoogleButton } from '../Button'
-import { auth, createUserWithEmailAndPassword } from '../../services/firebase'
+import { auth, createUserWithEmailAndPassword, provider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from '../../services/firebase'
+import { useNavigate } from 'react-router-dom'
 
 export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) => {  
   
@@ -16,6 +17,41 @@ export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) 
     // validation state
     const [isValid, setIsValid] = useState(initialValidation);
     const [errorMessageObj, setErrorMessageObj] = useState({});
+
+    const navigate = useNavigate();
+
+    //Get google register results
+    useEffect(() => {
+        getRedirectResult(auth)
+            .then(result => {
+                if(result) {
+                    let userInfo = result.user
+                    let createdAtMins = Number(userInfo.metadata.createdAt)
+                    let lastLoginAtMins = Number(userInfo.metadata.lastLoginAt)
+
+                    //Letting maximum difference between creation and last login to be 30s to be
+                    // considered a newly created account, else, it is assumed the account was already created
+                    if ((lastLoginAtMins - createdAtMins) <= 1) {
+                        setInfo({
+                            ...info,
+                            email: userInfo.email,
+                            profilePic: userInfo.photoURL,
+                            name: userInfo.displayName,
+                            userCredential: userInfo
+                        })
+                        setFirstStep(false);
+                    }
+                    else {
+                        //TODO: agregar modal
+                        navigate('/');
+                    }
+                }
+            })
+            .catch(error => {
+                //TODO: agregar modal para mostrar error
+            })
+        
+    }, [])
     
     // go-to-second-step button. It works only if validations are true
     const handleClick = ( event ) => {
@@ -38,11 +74,7 @@ export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) 
     // Registration with Google
     const handleGoogleClick = ( event ) => {
         event.preventDefault();
-        //
-        //
-        // TODO: HANDLE GOOGLE REGISTER WITH FIREBASE
-        //
-        //
+        signInWithRedirect(auth, provider);
     }
 
     // Changes info state

@@ -1,6 +1,9 @@
 .navBar {
     width: 100%;
     height: 124px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-bottom: 2px solid var(--blueGrey-color-300);
 }
 
@@ -46,7 +49,7 @@
     height: 3px;
     position: absolute;
     bottom: -3px;
-    left: 0;
+    left: 0px;
     background-color: var(--primary-color-200);
     transition: width .2s ease-in;
 }
@@ -72,23 +75,31 @@
 .nav_icon-button {
     position: relative;
     cursor: pointer;
-    width: 44px;
-    height: 44px;
+    width: 60px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--blueGrey-color-400);
     border-radius: 50%;
     background-color: var(--blueGrey-color-white);
-    transition: all .3s ease-in-out;
+    transition: outline .2s ease-in-out;
     z-index: 2;
+    background-color: var(--blueGrey-color-white);
 }
 
 .nav_icon-button img {
-    width: 44px;
-    height: 44px;
+    width: 60px;
+    height: 60px;
     padding: 10px;
     pointer-events: none;
+}
+
+#nav_profile-pic {
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 0px;
 }
 
 .nav_icon-button .nav_button_text {
@@ -96,9 +107,21 @@
     pointer-events: none;
 }
 
-.nav_icon-button:hover {
-    background-color: var(--primary-color-100);
-    border-color: var(--primary-color-300);
+.nav_icon-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    z-index: -1;
+    transition: .3s all ease-in-out;
+}
+
+.nav_icon-button:hover::before {
+    background-color: var(--secondary-color-200);
+    transform: scale(1.2);
 }
 
 .nav_notification-number {
@@ -124,10 +147,11 @@
 .nav_dropdown.content {
     position: absolute;
     width: 250px;
-    left: -115px;
-    background-color: var(--primary-color-50);
+    top: 65px;
+    left: -125px;
+    background-color: var(--blueGrey-color-white);
     border: 1px solid var(--primary-color-50);
-    padding: 20px 0px;
+    padding: 20px;
     box-shadow: var(--card-box-shadow-small-1), var(--card-box-shadow-small-2), var(--card-box-shadow-small-3);
     border-radius: 15px;
     
@@ -135,47 +159,42 @@
     flex-direction: column;
     gap: 10px;
     justify-content: center;
-    align-items: center;
-    margin-top: 18px;
+    margin-top: 5px;
     z-index: 3;
 }
 
-.nav_dropdown.content::after {
-    position: absolute;
-    content: "";
-    width: 0px;
-    height: 0px;
-    border-top: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-bottom: 15px solid var(--primary-color-50);
-    border-left: 15px solid transparent;
-    top: -30px;
-    right: 98px;
-}
-
-.nav_dropdown.profile {
-    left: -140px;
-    width: 200px;
-}
-
-.nav_dropdown.content.profile::after {
-    right: 22px;
+.nav_dropdown.content p {
+    width: 100%;
+    overflow: hidden;
 }
 
 .nav_dropdown.content button {
+    position: relative;
     background-color: transparent;
     border: none;
     width: 100%;
-    padding: 5px 20px;
+    max-width: 180px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 16px;
     transition: background-color .3s ease-in-out;
+    padding: 5px 0px;
 }
 
-.nav_dropdown.content button:hover {
+.nav_dropdown.content button::before {
+    content: '';
+    width: 0px;
+    height: 3px;
+    position: absolute;
+    bottom: -3px;
+    left: 0px;
     background-color: var(--primary-color-200);
+    transition: width .2s ease-in;
+}
+
+.nav_dropdown.content button:hover::before {
+    width: 100%;
 }
 
 .nav_burger-menu, .nav_close-menu {
@@ -193,6 +212,11 @@
 }
 
 /* Media queries */
+@media (max-width: 1530px) {
+    .nav_dropdown.content {
+        left: -165px;
+    }
+}
 
 @media (min-width: 1024px) and (max-width:1200px), (max-width: 480px){
     .nav_content {
@@ -209,6 +233,11 @@
 
     .nav_search.container {
         margin-right: 20px;
+        max-width: 600px;
+    }
+
+    .nav_dropdown.content {
+        left: -185px;
     }
 }
 
@@ -218,6 +247,25 @@
         content: url('../../imgs/UniTutor_logo-shapeOnly.svg');
         height: 55px;
         width: 77px;    
+    }
+
+    .nav_icon-button {
+        pointer-events: none;
+    }
+
+    .nav_open-session {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+    }
+
+    .nav_open-session:hover + .nav_icon-button::before {
+        background-color: var(--secondary-color-200);
+        transform: scale(1.2);
     }
 
     .nav_menu {
@@ -235,6 +283,19 @@
         border-radius: 10px;
         z-index: 10;
         transition: all .2s ease-in-out;
+    }
+
+    .nav_dropdown.content.hidden {
+        visibility: visible;
+        position: unset;
+        width: 100%;
+        box-shadow: none;
+        background-color: var(--blueGrey-color-100);
+        border: none
+    }
+
+    .nav_dropdown.content p, .nav_dropdown.content a {
+        margin-left: 0;
     }
 
     .nav__session::after {
@@ -260,7 +321,7 @@
     }
 
     .nav_menu a {
-        padding: 5px 10px;
+        padding: 5px 0px;
         text-align: center;
     }
 
@@ -268,7 +329,7 @@
         width: 100% !important;
     }
 
-    .nav_burger-menu, .nav_close-menu {
+    .nav_burger-menu.no-session, .nav_close-menu {
         display: block;
         transition: stroke .3s ease-in-out;
     }
@@ -282,7 +343,7 @@
         stroke: var(--primary-color-300);
     }
 
-    .nav_icon-button {
+    /* .nav_icon-button {
         border: none;
         background-color: var(--blueGrey-color-100);
         border-radius: 0px;
@@ -297,9 +358,9 @@
         margin-right: 20px;
         color: var(--secondary-color-300);
         font-size: 16px;
-    }
+    } */
 
-    .nav_icon-button::before {
+    /* .nav_icon-button::before {
         content: '';
         width: 0px;
         height: 3px;
@@ -320,37 +381,10 @@
 
     .nav_icon-button:hover::before {
         width: 100%;
-    }
-
-    .nav_notification-number {
-        right: 0;
-        top: 0;
-    }
+    } */
 
     .nav_dropdown.content {
         top: -40px;
-    }
-
-    .nav_dropdown.content.notification {
-        left: -290px;
-    }
-
-    .nav_dropdown.content::after {
-        border-top: 15px solid transparent;
-        border-right: 15px solid transparent;
-        border-bottom: 15px solid transparent;
-        border-left: 15px solid var(--primary-color-50);
-        top: 22px;
-        right: -30px;
-        z-index: 4;
-    }
-
-    .nav_dropdown.profile {
-        left: -240px;
-    }
-
-    .nav_dropdown.content.profile::after {
-        right: -30px;
     }
 
 }

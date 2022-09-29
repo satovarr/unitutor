@@ -4,14 +4,14 @@ import '../styles/componentStyles/buttons.css'
 import '../styles/componentStyles/progress&loading.css'
 import '../styles/RegisterComponentStyle.css'
 import { RegisterFormComponent } from '../components/registerPage/RegisterFormComponent'
-import { RegisterHeaderComponent } from '../components/registerPage/RegisterHeaderComponent'
+import { FormHeaderComponent } from '../components/FormHeaderComponent'
 
 
 export const Register = () => {
   return (
     <div className='formContainer'>
       <div className='RegisterCard'>
-        <RegisterHeaderComponent />
+        <FormHeaderComponent heading={'Crear Cuenta'}/>
         <RegisterFormComponent />
       </div>
     </div>

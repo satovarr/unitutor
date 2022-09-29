@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import logo from '../../imgs/UniTutor_logo.svg'
-import '../../styles/RegisterComponentStyle.css'
+import logo from '../imgs/UniTutor_logo.svg'
+import '../styles/componentStyles/formHeader.css'
 
-export const RegisterHeaderComponent = () => {
+export const FormHeaderComponent = ({ heading, addBar }) => {
 
   const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ export const RegisterHeaderComponent = () => {
       <div onClick={goToHome} id="register_logo">
         <img src={logo} alt="UniTutor"/>
       </div>
-      <h1>Crear cuenta</h1>
+      <h1 className={addBar ? 'heading-with-bar' : ''}>{heading}</h1>
     </div>
   )
 }

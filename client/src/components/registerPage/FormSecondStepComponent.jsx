@@ -6,8 +6,12 @@ import Loader from '../../imgs/loader.svg'
 import { storage, ref, uploadBytesResumable, getDownloadURL, auth, updateProfile } from '../../services/firebase';
 
 export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} ) => {
-    const [image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
-    const [nameError, setNameError] = useState('Debes rellenar este campo')
+    const [image, setImage] = useState(
+        info.profilePic !== ''
+            ? info.profilePic
+            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+        );
+    const [nameError, setNameError] = useState(info.name ? null : 'Debes rellenar este campo')
 
     const toggleModal = () => {
         let modal = document.getElementById('image-load-modal')
@@ -71,7 +75,7 @@ export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} 
                                 setImage(downloadURL)
                                 message = 'Carga exitosa'
                                 setModalMessage(false, message)
-                                setTimeout(() => toggleModal(), 5000)
+                                setTimeout(() => toggleModal(), 3500)
                             })
                             .catch(() => {
                                 message = 'Ocurrió un error :('
@@ -114,19 +118,20 @@ export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} 
     }
 
     const handleSubmit = () => {
-        const userData = {
+        let userData = {
             displayName: info.name,
-            photoURL: info.profilePic
+            photoURL: image
         }
 
         if (info.tel !== '') {
-            userData['phoneNumber'] = info.tel
-            console.log(userData)
+            userData = {...userData, phoneNumber: '+57'+info.tel}
+            
         }
 
         updateProfile(auth.currentUser, userData)
-            .then(() => {
-                console.log(auth)
+            .then(() => {})
+            .catch(error => {
+                //TODO: show error
             })
     }
 
@@ -140,7 +145,7 @@ export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} 
                 </div>
             </span>
             <label htmlFor="profilepic" className="imageSelection">
-                <img src={image} alt='' />
+                <img src={image} alt='profilePicture' referrerPolicy="no-referrer"/>
                 <input id="profilepic" type="file" accept="image/*" onChange={handleImageChange} />
                 <span className="icon">
                     <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">

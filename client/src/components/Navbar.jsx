@@ -6,8 +6,14 @@ import notification from '../imgs/notification.svg'
 import profile from '../imgs/profile.svg'
 import logout from '../imgs/logout.svg'
 import { Link } from 'react-router-dom'
+import { signOut } from '../services/firebase.js'
+import { useContext } from 'react'
+import { UserContext } from '../App'
 
-const Navbar = ({ goRegister, session, handleLogin, handleLogout }) => {
+const Navbar = ({ goRegister, navigate, auth }) => {
+
+    //current user
+    const user = useContext(UserContext);
 
     //TODO: define how we are going to handle notifications in the future
     const testNotifications = [
@@ -20,32 +26,46 @@ const Navbar = ({ goRegister, session, handleLogin, handleLogout }) => {
 
     const toggleDropdown = ({ target }) => {
         let dropdown_container = target.parentElement
-        let dropdown_sibling = dropdown_container.nextElementSibling ? 
-            dropdown_container.nextElementSibling.querySelector('.content')
-            : dropdown_container.previousElementSibling.querySelector('.content')
+        // let dropdown_sibling = dropdown_container.nextElementSibling ? 
+        //     dropdown_container.nextElementSibling.querySelector('.content')
+        //     : dropdown_container.previousElementSibling.querySelector('.content')
         let dropdown_content = dropdown_container.querySelector('.content')
 
-        if (!dropdown_sibling.classList.contains('hidden')) {
-            dropdown_sibling.classList.add('hidden')
-        }
+        // if (!dropdown_sibling.classList.contains('hidden')) {
+        //     dropdown_sibling.classList.add('hidden')
+        // }
         dropdown_content.classList.toggle('hidden')
 
     }
 
     const openMenu = ({ target }) => {
         let nav_session = target.parentElement
+        if (target.className === 'nav_open-session') {
+            nav_session = nav_session.parentElement
+        }
         nav_session.classList.remove('hidden')
     }
 
     const closeMenu = ({ target }) => {
+
         let nav_session = target.parentElement.parentElement
-        let dropdowns = nav_session.querySelectorAll('.content')
-        for (let elementIndex = 0; elementIndex < dropdowns.length; elementIndex++) {
-            if (!dropdowns[elementIndex].classList.contains('hidden')) {
-                dropdowns[elementIndex].classList.add('hidden')
-            }
+        if(target.classList.contains('session')) {
+            nav_session = nav_session.parentElement
         }
+
         nav_session.classList.add('hidden')
+    }
+
+    const handleLogin = () => {
+        navigate('/login')
+    }
+
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => {
+                navigate('/')
+            })
+            .catch(error => {})
     }
 
     return (
@@ -63,7 +83,7 @@ const Navbar = ({ goRegister, session, handleLogin, handleLogout }) => {
                     </span>
                 </div>
                 <div className='nav__session hidden'>
-                    <span className='nav_burger-menu' onClick={openMenu}>
+                    <span className={`nav_burger-menu ${!user ? 'no-session': ''}`} onClick={openMenu}>
                         <svg viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 13.6667H35"  strokeWidth="2.5" strokeLinecap="round" />
                             <path d="M5 22H35" strokeWidth="2.5" strokeLinecap="round" />
@@ -71,46 +91,29 @@ const Navbar = ({ goRegister, session, handleLogin, handleLogout }) => {
                         </svg>
                     </span>
                     {
-                        session ?
-                            <div className='nav_menu'>
-                                <span className='nav_close-menu' onClick={closeMenu}>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4 4L20 20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M4 20L20 4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </span>
-                                <Link to='/chats'>Mis Conversaciones</Link>
-                                <Link to='/tutorships'>Mis Tutorías</Link>
-                                <Link to='/about'>Sobre Nosotros</Link>
-                                <div className="nav_dropdown container">
-                                    <button className="nav_icon-button" onClick={toggleDropdown}>
-                                        <span className='nav_button_text'>Notificaciones</span>
-                                        <img src={notification} alt="notifications" width="24" height="24" />
-                                        <span
-                                            className="nav_notification-number"
-                                            style={{ display: testNotifications.length > 0 ? '' : 'none' }}
-                                        >
-                                            {testNotifications.length}
-                                        </span>
-                                    </button>
-                                    <div className="nav_dropdown content notification hidden" >
-                                        {   testNotifications.length > 0 ?
-                                                testNotifications.map(notification => (
-                                                    <p key={notification.id}>{notification.content}</p>
-                                                )
-
-                                                )
-                                            :
-                                                <p>No tienes notificaciones</p>
-                                        }
-                                    </div>
-                                </div>
-                                <div className="nav_dropdown container">
-                                    <button className="nav_icon-button" onClick={toggleDropdown}>
-                                        <span className="nav_button_text">Perfil</span>
-                                        <img src={profile} alt="profile" width="24" height="24" />
-                                    </button>
+                        user ?
+                            <div className="nav_dropdown container">
+                                <span className='nav_open-session' onClick={openMenu}></span>
+                                <button className="nav_icon-button" onClick={toggleDropdown}>
+                                    <img 
+                                        src={user?.profilePic || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
+                                        alt="profile"
+                                        referrerPolicy="no-referrer"
+                                        id="nav_profile-pic"
+                                    />
+                                </button>
+                                <div className='nav_menu'>
+                                    <span className='nav_close-menu session' onClick={closeMenu}>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4 4L20 20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M4 20L20 4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </span>
                                     <div className="nav_dropdown content profile hidden">
+                                        <p>Hola {user.name?.split(' ')[0] || 'Usuario'}!</p>
+                                        <Link to='/chats'>Mis Conversaciones</Link>
+                                        <Link to='/tutorships'>Mis Tutorías</Link>
+                                        <Link to='/about'>Sobre Nosotros</Link>
                                         <button onClick={handleLogout}>
                                             <span>Cerrar sesión</span>
                                             <img src={logout} alt=""></img>
@@ -128,7 +131,7 @@ const Navbar = ({ goRegister, session, handleLogin, handleLogout }) => {
                                 </span>
                                 <Button text={'Regístrate'} type={'Secondary'} handleClick={goRegister} />
                                 <Button text={'Ingresa'} handleClick={handleLogin} />
-                                <Link to='/forgotAccount'>¿Olvidaste tu cuenta?</Link>
+                                <Link to='/forgotPassword'>¿Olvidaste tu cuenta?</Link>
                             </div>
                     }
 

@@ -1,6 +1,17 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  updateProfile, 
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
+} from "firebase/auth";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
@@ -18,5 +29,23 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
+const provider = new GoogleAuthProvider();
 
-export { app, analytics, auth, ref, storage, createUserWithEmailAndPassword, updateProfile, uploadBytesResumable, getDownloadURL };
+export {
+  app,
+  analytics,
+  auth,
+  ref,
+  storage,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  uploadBytesResumable,
+  getDownloadURL,
+  provider,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
+};
