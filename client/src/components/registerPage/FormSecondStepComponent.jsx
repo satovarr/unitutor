@@ -2,10 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import Button from '../Button';
 import { InputGroup } from './InputGroup'
-import Loader from '../../imgs/loader.svg'
-import { storage, ref, uploadBytesResumable, getDownloadURL, auth, updateProfile } from '../../services/firebase';
+import { storage, ref, uploadBytesResumable, getDownloadURL } from '../../services/firebase';
 
-export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} ) => {
+export const FormSecondStepComponent = ({ info, setInfo, handleModalChange } ) => {
     const [image, setImage] = useState(
         info.profilePic !== ''
             ? info.profilePic
@@ -13,39 +12,9 @@ export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} 
         );
     const [nameError, setNameError] = useState(info.name ? null : 'Debes rellenar este campo')
 
-    const toggleModal = () => {
-        let modal = document.getElementById('image-load-modal')
-        modal.classList.toggle('hidden')
-    }
-
-    const closeModal = () => {
-        let modal = document.getElementById('image-load-modal')
-        modal.classList.add('hidden')
-    }
-
-    const setModalMessage = (error, newMessage) => {
-        let message = document.getElementById('image-load-modal_message')
-        let card = message.parentElement
-        card.className = ''
-
-        if (newMessage === '') {
-            card.className = 'image-load'
-            newMessage = 'Cargando imagen...'
-        }
-        else if (!error) {
-            card.className = 'image-load-success'   
-        }
-        else {
-            card.className = 'image-load-error'
-        }
-
-        message.innerText = newMessage
-    }
-    
     const handleImageChange = async ( {target} ) => {
         let image = target.files[0]
         if(image) {
-            let message = ''
             if (image.type === 'image/png' || image.type === 'image/jpeg') {
                 let extension = image.name.slice(-4)
                 //Uploading to firebase storage
@@ -54,8 +23,11 @@ export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} 
                     contentType: image.type
                 }
 
-                setModalMessage(false, message)
-                toggleModal()
+                handleModalChange({
+                    active: true,
+                    isLoading: true,
+                    message: 'Subiendo imagen...'
+                })
                 //Starting upload
                 let uploadTask = uploadBytesResumable(userContentRef, image, metadata)
                 uploadTask.on('state_changed',
@@ -64,8 +36,15 @@ export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} 
                         
                     }, 
                     (error) => {
-                        message = 'Ocurrió un error :('
-                        setModalMessage(true, message)
+                        handleModalChange({
+                            active: true,
+                            isSucessState: true,
+                            success: false,
+                            message: 'Ha ocurrido un error :(',
+                            message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                            isCloseable: true,
+                            acceptButtonText: 'Vale'
+                        })
                     },
                     () => {
                         //Upload was a success
@@ -73,32 +52,49 @@ export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} 
                             .then(downloadURL => {
                                 setInfo({...info, profilePic: downloadURL})
                                 setImage(downloadURL)
-                                message = 'Carga exitosa'
-                                setModalMessage(false, message)
-                                setTimeout(() => toggleModal(), 3500)
+                                handleModalChange({
+                                    active: true,
+                                    isSucessState: true,
+                                    success: true,
+                                    message: 'Carga exitosa',
+                                    message_description: 'Tu imagen se ha subido sin problemas!'
+                                })
+                                setTimeout(() => {
+                                    handleModalChange({
+                                        active: false,
+                                    })
+                                }, 4000)
                             })
                             .catch(() => {
-                                message = 'Ocurrió un error :('
-                                setModalMessage(true, message)
+                                handleModalChange({
+                                    active: true,
+                                    isSucessState: true,
+                                    success: false,
+                                    message: 'Ha ocurrido un error :(',
+                                    message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                                    isCloseable: true,
+                                    acceptButtonText: 'Vale'
+                                })
                             })
                     }
                 )
             }
             else {
-                message = 'Archivo debe ser imagen jpg o png'
-                setModalMessage(true, message)
-                toggleModal()
+                handleModalChange({
+                    active: true,
+                    isSucessState: true,
+                    success: false,
+                    message: 'Formato de archivo incorrecto',
+                    message_description: 'Archivo debe ser imagen jpg o png',
+                    isCloseable: true,
+                    acceptButtonText: 'Vale'
+                })
             }
         }
         
         
 
         
-    }
-
-    const handleClick = ( event ) => {
-        event.preventDefault()
-        setFirstStep(true)
     }
 
     const onNameChange = ( { target } ) => {
@@ -117,33 +113,8 @@ export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} 
         setInfo({ ...info, name: info.name.trimEnd() });
     }
 
-    const handleSubmit = () => {
-        let userData = {
-            displayName: info.name,
-            photoURL: image
-        }
-
-        if (info.tel !== '') {
-            userData = {...userData, phoneNumber: '+57'+info.tel}
-            
-        }
-
-        updateProfile(auth.currentUser, userData)
-            .then(() => {})
-            .catch(error => {
-                //TODO: show error
-            })
-    }
-
     return (
         <>
-            <span id="image-load-modal" className='hidden'>
-                <div id='modal-card'>
-                    <img src={Loader} alt='spinner' className='loading'></img>
-                    <p id="image-load-modal_message"></p>
-                    <Button handleClick={closeModal} text='Vale'/>
-                </div>
-            </span>
             <label htmlFor="profilepic" className="imageSelection">
                 <img src={image} alt='profilePicture' referrerPolicy="no-referrer"/>
                 <input id="profilepic" type="file" accept="image/*" onChange={handleImageChange} />
@@ -187,9 +158,7 @@ export const FormSecondStepComponent = ( {info, setInfo, setFirstStep, display} 
                         text={'Crear Cuenta'} 
                         type={'Primary'} 
                         disabled={nameError}
-                        handleClick={handleSubmit}
                     />
-                    <Button text={'Volver'} type={'Primary'} handleClick={handleClick} additionalClass={'pink_button'} />
                 </div>
         </>  
     )

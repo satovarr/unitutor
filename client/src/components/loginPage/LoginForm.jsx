@@ -97,7 +97,7 @@ const LoginForm = () => {
 
                 <Link to='/forgotPassword'>Olvidé mi contraseña</Link>
 
-                <div className='buttonsContainer'>
+                <div className='buttonsContainer line'>
                     <Button text={'Iniciar sesión'} type={'Primary'} />
                     <GoogleButton text={'Iniciar sesión con Google'}
                         type={'Primary'}

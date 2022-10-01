@@ -32,6 +32,12 @@
     --success-color-300: #00825F;
     --success-color-400: #005F45;
 
+  /* Warning color shade */
+    --warning-color-100: #FFF6DE;
+    --warning-color-200: #FFE399;
+    --warning-color-300: #FFBA00;
+    --warning-color-400: #916400;
+
   /* Blue grey shade */
   --blueGrey-color-white: #FFFFFF;
   --blueGrey-color-100: #FBFBFB;

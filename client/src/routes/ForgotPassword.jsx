@@ -1,11 +1,12 @@
 import '../styles/componentStyles/inputs.css'
 import '../styles/componentStyles/buttons.css'
 import '../styles/RegisterComponentStyle.css'
-import { useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../App'
 import ForgotPasswordForm from '../components/forgotPasswordPage/ForgotPasswordForm'
 import { FormHeaderComponent } from '../components/FormHeaderComponent'
 import { useNavigate } from 'react-router-dom'
+import Modal from '../components/Modal'
 
 
 const ForgotPassword = () => {
@@ -14,6 +15,8 @@ const ForgotPassword = () => {
 
     const navigate = useNavigate();
 
+    const [modalParams, setModalParams] = useState()
+
     //Redirect to home if active session
     useEffect(() => {
         if (user) {
@@ -21,11 +24,17 @@ const ForgotPassword = () => {
         }
     }, [])
 
+    //Function to set modal params
+    const handleModalChange = (params) => {
+        setModalParams(params)
+    }
+
     return (
         <div className='formContainer'>
+            <Modal {...modalParams} handleModalChange={handleModalChange} />
             <div className='RegisterCard'>
                 <FormHeaderComponent heading={'Recuperar cuenta'} addBar={true}/>
-                <ForgotPasswordForm />
+                <ForgotPasswordForm setModalParams={handleModalChange}/>
             </div>
         </div>
     )

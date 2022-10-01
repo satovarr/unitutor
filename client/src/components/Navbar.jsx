@@ -2,38 +2,22 @@ import '../styles/componentStyles/inputs.css'
 import '../styles/componentStyles/buttons.css'
 import '../styles/componentStyles/navBar.css'
 import Button from './Button'
-import notification from '../imgs/notification.svg'
-import profile from '../imgs/profile.svg'
 import logout from '../imgs/logout.svg'
 import { Link } from 'react-router-dom'
 import { signOut } from '../services/firebase.js'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 
-const Navbar = ({ goRegister, navigate, auth }) => {
+const Navbar = ({ goRegister, navigate, auth}) => {
 
     //current user
-    const user = useContext(UserContext);
-
-    //TODO: define how we are going to handle notifications in the future
-    const testNotifications = [
-        {id: 1, content: 'notification a'}, 
-        {id:2, content: 'notification b'},
-        {id:3, content:'notification c'},
-        {id: 4, content:'notification d'}
-    ]
-    //const testNotifications = []
+    const { currentUser } = useContext(UserContext);
 
     const toggleDropdown = ({ target }) => {
         let dropdown_container = target.parentElement
-        // let dropdown_sibling = dropdown_container.nextElementSibling ? 
-        //     dropdown_container.nextElementSibling.querySelector('.content')
-        //     : dropdown_container.previousElementSibling.querySelector('.content')
+
         let dropdown_content = dropdown_container.querySelector('.content')
 
-        // if (!dropdown_sibling.classList.contains('hidden')) {
-        //     dropdown_sibling.classList.add('hidden')
-        // }
         dropdown_content.classList.toggle('hidden')
 
     }
@@ -83,7 +67,7 @@ const Navbar = ({ goRegister, navigate, auth }) => {
                     </span>
                 </div>
                 <div className='nav__session hidden'>
-                    <span className={`nav_burger-menu ${!user ? 'no-session': ''}`} onClick={openMenu}>
+                    <span className={`nav_burger-menu ${!currentUser ? 'no-session': ''}`} onClick={openMenu}>
                         <svg viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 13.6667H35"  strokeWidth="2.5" strokeLinecap="round" />
                             <path d="M5 22H35" strokeWidth="2.5" strokeLinecap="round" />
@@ -91,12 +75,12 @@ const Navbar = ({ goRegister, navigate, auth }) => {
                         </svg>
                     </span>
                     {
-                        user ?
+                        currentUser ?
                             <div className="nav_dropdown container">
                                 <span className='nav_open-session' onClick={openMenu}></span>
                                 <button className="nav_icon-button" onClick={toggleDropdown}>
                                     <img 
-                                        src={user?.profilePic || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
+                                        src={currentUser?.profilePic || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
                                         alt="profile"
                                         referrerPolicy="no-referrer"
                                         id="nav_profile-pic"
@@ -110,7 +94,7 @@ const Navbar = ({ goRegister, navigate, auth }) => {
                                         </svg>
                                     </span>
                                     <div className="nav_dropdown content profile hidden">
-                                        <p>Hola {user.name?.split(' ')[0] || 'Usuario'}!</p>
+                                        <p>Hola {currentUser.name?.split(' ')[0] || 'Usuario'}!</p>
                                         <Link to='/chats'>Mis Conversaciones</Link>
                                         <Link to='/tutorships'>Mis Tutorías</Link>
                                         <Link to='/about'>Sobre Nosotros</Link>

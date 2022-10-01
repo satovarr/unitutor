@@ -3,10 +3,10 @@ import Button from '../Button'
 import { PasswordField } from './PasswordField'
 import { InputGroup } from './InputGroup'
 import { GoogleButton } from '../Button'
-import { auth, createUserWithEmailAndPassword, provider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from '../../services/firebase'
+import { auth, createUserWithEmailAndPassword, provider, signInWithRedirect, getRedirectResult } from '../../services/firebase'
 import { useNavigate } from 'react-router-dom'
 
-export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) => {  
+export const FormFirstStepComponent = ({ info, setInfo, setFirstStep, handleModalChange}) => {  
   
     //are the email an password valid?
     const initialValidation = {
@@ -42,13 +42,26 @@ export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) 
                         setFirstStep(false);
                     }
                     else {
-                        //TODO: agregar modal
-                        navigate('/');
+                        handleModalChange({
+                            active: true,
+                            isWarning: true,
+                            message: 'Usuario ya existe',
+                            message_description: 'Este usuario ya existe, iniciando sesión...'
+                        })
+                        setTimeout(() => navigate('/'), 4000);
                     }
                 }
             })
             .catch(error => {
-                //TODO: agregar modal para mostrar error
+                handleModalChange({
+                    active: true,
+                    isSucessState: true,
+                    success: false,
+                    message: 'Ha ocurrido un error :(',
+                    message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                    isCloseable: true,
+                    acceptButtonText: 'Vale'
+                })
             })
         
     }, [])
@@ -141,7 +154,7 @@ export const FormFirstStepComponent = ( {info, setInfo, setFirstStep, display}) 
               confirmation_error={errorMessageObj.confirmation_error}
         />
 
-        <div className='buttonsContainer'>
+        <div className='buttonsContainer line'>
                 <Button text={'Continuar con el correo'}
                     type={'Primary'}
                     handleClick={handleClick}

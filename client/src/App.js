@@ -14,26 +14,52 @@ function App() {
   //Global user state
   const [currentUser, setCurrentUser] = useState(null);
 
-  //Context
 
-  //Keeping track of user session across the App
+  //Keeping track of user session across the App (this executes every time a page is loaded)
   onAuthStateChanged(auth, (user) => {
     if (user) {
 
       if(!currentUser) {
+
+        // Setting variable in local storage (if not already there) to be able to know before pages fully
+        // render if there is an active session, to redirect some routes
+        if (!localStorage.getItem('activeSession') || localStorage.getItem('activeSession') === 'false') {
+          localStorage.setItem('activeSession', 'true')
+        }
+
+        setCurrentUser({ uid: user.uid, name: user.displayName, profilePic: user.photoURL })
+      }
+
+      // Else if to tackle a problem when creating account with email and password
+      else if(!currentUser.name) {
         setCurrentUser({ uid: user.uid, name: user.displayName, profilePic: user.photoURL })
       }
 
     } else {
+      // Check to avoid setting global state multiple times to null
+      if (currentUser) {
 
-      if (!currentUser) {
+        //also keep track of logout with local storage variable
+        if (localStorage.getItem('activeSession') === 'true') {
+          localStorage.setItem('activeSession', 'false')
+        }
+
         setCurrentUser(null)
       }
     }
   })
 
+  // const setUser = (newUser) => {
+  //   setUser(newUser)
+  // }
+
+  const value = {
+    currentUser,
+    setCurrentUser
+  }
+
   return (
-    <UserContext.Provider value={currentUser}>
+    <UserContext.Provider value={value}>
       <div>
         <Router>
           <Routes>

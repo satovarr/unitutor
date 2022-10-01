@@ -7,6 +7,7 @@ import MainCategories from "../components/homePage/MainCategories"
 import Footer from "../components/Footer"
 import { auth } from "../services/firebase"
 
+
 const Home = () => {
 
     const navigate = useNavigate()

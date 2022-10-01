@@ -5,12 +5,11 @@ import Button from '../Button';
 import { auth, sendPasswordResetEmail } from '../../services/firebase';
 import '../../styles/componentStyles/forgotPasswordForm.css'
 
-const ForgotPasswordForm = () => {
-
+const ForgotPasswordForm = ({ setModalParams }) => {
+ 
     //Credentials state
     const [email, setEmail] = useState('');
     const [isValid, setIsValid] = useState(false);
-    // const [errorMessage, setErrorMessage] = useState(null);
 
     const navigate = useNavigate();
 
@@ -25,35 +24,39 @@ const ForgotPasswordForm = () => {
 
     //Email validation
     useEffect(() => {
-        // let newErrorMessageObj = errorMessageObj
         //email must contain username+@+domain
         if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) {
-            // delete errorMessageObj.email_error
             setIsValid(true);
         } else {
             setIsValid(false);
-            // newErrorMessageObj.email_error = 'Correo debe contener usuario+@+dominio.'
         }
-        // setErrorMessageObj(newErrorMessageObj)
     }, [email]);
 
     //Handle submit of the form.
     const onSubmit = (event) => {
         event.preventDefault();
-        //
-        //
-        //TODO: send email to change password.
-        //
-        //
         console.log(email)
         sendPasswordResetEmail(auth, email)
             .then(() => {
-                //TODO: add modal
-                console.log('breee')
+                setModalParams({
+                    active: true,
+                    isSucessState: true,
+                    success: true,
+                    message: 'Correo enviado exitosamente',
+                    message_description: 'Recuerda revisar tu carpeta de spam, a veces nuestros mensajes terminan allí :('
+                })
+                setTimeout(() => navigate('/'), 4000)
             })
             .catch(error => {
-                //TODO: add modal
-                console.log(error.code)
+                setModalParams({
+                    active: true,
+                    isSucessState: true,
+                    success: false,
+                    message: 'Ha ocurrido un error :(',
+                    message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                    isCloseable: true,
+                    acceptButtonText: 'Vale'
+                })
             })
     }
 
@@ -79,7 +82,7 @@ const ForgotPasswordForm = () => {
                     />
                 </div>
 
-                <div className='buttonsContainer'>
+                <div className='buttonsContainer line'>
                     <Button text={'Enviar Correo de Recuperación'} type={'Primary'} disabled={!isValid}/>
                     <Button text={'Volver a Inicio'}
                         type={'Secondary'}
