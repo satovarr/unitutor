@@ -7,8 +7,6 @@
 .pnp.js
 .env
 .venv
-/api/venv
-/api/serviceAccountKey.json
 # testing
 /coverage
 __pycache__
@@ -26,5 +24,4 @@ __pycache__
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-api/serviceAccountKey.json
 .vscode/settings.json
