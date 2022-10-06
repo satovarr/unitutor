@@ -5,9 +5,12 @@
 /client/node_modules
 /.pnp
 .pnp.js
-
+.env
+/api/venv
+/api/app/helpers/serviceAccountKey.json
 # testing
 /coverage
+__pycache__
 
 # production
 /build
