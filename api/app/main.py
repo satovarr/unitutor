@@ -5,6 +5,9 @@ from sqlalchemy.orm import Session
 from .sql import models
 from .sql.database import SessionLocal, engine
 
+models.Base.metadata.create_all(bind=engine, checkfirst=False)
+
+
 app = FastAPI()
 
 app.include_router(register.router)

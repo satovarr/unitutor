@@ -10,6 +10,7 @@
   > python -m virtualvenv .venv
   > venv/Scripts/activate
 3. install requirements
-4. add .env to /app
+  (.venv)> pip install -r requirements.txt 
+4. add .env to /app (depending on your connection)
 5. add the firebase key to the path: /api/serviceAccountKey.json
 6. uvicorn app.main:app --reload
