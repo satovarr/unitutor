@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Body, Request, Depends, HTTPException
 from http import HTTPStatus
 from sqlalchemy.orm import Session
-from ..middlewares.validateToken import validate_token
-from ..main import get_db
+from .validateToken import validate_token
+from ..sql.database import get_db
 from ..sql import crud
 
 router = APIRouter()
@@ -15,8 +15,9 @@ def signin_user(token: dict = Body(...), db: Session = Depends(get_db)):
     raise HTTPException(status_code=404, detail="Invalid login")
 
 
-@router.get('/profile-user')
+@router.post('/profile-user')
 def profile_user(token: dict = Body(...), db: Session = Depends(get_db)):
+    print(token)
     uuid = validate_token(token)
     if uuid:
         return crud.get_user_by_id(db, uuid)
