@@ -347,11 +347,13 @@
 
 }
 
-@media (max-width: 370px) {
+@media (max-width: 430px) {
     .nav_content {
         padding: 40px 10px;
     }
+}
 
+@media (max-width: 370px) {
     .nav__logo {
         width: 57px;
         margin-right: 10px;
