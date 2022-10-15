@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Body, Request, Depends, HTTPException
+from fastapi import APIRouter, Body, Request, Depends, HTTPException,status
 from http import HTTPStatus
 from sqlalchemy.orm import Session
 from .validateToken import validate_token
 from ..sql.database import get_db
 from ..sql import crud
+from ..sql import schemas
 
 router = APIRouter()
 
@@ -38,3 +39,45 @@ def create_tutoring(token: dict = Body(...), tutoring: dict = Body(...), db: Ses
     if uuid:
         return crud.post_tutoring(db, uuid, tutoring)
     raise HTTPException(status_code=404, detail="Invalid creation")
+
+@router.post(
+    path='/create-categories',
+    status_code=status.HTTP_201_CREATED,
+    tags=['Create',],
+    summary= "Create category in the app"
+    )
+def create_category(category: schemas.Category = Body(...), db: Session = Depends(get_db)):
+    """
+    # Create category
+    
+    This path operation create a category in the app and save the information in the database
+    
+    Parameters:
+    - Request Body parameter:
+        - **category: Category** -> A category model with the name
+    
+    Return a status 201 
+    """
+    category_r = crud.post_category(db, category)
+    return category_r
+
+@router.post(
+    path='/create-subcategories',
+    status_code=status.HTTP_201_CREATED,
+    tags=['Create',],
+    summary= "Create subcategory in the app"
+    )
+def create_subcategory(subcategory: schemas.SubCategory = Body(...), db: Session = Depends(get_db)):
+    """
+    # Create subcategory
+    
+    This path operation create a subcategory in the app and save the information in the database
+    
+    Parameters:
+    - Request Body parameter:
+        - **category: Category** -> A category model with the name, category_id and image_url
+    
+    Return a status 201 
+    """
+    crud.post_subcategory(db, subcategory)
+    return subcategory

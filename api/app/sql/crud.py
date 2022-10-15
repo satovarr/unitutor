@@ -1,3 +1,4 @@
+import imp
 from unicodedata import name
 from sqlalchemy.orm import Session
 
@@ -29,6 +30,30 @@ def post_tutoring(db: Session, uuid: str, tutoring: dict):
     db.commit()
     db.refresh(db_tutoring)
     return db_tutoring
+
+def post_category(db: Session, category: schemas.Category):
+    db_category = models.Category(
+        name=category.name
+    )
+    db.add(db_category)
+    db.commit()
+    return category
+
+def post_subcategory(db: Session, subcategory: schemas.SubCategory):
+    db_subcategory = models.Subcategory(
+        name=subcategory.name,
+        category_id=subcategory.category_id,
+        image_url=subcategory.image_url
+    )
+    db.add(db_subcategory)
+    db.commit()
+
+def get_categories(db: Session):
+    return db.query(models.Category).all()
+
+def get_subcategories(db: Session, categorys_id):
+    return db.query(models.Subcategory).filter_by(category_id=categorys_id).all()
+
 
 
 """

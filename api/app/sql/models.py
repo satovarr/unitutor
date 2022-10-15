@@ -1,14 +1,18 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import relationship
-
 from .database import Base
+import uuid
+
+def generate_uuid():
+  return uuid.uuid4().hex
+
 
 
 class User(Base):
     __tablename__ = "user"
 
     user_id = Column(String(50), primary_key=True, unique=True, nullable=False)
-    public_id = Column(String(50), nullable=False, unique=True)
+    public_id = Column(String(50), nullable=False, unique=True, default=generate_uuid())
     is_tutor = Column(Boolean, default=False)
     description = Column(String(200))
     tutorings = relationship("Tutoring", backref="user")
@@ -17,7 +21,7 @@ class User(Base):
 class Category(Base):
     __tablename__ = 'category'
     cat_id = Column(String(50), primary_key=True,
-                    unique=True, nullable=False)
+                    unique=True, nullable=False, default=generate_uuid())
     name = Column(String(50), nullable=False)
     sub_categorys = relationship("Subcategory", backref="category_s")
     tutorings = relationship("Tutoring", backref="category_t")
@@ -27,7 +31,7 @@ class Subcategory(Base):
     __tablename__ = 'subcategory'
 
     subcat_id = Column(String(50), primary_key=True,
-                       unique=True, nullable=False)
+                       unique=True, nullable=False, default=generate_uuid())
     name = Column(String(50), nullable=False)
     image_url = Column(String(300))
     category_id = Column(String(50), ForeignKey("category.cat_id"))
@@ -37,7 +41,7 @@ class Subcategory(Base):
 class Tutoring(Base):
     __tablename__ = 'tutoring'
     tutoring_id = Column(String(50), primary_key=True,
-                         unique=True, nullable=False)
+                         unique=True, nullable=False, default=generate_uuid())
     ut_value = Column(String(50), nullable=False)
     description = Column(String(50), nullable=False)
     name = Column(String(50), nullable=False)
@@ -50,7 +54,7 @@ class Tutoring(Base):
 class Score(Base):
     __tablename__ = 'Score'
     score_id = Column(String(50), primary_key=True,
-                      unique=True, nullable=False)
+                      unique=True, nullable=False, default=generate_uuid())
     score = Column(Float, nullable=False)
     reviews_amount = Column(Integer, nullable=False)
     tutoring_id = Column(String(50), ForeignKey("tutoring.tutoring_id"))

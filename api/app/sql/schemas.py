@@ -33,3 +33,27 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+class Category(BaseModel):
+    name: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "name": "Calculo"
+            }
+        }
+
+class SubCategory(BaseModel):
+    category_id: str
+    name: str
+    image_url: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "category_id": "beb98d3c1d9e4199835bc6a14832b041",
+                "name": "Calculo Diferencial",
+                "image_url": "www.test.com"
+            }
+        }
