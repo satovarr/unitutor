@@ -81,3 +81,25 @@ def create_subcategory(subcategory: schemas.SubCategory = Body(...), db: Session
     """
     crud.post_subcategory(db, subcategory)
     return subcategory
+
+
+@router.post(
+    path='/create-tutorship',
+    status_code=status.HTTP_201_CREATED,
+    tags=['Create',],
+    summary= "Create a tutorship in the app"
+    )
+def create_tutorship(tutorship: schemas.Tutorship = Body(...), db: Session = Depends(get_db)):
+    """
+    # Create tutorship
+    
+    This path operation create a tutorship in the app and save the information in the database
+    
+    Parameters:
+    - Request Body parameter:
+        - **tutorship: Tutorship** -> A tutorshio model with the name, description, value, category_id, subcategory_id and public_id
+    
+    Return a status 201 
+    """
+    crud.post_tutorship(db, tutorship)
+    return tutorship

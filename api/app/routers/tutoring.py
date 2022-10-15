@@ -1,10 +1,11 @@
+import imp
 from fastapi import APIRouter, Body, Request, Depends, HTTPException,status
 from http import HTTPStatus
 from sqlalchemy.orm import Session
 from ..sql import crud
 from .validateToken import validate_token
 from ..sql.database import get_db
-
+from typing import Optional
 
 router = APIRouter()
 
@@ -65,3 +66,43 @@ def view_subcategory(category_id: str, db: Session = Depends(get_db)):
     """
     result = crud.get_subcategories(db, category_id)
     return result
+
+@router.get(
+    path='/categories/subcategories/{subcategory_id}',
+    tags=['View',],
+    status_code=status.HTTP_200_OK,
+    summary= "View all tutorships of a subcategory in the app"
+    )
+def view_tutorships_subcategory(subcategory_id: str ,db: Session = Depends(get_db)):
+    """
+    # View categories
+    
+    This path operation fetches all the categories from the database and returns a json with them.
+    
+    Return a status 200 and Json with de categories
+    """
+    result = crud.get_tutorships_subcategories(db,subcategory_id)
+    return result 
+
+@router.get(
+    path='/tutorships/search',
+    tags=['View',],
+    status_code=status.HTTP_200_OK,
+    summary= "View all tutorships of a subcategory in the app"
+    )
+def view_tutorships_search(
+    category_id: str = "",
+    subcategory_id: str = "",
+    ut_value_min: int = -1,
+    ut_value_max: int = -1,
+    db: Session = Depends(get_db)
+    ):
+    """
+    # View categories
+    
+    This path operation fetches all the categories from the database and returns a json with them.
+    
+    Return a status 200 and Json with de categories
+    """
+    result = crud.get_tutorships_search(db, category_id, subcategory_id, ut_value_min, ut_value_max)
+    return result 

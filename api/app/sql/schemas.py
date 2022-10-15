@@ -1,4 +1,7 @@
+
 from pydantic import BaseModel
+
+
 
 
 class ItemBase(BaseModel):
@@ -55,5 +58,25 @@ class SubCategory(BaseModel):
                 "category_id": "beb98d3c1d9e4199835bc6a14832b041",
                 "name": "Calculo Diferencial",
                 "image_url": "www.test.com"
+            }
+        }
+
+class Tutorship(BaseModel):
+    category_id: str
+    subcategory_id: str
+    public_id: str
+    name: str
+    description: str
+    ut_value: int
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "category_id": "beb98d3c1d9e4199835bc6a14832b041",
+                "subcategory_id": "9e3e03f692a84748a86e7b43102fc10b",
+                "public_id": "2",
+                "name": "Derivadas parciales",
+                "ut_value": 45000,
+                "description": "La mejor tutoria!"
             }
         }

@@ -1,6 +1,7 @@
-import imp
 from unicodedata import name
 from sqlalchemy.orm import Session
+
+
 
 from ..sql import models, schemas
 
@@ -48,13 +49,41 @@ def post_subcategory(db: Session, subcategory: schemas.SubCategory):
     db.add(db_subcategory)
     db.commit()
 
+def post_tutorship(db: Session, tutorship: schemas.Tutorship):
+    db_tutorship = models.Tutoring(
+        category_id=tutorship.category_id,
+        subcategory_id=tutorship.subcategory_id,
+        public_id=tutorship.public_id,
+        name=tutorship.name,
+        description=tutorship.description,
+        ut_value=tutorship.ut_value
+    )
+    db.add(db_tutorship)
+    db.commit()
+
 def get_categories(db: Session):
     return db.query(models.Category).all()
 
 def get_subcategories(db: Session, categorys_id):
     return db.query(models.Subcategory).filter_by(category_id=categorys_id).all()
 
+def get_tutorships_subcategories(db: Session, subcategory_id):
+    return db.query(models.Tutoring).filter_by(subcategory_id=subcategory_id).all()
 
+def get_tutorships_search(db: Session, category_id, subcategory_id, ut_value_min, ut_value_max):
+    result = {"Estado": "En Proceso aun no esta"}
+    # tutoring = models.Tutoring
+    # if category_id == "":
+    #     if subcategory_id != "" and ut_value_min != -1 and ut_value_max != -1:
+    #         result = db.query(tutoring).filter(tutoring.ut_value <= ut_value_max, tutoring.ut_value >= ut_value_min, tutoring.subcategory_id==subcategory_id).all()
+    #     elif subcategory_id == "":
+    #         result = db.query(models.Tutoring).filter_by(ut_value=ut_value).all()
+    #     elif ut_value_min == -1:
+    #         result = db.query(models.Tutoring).filter_by(subcategory_id=subcategory_id).all()
+    #result = db.query(models.Tutoring).filter_by(subcategory_id=subcategory_id, category_id=category_id).all()
+    #result = db.query(models.Tutoring).filter(models.Tutoring.ut_value <= ut_value_max, models.Tutoring.ut_value >= ut_value_min, models.Tutoring.category_id == category_id).all()
+
+    return result
 
 """
 

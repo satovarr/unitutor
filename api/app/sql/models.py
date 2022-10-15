@@ -42,7 +42,7 @@ class Tutoring(Base):
     __tablename__ = 'tutoring'
     tutoring_id = Column(String(50), primary_key=True,
                          unique=True, nullable=False, default=generate_uuid())
-    ut_value = Column(String(50), nullable=False)
+    ut_value = Column(Integer, nullable=False)
     description = Column(String(50), nullable=False)
     name = Column(String(50), nullable=False)
     subcategory_id = Column(String(50), ForeignKey("subcategory.subcat_id"))
