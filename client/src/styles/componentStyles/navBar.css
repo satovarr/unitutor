@@ -22,6 +22,7 @@
     content: url('../../imgs/UniTutor_logo.svg');
     height: 44px;
     margin-right: 40px;
+    cursor: pointer;
 }
 
 .nav_menu {

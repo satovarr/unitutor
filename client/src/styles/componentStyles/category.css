@@ -1,6 +1,6 @@
 .main_category {
     margin-top: 40px;
-    width: fit-content;
+    width: 100%;
 }
 
 .category_heading {
@@ -28,15 +28,9 @@
 }
 
 .subcategories_container {
-    display: flex;
-    gap: 22px;
-    flex-wrap: wrap;
-    width: fit-content; 
-}
-
-@media (max-width: 720px) {
-    .subcategories_container {
-        justify-content: center;
-    }
-    
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-rows: repeat(auto-fill, 215px);
+    gap: 20px;
 }

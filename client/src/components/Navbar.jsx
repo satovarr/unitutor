@@ -3,12 +3,16 @@ import '../styles/componentStyles/buttons.css'
 import '../styles/componentStyles/navBar.css'
 import Button from './Button'
 import logout from '../imgs/logout.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { signOut } from '../services/firebase.js'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { UserContext } from '../App'
 
-const Navbar = ({ goRegister, navigate, auth}) => {
+const Navbar = ({ goRegister, auth}) => {
+
+    const navigate = useNavigate()
+
+    const defaultPic = 'https://firebasestorage.googleapis.com/v0/b/unitutor-f0c21.appspot.com/o/content%2Fdefault_avatar.png?alt=media&token=04f223db-eb55-4632-9fcf-5a4457cdd655'
 
     //current user
     const { currentUser } = useContext(UserContext);
@@ -52,10 +56,14 @@ const Navbar = ({ goRegister, navigate, auth}) => {
             .catch(error => {})
     }
 
+    const goHome = () => {
+        navigate('/')
+    }
+
     return (
         <nav className='navBar'>
             <div className="nav_content">
-                <img className="nav__logo" alt="UniTutor Logo" />
+                <img className="nav__logo" alt="UniTutor Logo" onClick={goHome}/>
                 <div className="input__search container nav_search">
                     <input className="input input__search" type="text" placeholder="Busca tutorías" id="nav_search" />
                     <span className="input__search-icon">
@@ -80,7 +88,7 @@ const Navbar = ({ goRegister, navigate, auth}) => {
                                 <span className='nav_open-session' onClick={openMenu}></span>
                                 <button className="nav_icon-button" onClick={toggleDropdown}>
                                     <img 
-                                        src={currentUser?.profilePic || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
+                                        src={currentUser?.profilePic || defaultPic}
                                         alt="profile"
                                         referrerPolicy="no-referrer"
                                         id="nav_profile-pic"

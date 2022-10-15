@@ -5,10 +5,13 @@ import { InputGroup } from './InputGroup'
 import { storage, ref, uploadBytesResumable, getDownloadURL } from '../../services/firebase';
 
 export const FormSecondStepComponent = ({ info, setInfo, handleModalChange } ) => {
+
+    const defaultPic = 'https://firebasestorage.googleapis.com/v0/b/unitutor-f0c21.appspot.com/o/content%2Fdefault_avatar.png?alt=media&token=04f223db-eb55-4632-9fcf-5a4457cdd655'
+
     const [image, setImage] = useState(
         info.profilePic !== ''
             ? info.profilePic
-            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+            : defaultPic
         );
     const [nameError, setNameError] = useState(info.name ? null : 'Debes rellenar este campo')
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import '../../styles/componentStyles/category.css'
+import '../styles/componentStyles/category.css'
 import SubCategory from "./SubCategory"
 
 const Category = ({ category_name="Random Categorie", subcategories }) => {
