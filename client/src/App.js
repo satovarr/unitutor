@@ -49,10 +49,6 @@ function App() {
     }
   })
 
-  // const setUser = (newUser) => {
-  //   setUser(newUser)
-  // }
-
   const value = {
     currentUser,
     setCurrentUser

@@ -19,10 +19,10 @@ const ForgotPassword = () => {
 
     //Redirect to home if active session
     useEffect(() => {
-        if (user) {
+        if (localStorage.getItem('activeSession') === 'true') {
             navigate('/')
         }
-    }, [])
+    }, [navigate])
 
     //Function to set modal params
     const handleModalChange = (params) => {
