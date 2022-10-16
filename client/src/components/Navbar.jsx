@@ -61,20 +61,26 @@ const Navbar = ({ goRegister}) => {
         navigate('/')
     }
 
+    const search = (event) => {
+        event.preventDefault()
+        let input = event.target.children[0]
+        navigate(`/search${input.value !== '' ? '?name=' + input.value : ''}`)
+    }
+
     return (
         <nav className='navBar'>
             <div className="nav_content">
                 <img className="nav__logo" alt="UniTutor Logo" onClick={goHome}/>
-                <div className="input__search container nav_search">
+                <form className="input__search container nav_search" onSubmit={search}>
                     <input className="input input__search" type="text" placeholder="Busca tutorías" id="nav_search" />
-                    <span className="input__search-icon">
+                    <button className="input__search-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.5 19C15.1944 19 19 15.1944 19 10.5C19 5.8056 15.1944 2 10.5 2C5.8056 2 2 5.8056 2 10.5C2 15.1944 5.8056 19 10.5 19Z" fill="white" strokeWidth="2" strokeLinejoin="round" />
                             <path d="M13.3284 7.17155C12.6045 6.4477 11.6045 6 10.5 6C9.39544 6 8.39544 6.4477 7.67154 7.17155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             <path d="M16.6109 16.6109L20.8535 20.8535" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                    </span>
-                </div>
+                    </button>
+                </form>
                 <div className='nav__session hidden'>
                     <span className={`nav_burger-menu ${!currentUser ? 'no-session': ''}`} onClick={openMenu}>
                         <svg viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">

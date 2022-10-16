@@ -1,13 +1,15 @@
 import Tutorship from "./Tutorship"
 import '../styles/componentStyles/tutorshipsContainer.css'
 
-const TutorshipsContainer = ({ tutorships = [] }) => {
+const TutorshipsContainer = ({ tutorships }) => {
     return (
         <div className="page tutorships">
             {
-                tutorships.map(tutorship => (
-                    <Tutorship key={tutorship.id} tutorship={tutorship} />
-                ))
+                tutorships ?
+                    tutorships.map(tutorship => (
+                        <Tutorship key={tutorship.id} tutorship={tutorship} />
+                    ))
+                : <></>
             }
         </div>
     )

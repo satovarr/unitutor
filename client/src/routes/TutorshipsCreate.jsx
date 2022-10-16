@@ -8,10 +8,19 @@ import Button from '../components/Button'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
 
+//services
+import { getCategories, getSubcategories } from '../services/categories'
+import Modal from '../components/Modal'
+import { createTutorship } from '../services/tutorships'
+
 const Tutorships_Create = () => {
 
+    const [modalParams, setModalParams] = useState()
     const [errorMessageObj, setErrorMessageObj] = useState({})
     const [formInfo, setFormInfo] = useState({})
+    const [categories, setCategories] = useState(null)
+    //object that contains selected category and its subcategories
+    const [selectedCat_subcats, setSelectedCat_subcats] = useState(null)
 
     const navigate = useNavigate()
 
@@ -22,8 +31,61 @@ const Tutorships_Create = () => {
         }
     }, [navigate])
 
-    const testCategories = ['Matemáticas', 'Física', 'Química', 'Biología']
-    const testSubcategories = ['Cálculo diferencial', 'Mecánica clásica', 'Química Orgánica', 'Algo e Biología']
+    //Get categories info
+    useEffect(() => {
+
+        if(!categories) {
+            getCategories()
+                .then(response => {
+                    setCategories(response)
+                    setSelectedCat_subcats({ ...selectedCat_subcats, loading: true })
+                })
+                .catch(() => {
+                    handleModalChange({
+                        active: true,
+                        isSucessState: true,
+                        success: false,
+                        message: 'Ha ocurrido un error :(',
+                        message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                        isCloseable: true,
+                        acceptButtonText: 'Vale'
+                    })
+                })
+        }
+    }, [])
+
+    //Get subcategories info
+    useEffect(() => {
+        if (formInfo.category !== '' ) {
+            if (!selectedCat_subcats || formInfo.category !== selectedCat_subcats.category) {
+                getSubcategories(formInfo.category)
+                    .then(response => {
+                        setSelectedCat_subcats({ category: formInfo.category, subcategories: response, loading: false })
+                    })
+                    .catch(() => {
+                        handleModalChange({
+                            active: true,
+                            isSucessState: true,
+                            success: false,
+                            message: 'Ha ocurrido un error :(',
+                            message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                            isCloseable: true,
+                            acceptButtonText: 'Vale'
+                        })
+                    })
+            }
+            
+        }
+        else {
+            setSelectedCat_subcats(null)
+        } 
+            
+    }, [formInfo])
+
+    //Function to set modal params
+    const handleModalChange = (params) => {
+        setModalParams(params)
+    }
 
     const onPriceChange = ({ target }) => {
         if (/^\d*$/.test(target.value) && target.value.length <= 6) {
@@ -47,7 +109,18 @@ const Tutorships_Create = () => {
     }
 
     const onOptionChange = ({ target }) => {
-        setFormInfo({ ...formInfo, [target.name]: target.value });
+        //Only change states if the options are different
+        if (formInfo[target.name] !== target.value) {
+            //Clean subcategory selection if category changes
+            if (target.name === 'category') {
+                setFormInfo({ ...formInfo, [target.name]: target.value, subcategory: undefined })
+            }
+            else {
+                setFormInfo({ ...formInfo, [target.name]: target.value })
+            }
+            
+        }
+        
     }
 
     const onOptionBlur = ({ target }) => {
@@ -59,8 +132,41 @@ const Tutorships_Create = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        //TODO: send info to back
-        console.log(formInfo)
+        //TODO: change public id later
+        const tutorshipData = {
+            category_id: formInfo.category,
+            subcategory_id: formInfo.subcategory,
+            public_id: 2,
+            name: formInfo.name,
+            ut_value: formInfo.price,
+            description: formInfo.description
+        }
+        createTutorship(tutorshipData)
+            .then(success => {
+                if(success) {
+                    handleModalChange({
+                        active: true,
+                        isSucessState: true,
+                        success: true,
+                        message: 'Creación exitosa',
+                        message_description: 'Tu tutoría se ha creado correctamente! Volviendo a mis tutorías...'
+                    })
+
+                    setTimeout(() => navigate('/tutorships'), 4000)
+                }
+                else {
+                    handleModalChange({
+                        active: true,
+                        isSucessState: true,
+                        success: false,
+                        message: 'Ha ocurrido un error :(',
+                        message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                        isCloseable: true,
+                        acceptButtonText: 'Vale'
+                    })
+                }
+            })
+        console.log(tutorshipData)
     }
 
     const allowContinue = () => {
@@ -77,7 +183,11 @@ const Tutorships_Create = () => {
     }
 
     return(
-        <div>
+        <div className='tutorshipForm page'>
+            <Modal
+                {...modalParams}
+                handleModalChange={handleModalChange}
+            />
             <Navbar />
             <div className="tutorship-form container">
                 <h1>
@@ -102,24 +212,34 @@ const Tutorships_Create = () => {
                         <h2>Categoría</h2>
                         <InputGroup label="¿A qué categoría y subcategoría pertenece la tutoría que quieres ofertar?"
                             id="category"
-                            placeholder="Selecciona una categoría"
+                            placeholder={categories ? 'Selecciona una categoría' : 'Cargando categorías...'}
                             type="select"
                             name={'category'}
                             value={formInfo.category}
                             error={errorMessageObj.category}
                             onChange={onOptionChange}
-                            options={testCategories.map(category => ({ value: category, display: category }))}
+                            options={categories ? categories.map(category => ({ value: category.cat_id, display: category.name })) : null}
                             onBlur={onOptionBlur}
                         />
                         <Input
                             id="subcategory"
-                            placeholder="Selecciona una subcategoría"
+                            placeholder={
+                                selectedCat_subcats?.category ? 
+                                    selectedCat_subcats.loading ?
+                                        'Cargando subcategorías...' 
+                                        : 'Selecciona una subcategoría'
+                                : 'Esperando por categoría...'
+                            }
                             type="select"
                             name={'subcategory'}
                             value={formInfo.subcategory}
                             error={errorMessageObj.subcategory}
                             onChange={onOptionChange}
-                            options={testSubcategories.map(subcategory => ({ value: subcategory, display: subcategory }))}
+                            options={
+                                !selectedCat_subcats?.subcategories || selectedCat_subcats?.loading ? 
+                                    null
+                                    : selectedCat_subcats.subcategories.map(subcategory => ({ value: subcategory.subcat_id, display: subcategory.name })) 
+                            }
                             onBlur={onOptionBlur}
                         />
                     </div>

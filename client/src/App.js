@@ -9,6 +9,7 @@ import Tutorships from './routes/Tutorships'
 import NotFound from './routes/NotFound'
 import TutorshipsCreate from './routes/TutorshipsCreate'
 import TutorshipsInfo from './routes/TutorshipsInfo'
+import Search from './routes/Search'
 
 // Context
 const UserContext = createContext();
@@ -64,8 +65,9 @@ function App() {
         <Router>
           <Routes>
             <Route>
+              <Route path='search' element={<Search />} />
               <Route path='tutorships' element={<Tutorships />} />
-              <Route path='tutorships/create' element={<TutorshipsCreate />} />
+              <Route path='tutorships/new' element={<TutorshipsCreate />} />
               <Route path='tutorships/:id' element={<TutorshipsInfo />} />
               <Route path='forgotPassword' element={<ForgotPassword />} />
               <Route path='login' element={<Login />} />

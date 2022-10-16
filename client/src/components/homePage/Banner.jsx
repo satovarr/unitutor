@@ -3,7 +3,7 @@ import onlineMeeting from '../../imgs/malte-helmhold-m0r4a8nMarw-unsplash.jpg'
 import CTAInput from './CTAInput'
 
 
-const Banner = () => {
+const Banner = ({ navigate }) => {
 
     return (
         <section className="banner_container">
@@ -14,7 +14,7 @@ const Banner = () => {
                     tutores que se ajusten a <span>tus
                     necesidades</span>. 
                 </p>
-                <CTAInput placeHolder={'¿Qué quieres reforzar?'}/>
+                <CTAInput placeHolder={'¿Qué quieres reforzar?'} navigate={navigate}/>
             </div>
             <img src={onlineMeeting} alt="men in online meeting"></img>
         </section>

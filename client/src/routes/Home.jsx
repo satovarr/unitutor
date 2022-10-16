@@ -19,7 +19,7 @@ const Home = () => {
     return (
         <div className="home_body">
             <Navbar goRegister={goToRegister} navigate={navigate} auth={auth}/>
-            <Banner />
+            <Banner navigate={navigate}/>
             <HowItWorks />
             <MainCategories />
             <Footer />

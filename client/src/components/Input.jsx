@@ -25,9 +25,11 @@ const Input = ({ id, placeholder, type = "text", value = '', onChange, variant =
                     >
                         <option value='' className="selectPlaceholder">{placeholder}</option>
                         {
-                            options.map(option => (
-                                <option key={option?.value} value={option?.value || ''}>{option?.display || ''}</option>
-                            ))
+                            options ?
+                                options.map(option => (
+                                    <option key={option?.value} value={option?.value || ''}>{option?.display || ''}</option>
+                                ))
+                            : <></>
                         }
                     </select>
             }

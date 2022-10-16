@@ -1,3 +1,7 @@
+.tutorshipForm.page {
+    position: relative;
+}
+
 .tutorship-form.container {
     width: max-content;
     margin: 50px auto;
