@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { InputGroup } from '../registerPage/InputGroup';
+import { InputGroup } from '../InputGroup';
 import PasswordInput from '../PasswordInput';
 import Button from '../Button';
 import { GoogleButton } from '../Button';
@@ -82,6 +82,7 @@ const LoginForm = () => {
                         value={credentials.email}
                         onChange={onInputChange}
                         name={'email'}
+                        add_classes={'reg_input'}
                     />
                 </div>
                 <div className='input-group'>

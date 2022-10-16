@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import Button from '../Button';
-import { InputGroup } from './InputGroup'
+import { InputGroup } from '../InputGroup'
 import { storage, ref, uploadBytesResumable, getDownloadURL } from '../../services/firebase';
 
 export const FormSecondStepComponent = ({ info, setInfo, handleModalChange } ) => {
@@ -141,6 +141,7 @@ export const FormSecondStepComponent = ({ info, setInfo, handleModalChange } ) =
                     name={'name'}
                     error = {nameError}
                     onBlur={onNameFocusOut}
+                    add_classes={'reg_input'}
                 />
 
                 <InputGroup
@@ -151,6 +152,7 @@ export const FormSecondStepComponent = ({ info, setInfo, handleModalChange } ) =
                     value={info.tel}
                     onChange={onTelChange}
                     name={'tel'}
+                    add_classes={'reg_input'}
                 />
 
             </div> 

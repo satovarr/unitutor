@@ -7,8 +7,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { signOut } from '../services/firebase.js'
 import { useContext } from 'react'
 import { UserContext } from '../App'
+import { auth } from '../services/firebase.js'
 
-const Navbar = ({ goRegister, auth}) => {
+const Navbar = ({ goRegister}) => {
 
     const navigate = useNavigate()
 
