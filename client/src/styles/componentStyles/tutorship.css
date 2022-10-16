@@ -32,6 +32,11 @@
     font-weight: 600;
     font-size: 16px;
     color: var(--ink-color-80);
+    align-items: center;
+}
+
+.tutorship .price img {
+    height: 25px
 }
 
 .tutorship .categories {
