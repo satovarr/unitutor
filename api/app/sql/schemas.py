@@ -2,8 +2,6 @@
 from pydantic import BaseModel
 
 
-
-
 class ItemBase(BaseModel):
     title: str
     description: str | None = None
@@ -21,21 +19,12 @@ class Item(ItemBase):
         orm_mode = True
 
 
-class UserBase(BaseModel):
-    email: str
+class User(BaseModel):
+    user_id: str
+    public_id: str
+    is_tutor: bool
+    description: str
 
-
-class UserCreate(UserBase):
-    password: str
-
-
-class User(UserBase):
-    id: int
-    is_active: bool
-    items: list[Item] = []
-
-    class Config:
-        orm_mode = True
 
 class Category(BaseModel):
     name: str
@@ -46,6 +35,7 @@ class Category(BaseModel):
                 "name": "Calculo"
             }
         }
+
 
 class SubCategory(BaseModel):
     category_id: str
@@ -60,6 +50,7 @@ class SubCategory(BaseModel):
                 "image_url": "www.test.com"
             }
         }
+
 
 class Tutorship(BaseModel):
     category_id: str

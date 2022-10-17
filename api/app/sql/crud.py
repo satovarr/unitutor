@@ -16,28 +16,17 @@ def get_user_by_id(db: Session, user_id: str):
     return db.query(models.User).filter(models.User.user_id == user_id).first()
 #test passed
 
-def post_user(db: Session, uuid: str, user: dict):
+def post_user(db: Session, uuid: str, user: schemas.User):
     db_user = models.User(
-        public_id= generate_uuid(),
-        user_id=uuid, description=user["description"]
+        public_id=generate_uuid(),
+        user_id=uuid,
+        is_tutor=user.is_tutor,
+        description=user.description,
     )
     db.add(db_user)
     db.commit()
-    db.refresh(db_user)
-    return db_user
+    return user
 
-
-def post_tutoring(db: Session, uuid: str, tutoring: dict):
-    # request category id
-    subcategory_id = 1
-    # request subcategory id
-    category_id = 1
-    db_tutoring = models.User(
-        ut_value=tutoring["ut_value"], description=tutoring["description"], name=tutoring["name"], subcategory_id=subcategory_id, category_id=category_id)
-    db.add(db_tutoring)
-    db.commit()
-    db.refresh(db_tutoring)
-    return db_tutoring
 
 def post_category(db: Session, category: schemas.Category):
     db_category = models.Category(
@@ -87,14 +76,16 @@ def get_tutorships_info(db: Session, tutoring_id):
 
 def get_tutorships_search(db: Session, category_id, subcategory_id, ut_value_min, ut_value_max):
     result = {"Estado": "En Proceso aun no esta"}
-    # tutoring = models.Tutoring
-    # if category_id == "":
-    #     if subcategory_id != "" and ut_value_min != -1 and ut_value_max != -1:
+    result = db.query(models.Tutoring)
+    if category_id != "":
+        result = result.filter_by(category_id = category_id)
+    if subcategory_id != "":
+        result = result.filter_by(subcategory_id = subcategory_id)
+    result = result.filter(models.Tutoring.ut_value <= ut_value_max, models.Tutoring.ut_value >= ut_value_min).all()
+    
+    #     if subcategory_id != "" 
     #         result = db.query(tutoring).filter(tutoring.ut_value <= ut_value_max, tutoring.ut_value >= ut_value_min, tutoring.subcategory_id==subcategory_id).all()
-    #     elif subcategory_id == "":
-    #         result = db.query(models.Tutoring).filter_by(ut_value=ut_value).all()
-    #     elif ut_value_min == -1:
-    #         result = db.query(models.Tutoring).filter_by(subcategory_id=subcategory_id).all()
+    
     #result = db.query(models.Tutoring).filter_by(subcategory_id=subcategory_id, category_id=category_id).all()
     #result = db.query(models.Tutoring).filter(models.Tutoring.ut_value <= ut_value_max, models.Tutoring.ut_value >= ut_value_min, models.Tutoring.category_id == category_id).all()
 

@@ -93,8 +93,8 @@ def view_tutorships_subcategory(subcategory_id: str ,db: Session = Depends(get_d
 def view_tutorships_search(
     category_id: str = "",
     subcategory_id: str = "",
-    ut_value_min: int = -1,
-    ut_value_max: int = -1,
+    ut_value_min: int = 0,
+    ut_value_max: int = 10000000,
     db: Session = Depends(get_db)
     ):
     """

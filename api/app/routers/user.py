@@ -11,8 +11,9 @@ router = APIRouter()
 
 @router.get('/signin-user')
 def signin_user(token: dict = Body(...), db: Session = Depends(get_db)):
-    if validate_token(token):
-        return HTTPStatus.OK
+    uuid = validate_token(token)
+    if uuid:
+        return uuid
     raise HTTPException(status_code=404, detail="Invalid login")
 
 
@@ -26,19 +27,12 @@ def profile_user(token: dict = Body(...), db: Session = Depends(get_db)):
 
 
 @router.post('/create-user')
-def create_user(token: dict = Body(...), user: dict = Body(...), db: Session = Depends(get_db)):
+def create_user(token: dict = Body(...), user: schemas.User = Body(...), db: Session = Depends(get_db)):
     uuid = validate_token(token)
     if uuid:
         return crud.post_user(db, uuid, user)
     raise HTTPException(status_code=404, detail="Invalid register")
 
-
-@router.post('/create-tutoring')
-def create_tutoring(token: dict = Body(...), tutoring: dict = Body(...), db: Session = Depends(get_db)):
-    uuid = validate_token(token)
-    if uuid:
-        return crud.post_tutoring(db, uuid, tutoring)
-    raise HTTPException(status_code=404, detail="Invalid creation")
 
 @router.post(
     path='/create-categories',
