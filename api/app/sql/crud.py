@@ -1,9 +1,14 @@
 from unicodedata import name
 from sqlalchemy.orm import Session
+import uuid
 
 
 
 from ..sql import models, schemas
+
+def generate_uuid():
+  return uuid.uuid4().hex
+
 
 
 def get_user_by_id(db: Session, user_id: str):
@@ -12,6 +17,7 @@ def get_user_by_id(db: Session, user_id: str):
 
 def post_user(db: Session, uuid: str, user: dict):
     db_user = models.User(
+        public_id= generate_uuid(),
         user_id=uuid, description=user["description"]
     )
     db.add(db_user)
@@ -34,6 +40,7 @@ def post_tutoring(db: Session, uuid: str, tutoring: dict):
 
 def post_category(db: Session, category: schemas.Category):
     db_category = models.Category(
+        cat_id= generate_uuid(),
         name=category.name
     )
     db.add(db_category)
@@ -42,6 +49,7 @@ def post_category(db: Session, category: schemas.Category):
 
 def post_subcategory(db: Session, subcategory: schemas.SubCategory):
     db_subcategory = models.Subcategory(
+        subcat_id= generate_uuid(),
         name=subcategory.name,
         category_id=subcategory.category_id,
         image_url=subcategory.image_url
@@ -51,6 +59,7 @@ def post_subcategory(db: Session, subcategory: schemas.SubCategory):
 
 def post_tutorship(db: Session, tutorship: schemas.Tutorship):
     db_tutorship = models.Tutoring(
+        tutoring_id= generate_uuid(),
         category_id=tutorship.category_id,
         subcategory_id=tutorship.subcategory_id,
         public_id=tutorship.public_id,
