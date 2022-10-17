@@ -1,5 +1,6 @@
+
 from unicodedata import name
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, join
 import uuid
 
 
@@ -78,6 +79,11 @@ def get_subcategories(db: Session, categorys_id):
 
 def get_tutorships_subcategories(db: Session, subcategory_id):
     return db.query(models.Tutoring).filter_by(subcategory_id=subcategory_id).all()
+
+def get_tutorships_info(db: Session, tutoring_id):
+    return db.query(models.Tutoring).filter_by(tutoring_id=tutoring_id).first()
+
+
 
 def get_tutorships_search(db: Session, category_id, subcategory_id, ut_value_min, ut_value_max):
     result = {"Estado": "En Proceso aun no esta"}

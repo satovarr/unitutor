@@ -98,11 +98,31 @@ def view_tutorships_search(
     db: Session = Depends(get_db)
     ):
     """
-    # View categories
+    # View tutorship search WE NEED TO COMPLETE THIS DESCRIPTION
     
     This path operation fetches all the categories from the database and returns a json with them.
     
     Return a status 200 and Json with de categories
     """
     result = crud.get_tutorships_search(db, category_id, subcategory_id, ut_value_min, ut_value_max)
+    return result 
+
+@router.get(
+    path='/tutorships/view/{tutoring_id}',
+    tags=['View',],
+    status_code=status.HTTP_200_OK,
+    summary= "View info of a tutorship in the app"
+    )
+def view_tutorship(
+    tutoring_id: str,
+    db: Session = Depends(get_db)
+    ):
+    """
+    # View tutorship -- WE NEED TO COMPLETE THIS DESCRIPTION
+    
+    This path operation fetches all the categories from the database and returns a json with them.
+    
+    Return a status 200 and Json with de categories
+    """
+    result = crud.get_tutorships_info(db, tutoring_id)
     return result 
