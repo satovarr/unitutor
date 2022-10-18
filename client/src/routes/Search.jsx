@@ -11,6 +11,7 @@ import { getCategories, getSubcategories } from "../services/categories"
 import search from '../imgs/search-pink.svg'
 import filter from '../imgs/filter.svg'
 import '../styles/Search.css'
+import { searchTutorships } from "../services/tutorships"
 
 const Search = () => {
     //TODO: style some more if results are paginated
@@ -20,6 +21,8 @@ const Search = () => {
     const [categories, setCategories] = useState(null)
     //object that contains selected category and its subcategories
     const [selectedCat_subcats, setSelectedCat_subcats] = useState(null)
+    
+    const[searchResults, setSearchResults] = useState([])
 
     const navigate = useNavigate()
 
@@ -27,14 +30,36 @@ const Search = () => {
     useEffect(() => {
         let navBarInput = document.getElementById('nav_search')
         let results = {}
+
         for (let entry of searchParams.entries()) {
             results[entry[0]] = entry[1]
+
         }
 
         navBarInput.value = results.name || ''
+
         setParams(results)
 
-        //TODO: get tutorships after obtaining params
+        let stringParams = '?' + searchParams.toString()
+
+        searchTutorships(stringParams)
+            .then(searchData => {
+                if(searchData) {
+                    setSearchResults(searchData)
+                }
+                else {
+                    handleModalChange({
+                        active: true,
+                        isSucessState: true,
+                        success: false,
+                        message: 'Ha ocurrido un error :(',
+                        message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                        isCloseable: true,
+                        acceptButtonText: 'Vale'
+                    })
+                }
+            })
+
     }, [searchParams])
 
     //Get categories info
@@ -62,11 +87,11 @@ const Search = () => {
 
     //Get subcategories info
     useEffect(() => {
-        if (params.category !== '') {
-            if (!selectedCat_subcats || params.category !== selectedCat_subcats.category) {
-                getSubcategories(params.category)
+        if (params.category_id !== '') {
+            if (!selectedCat_subcats || params.category_id !== selectedCat_subcats.category_id) {
+                getSubcategories(params.category_id)
                     .then(response => {
-                        setSelectedCat_subcats({ category: params.category, subcategories: response, loading: false })
+                        setSelectedCat_subcats({ category_id: params.category_id, subcategories: response, loading: false })
                     })
                     .catch(() => {
                         handleModalChange({
@@ -228,8 +253,8 @@ const Search = () => {
                                 id="category"
                                 placeholder={categories ? 'Categoría' : 'Cargando...'}
                                 type="select"
-                                name={'category'}
-                                value={params.category}
+                                name={'category_id'}
+                                value={params.category_id}
                                 onChange={onOptionChange}
                                 options={categories ? categories.map(category => ({ value: category.cat_id, display: category.name })) : null}
                             />
@@ -237,15 +262,15 @@ const Search = () => {
                                 label="Subcategoría"
                                 id="subcategory"
                                 placeholder={
-                                    selectedCat_subcats?.category ?
+                                    selectedCat_subcats?.category_id ?
                                         selectedCat_subcats.loading ?
                                             'Cargando...'
                                             : 'Subcategoría'
                                         : 'Esperando categoría...'
                                 }
                                 type="select"
-                                name={'subcategory'}
-                                value={params.subcategory}
+                                name={'subcategory_id'}
+                                value={params.subcategory_id}
                                 onChange={onOptionChange}
                                 options={
                                     !selectedCat_subcats?.subcategories || selectedCat_subcats?.loading ?
@@ -260,16 +285,16 @@ const Search = () => {
                                         id="minprice"
                                         placeholder="Mínimo"
                                         type="text"
-                                        name={'minPrice'}
-                                        value={params.minPrice}
+                                        name={'ut_value_min'}
+                                        value={params.ut_value_min}
                                         onChange={onPriceChange}
                                     />
                                     <Input
                                         id="maxprice"
                                         placeholder="Máximo"
                                         type="text"
-                                        name={'maxPrice'}
-                                        value={params.maxPrice}
+                                        name={'ut_value_max'}
+                                        value={params.ut_value_max}
                                         onChange={onPriceChange}
                                     />
                                 </div>
@@ -288,7 +313,12 @@ const Search = () => {
                             </div>
                         </form>
                     </div>
-                    <TutorshipsContainer tutorships={test} />
+                    {
+                        searchResults.length > 0 ?
+                            <TutorshipsContainer tutorships={searchResults} />
+                        : <p className="no-results">No se encontraron tutorías</p>
+                    }
+                    
                 </div>
             </div>
             <Footer />

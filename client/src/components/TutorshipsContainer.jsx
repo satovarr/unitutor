@@ -7,7 +7,7 @@ const TutorshipsContainer = ({ tutorships }) => {
             {
                 tutorships ?
                     tutorships.map(tutorship => (
-                        <Tutorship key={tutorship.id} tutorship={tutorship} />
+                        <Tutorship key={tutorship.tutoring_id} tutorship={tutorship} />
                     ))
                 : <></>
             }

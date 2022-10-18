@@ -1,4 +1,5 @@
 import axios from 'axios'
+const baseUrl = '/tutorships'
 
 const createTutorship = async (payload) => {
     //Creates a tutorship, returns true if creation succeded,
@@ -8,9 +9,29 @@ const createTutorship = async (payload) => {
         return true
     }
     catch (error) {
-        console.log(error)
         return false
     }
 }
 
-export { createTutorship }
+const searchTutorships = async (params) => {
+    //Searches tutorships with given parameters (must be in string format)
+    try {
+        let response = await axios.get(baseUrl+'/search'+params)
+        return response.data
+    }
+    catch {
+        return null
+    }
+}
+
+const getTutorshipbyId = async (tutorship_id) => {
+    try {
+        let response = await axios.get(baseUrl + '/view/' + tutorship_id)
+        return response.data
+    }
+    catch {
+        return null
+    }
+}
+
+export { createTutorship, searchTutorships, getTutorshipbyId }

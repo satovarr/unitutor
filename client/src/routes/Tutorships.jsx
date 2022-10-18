@@ -10,6 +10,7 @@ const Tutorships = () => {
     
     const navigate = useNavigate()
 
+    //TODO: change get tutorships from back
     //Test tutorships
     const test = [
         {
@@ -90,7 +91,7 @@ const Tutorships = () => {
     }, [navigate])
 
     const createTutorship = () => {
-        navigate('/tutorships/create')
+        navigate('/tutorships/new')
     }
 
     return (
@@ -107,7 +108,7 @@ const Tutorships = () => {
                             test ?
                                 <TutorshipsContainer tutorships={test} />
                                 : <p className="no_tutorships">
-                                    Aún no has creado ninguna tutoría <Link to='/tutorships/create'>¿Quieres crear una?</Link>
+                                    Aún no has creado ninguna tutoría <Link to='/tutorships/new'>¿Quieres crear una?</Link>
                                 </p>
                         }
 

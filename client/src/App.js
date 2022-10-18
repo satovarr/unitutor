@@ -10,6 +10,8 @@ import NotFound from './routes/NotFound'
 import TutorshipsCreate from './routes/TutorshipsCreate'
 import TutorshipsInfo from './routes/TutorshipsInfo'
 import Search from './routes/Search'
+import Categories from './routes/Categories'
+import CategoriesCategory from './routes/CategoriesCategory'
 
 // Context
 const UserContext = createContext();
@@ -65,6 +67,8 @@ function App() {
         <Router>
           <Routes>
             <Route>
+              <Route path='categories' element={<Categories />} />
+              <Route path='categories/:cat_id' element={<CategoriesCategory />} />
               <Route path='search' element={<Search />} />
               <Route path='tutorships' element={<Tutorships />} />
               <Route path='tutorships/new' element={<TutorshipsCreate />} />

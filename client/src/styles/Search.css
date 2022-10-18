@@ -114,8 +114,17 @@
     background-color: var(--secondary-color-300);
 }
 
-.page.tutorships {
+.search .page.tutorships {
     width: calc(100% - 340px);
+}
+
+.search .no-results {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink-color-80);
+    margin-top: 40px;
 }
 
 /* Media queries */
@@ -140,7 +149,7 @@
         gap: 20px;
     }
 
-    .page.tutorships {
+    .search .page.tutorships {
         width: calc(100% - 320px);
     }
 }
@@ -208,7 +217,7 @@
         transform: rotate(-180deg);
     }
 
-    .page.tutorships {
+    .search .page.tutorships {
         width: 100%;
     }
 }
@@ -221,7 +230,7 @@
         left: 30px;
     }
 
-    .page.tutorships {
+    .search .page.tutorships {
         margin-top: 40px;
         width: 100%;
     }
