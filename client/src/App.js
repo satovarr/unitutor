@@ -5,6 +5,11 @@ import { Register } from './routes/Register.jsx'
 import Home from './routes/Home.jsx'
 import Login from './routes/Login.jsx'
 import ForgotPassword from './routes/ForgotPassword'
+import Tutorships from './routes/Tutorships'
+import NotFound from './routes/NotFound'
+import TutorshipsCreate from './routes/TutorshipsCreate'
+import TutorshipsInfo from './routes/TutorshipsInfo'
+import Search from './routes/Search'
 
 // Context
 const UserContext = createContext();
@@ -49,10 +54,6 @@ function App() {
     }
   })
 
-  // const setUser = (newUser) => {
-  //   setUser(newUser)
-  // }
-
   const value = {
     currentUser,
     setCurrentUser
@@ -64,10 +65,15 @@ function App() {
         <Router>
           <Routes>
             <Route>
+              <Route path='search' element={<Search />} />
+              <Route path='tutorships' element={<Tutorships />} />
+              <Route path='tutorships/new' element={<TutorshipsCreate />} />
+              <Route path='tutorships/:id' element={<TutorshipsInfo />} />
               <Route path='forgotPassword' element={<ForgotPassword />} />
               <Route path='login' element={<Login />} />
               <Route path='register' element={<Register />} />
               <Route path='/' element={<Home />} />
+              <Route path='*' element={<NotFound />} />
             </Route>
           </Routes>
         </Router>

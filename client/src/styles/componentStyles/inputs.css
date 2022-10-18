@@ -66,6 +66,15 @@
     text-align: start;
 }
 
+select.input {
+    height: max-content;
+}
+
+.selectPlaceholder {
+    color: var(--blueGrey-500);
+}
+
+
 /* Animations */
 .input:hover {
     border-color: var(--primary-color-200);

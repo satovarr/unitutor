@@ -1,6 +1,5 @@
 import '../../styles/componentStyles/mainCategories.css'
-import Category from './Category'
-import testPic2 from '../../imgs/testing_pic2.jpg'
+import Category from '../Category'
 import { Link } from 'react-router-dom'
 
 const MainCategories = () => {
@@ -23,7 +22,7 @@ const MainCategories = () => {
                 {
                     id: 5,
                     name: "Subcategory 1",
-                    imgSrc: testPic2 
+                    imgSrc: "https://firebasestorage.googleapis.com/v0/b/unitutor-f0c21.appspot.com/o/content%2Ftesting_pic2.jpg?alt=media&token=670f9675-8767-4f9c-b21d-5cfb95f4a533"
                 },
                 { id: 6, name: "Subcategory 2" },
                 { id: 7, name: "Subcategory 3" }

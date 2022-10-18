@@ -1,0 +1,171 @@
+.tutorshipInfo.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.tutorshipInfo.container h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--blueGrey-color-white);
+    background-color: var(--primary-color-300);
+    padding: 50px;
+}
+
+.tutorshipInfo.content {
+    flex-grow: 1;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+.tutorshipInfo .userInfo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    max-height: 50px;
+    overflow: hidden;
+}
+
+.tutorshipInfo .userInfo a {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--secondary-color-300);
+    text-decoration: none;
+    transition: color .3s ease-in-out;
+}
+
+.tutorshipInfo .userInfo a:hover {
+    color: var(--secondary-color-400);
+}
+
+.tutorshipInfo .userInfo img {
+    display: block;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.tutorshipInfo.description {
+    max-width: 490px;
+}
+
+.tutorshipInfo.rating {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.tutorshipInfo .star {
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.tutorshipInfo .star .outer{
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+}
+
+.tutorshipInfo .star .inner {
+    width: 26px;
+    height: 26px;
+}
+
+.tutorshipInfo .star span {
+    position: absolute;
+    display: block;
+    object-fit: contain;
+    top: 2px;
+    left: 2px;
+    height: 26px;
+    overflow: hidden;
+}
+
+.tutorshipInfo.rating p{
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.tutorshipInfo .categories {
+    display: flex;
+    gap: 20px;
+}
+
+.tutorshipInfo .price {
+    display: flex;
+    gap: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink-color-80);
+    align-items: center;
+}
+
+.tutorshipInfo .price img {
+    height: 25px
+}
+
+.tutorshipInfo.actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tutorshipInfo.actions .button {
+    width: 230px;
+}
+
+.tutorshipInfo.actions .back {
+    color: var(--secondary-color-300);
+    border-color: var(--secondary-color-300);
+}
+
+.tutorshipInfo.actions .back:hover {
+    color: var(--blueGrey-color-white);
+    background-color: var(--secondary-color-300);
+}
+
+/* media queries */
+@media (max-width: 600px) {
+    .tutorshipInfo.description {
+        max-width: 390px;
+    }
+
+    .tutorshipInfo.actions {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .tutorshipInfo.actions .button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 490px) {
+    .tutorshipInfo.container h1 {
+        padding: 30px;
+    }
+
+    .tutorshipInfo.description {
+        max-width: 290px;
+    }
+}
+
+@media (max-width: 390px) {
+    .tutorshipInfo.container h1 {
+        padding: 20px;
+    }
+
+    .tutorshipInfo.description {
+        max-width: 200px;
+    }
+}

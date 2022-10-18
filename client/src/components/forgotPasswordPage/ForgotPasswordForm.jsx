@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { InputGroup } from '../registerPage/InputGroup';
+import { InputGroup } from '../InputGroup';
 import Button from '../Button';
 import { auth, sendPasswordResetEmail } from '../../services/firebase';
 import '../../styles/componentStyles/forgotPasswordForm.css'
@@ -79,6 +79,7 @@ const ForgotPasswordForm = ({ setModalParams }) => {
                         value={email}
                         onChange={onInputChange}
                         name={'email'}
+                        add_classes={'reg_input'}
                     />
                 </div>
 

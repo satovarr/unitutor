@@ -1,0 +1,103 @@
+.tutorshipForm.page {
+    position: relative;
+}
+
+.tutorship-form.container {
+    width: max-content;
+    margin: 50px auto;
+}
+
+.tutorship-form h1 {
+    display: flex;
+    gap: 10px;
+    color: var(--blueGrey-color-600);
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.tutorship-form h2 {
+    width: 100%;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--secondary-color-400);
+}
+
+.tutorship-form.content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.tutorship-form .input-group, .tutorship-form .input-container, .tutorship-form .input, .tutorship-form.field{
+    width: 100%;
+}
+
+.tutorship-form.field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tutorship-form label {
+    width: 100%;
+    font-size: 16px;
+    color: var(--blueGrey-color-700);
+    margin-bottom: 10px;
+}
+
+.tutorship-form textarea {
+    margin-top: -10px;
+    min-height: 100px;
+}
+
+.tutorship-form.actions {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tutorship-form.actions .button {
+    width: 260px;
+}
+
+.tutorship-form.actions .back {
+    color: var(--secondary-color-300);
+    border-color: var(--secondary-color-300);
+}
+
+.tutorship-form.actions .back:hover {
+    background-color: var(--secondary-color-300);
+    color: var(--blueGrey-color-white);
+}
+
+/* Media queries */
+@media (max-width: 730px) {
+    .tutorship-form label {
+        max-width: 400px;
+    }
+
+    .tutorship-form.actions .button {
+        width: 180px;
+    }
+}
+
+@media (max-width: 500px) {
+    .tutorship-form h1 {
+        font-size: 32px;
+    }
+
+    .tutorship-form h2 {
+        font-size: 16px;
+    }
+
+    .tutorship-form label {
+        max-width: 280px;
+        font-size: 14px;
+    }
+
+    .tutorship-form.actions .button {
+        width: 135px;
+    }
+}

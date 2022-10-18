@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../Button'
-import { PasswordField } from './PasswordField'
-import { InputGroup } from './InputGroup'
+import { PasswordField } from '../PasswordField'
+import { InputGroup } from '../InputGroup'
 import { GoogleButton } from '../Button'
 import { auth, createUserWithEmailAndPassword, provider, signInWithRedirect, getRedirectResult } from '../../services/firebase'
 import { useNavigate } from 'react-router-dom'
@@ -143,6 +143,7 @@ export const FormFirstStepComponent = ({ info, setInfo, setFirstStep, handleModa
                 onChange={onInputChange}
                 name={'email'}
                 error={errorMessageObj.email_error}
+                add_classes={'reg_input'}
             />
         </div>    
 

@@ -1,0 +1,95 @@
+.tutorship {
+    text-decoration: none;
+    transition: transform .3s ease-out;
+}
+
+.tutorship:hover {
+    transform: scale(1.1);
+}
+
+.tutorship .container {
+    min-width: 285px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: var(--card-box-shadow-small-1),
+        var(--card-box-shadow-small-2),
+        var(--card-box-shadow-small-3);
+    border-radius: 12px;
+    padding: 20px 30px;
+    overflow: hidden;
+}
+
+.tutorship .heading {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--blueGrey-color-700);
+}
+
+.tutorship .price {
+    display: flex;
+    gap: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink-color-80);
+    align-items: center;
+}
+
+.tutorship .price img {
+    height: 25px
+}
+
+.tutorship .categories {
+    display: flex;
+    gap: 20px;
+}
+
+.tutorship .userInfo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    max-height: 30px;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--blueGrey-color-700);
+    overflow: hidden;
+}
+
+.tutorship .userInfo img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* media queries */
+@media (max-width: 800px) {
+    .tutorship .container {
+        min-width: 265px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tutorship .container {
+        min-width: 250px;
+    }
+
+    .tutorship .heading {
+        font-size: 14px;
+    }
+
+    .tutorship .price {
+        font-size: 12px;
+        color: var(--ink-color-80);
+    }
+
+    .tutorship .categories {
+        gap: 10px;
+    }
+
+    .tutorship .userInfo {
+        gap: 10px;
+        font-size: 14px;
+    }
+}
