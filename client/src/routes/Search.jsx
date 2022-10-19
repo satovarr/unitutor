@@ -36,7 +36,7 @@ const Search = () => {
 
         }
 
-        navBarInput.value = results.name || ''
+        navBarInput.value = results.name_tutoring || ''
 
         setParams(results)
 
@@ -240,7 +240,7 @@ const Search = () => {
             <div className="search content">
                 <h1>
                     <img alt="" src={search} />
-                    {params.name || 'Búsqueda'}
+                    {params?.name_tutoring || 'Búsqueda'}
                 </h1>
                 <div className="search results">
                     <div className="dropdown" id="filterDropdown">

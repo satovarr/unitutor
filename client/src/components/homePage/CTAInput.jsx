@@ -5,7 +5,7 @@ const CTAInput = ({ placeHolder, navigate }) => {
     const search = (event) => {
         event.preventDefault()
         let input = event.target.children[0]
-        navigate(`/search${input.value !== '' ? '?name='+input.value : ''}`)
+        navigate(`/search${input.value !== '' ? '?name_tutoring='+input.value : ''}`)
     }
 
     return (
