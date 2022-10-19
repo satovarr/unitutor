@@ -12,6 +12,8 @@ class User(Base):
     user_id = Column(String(50), primary_key=True, unique=True, nullable=False)
     public_id = Column(String(50), nullable=False, unique=True)
     is_tutor = Column(Boolean, default=False)
+    photo_url = Column(String(250), default="Sin imagen")
+    telephone = Column(String(10), default=None)
     description = Column(String(200))
     tutorings = relationship("Tutoring", backref="user")
 
