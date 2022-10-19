@@ -79,7 +79,7 @@ def view_tutorships_subcategory(subcategory_id: str ,db: Session = Depends(get_d
     
     This path operation fetches all the categories from the database and returns a json with them.
     
-    Return a status 200 and Json with de categories
+    Return a status 200 and Json with the categories
     """
     result = crud.get_tutorships_subcategories(db,subcategory_id)
     return result 
@@ -98,11 +98,11 @@ def view_tutorships_search(
     db: Session = Depends(get_db)
     ):
     """
-    # View tutorship search WE NEED TO COMPLETE THIS DESCRIPTION
+    # View all tutorships of a subcategory
     
-    This path operation fetches all the categories from the database and returns a json with them.
+    This path operation fetches all tutorships of a subcategory from the database and returns a json with them.
     
-    Return a status 200 and Json with de categories
+    Return a status 200 and Json with the tutorships
     """
     result = crud.get_tutorships_search(db, category_id, subcategory_id, ut_value_min, ut_value_max)
     return result 
@@ -118,11 +118,31 @@ def view_tutorship(
     db: Session = Depends(get_db)
     ):
     """
-    # View tutorship -- WE NEED TO COMPLETE THIS DESCRIPTION
+    # View info tutorship 
     
-    This path operation fetches all the categories from the database and returns a json with them.
+    This path operation obtains the information of a tutorial in the database and returns a json with it.
     
-    Return a status 200 and Json with de categories
+    Return a status 200 and Json with the info of a tutorship
     """
     result = crud.get_tutorships_info(db, tutoring_id)
+    return result 
+
+@router.get(
+    path='/tutorships/user/{public_id}',
+    tags=['View',],
+    status_code=status.HTTP_200_OK,
+    summary= "See info of all tutorials of a user in the app"
+    )
+def view_tutorship_user(
+    public_id: str,
+    db: Session = Depends(get_db)
+    ):
+    """
+    # View tutorship from a user
+    
+    This path operation obtains all the tutorship of a user from the database and returns a json with them.
+    
+    Return a status 200 and Json with the tutorship 
+    """
+    result = crud.get_tutorships_user(db, public_id)
     return result 

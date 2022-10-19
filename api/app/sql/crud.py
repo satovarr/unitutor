@@ -72,10 +72,11 @@ def get_tutorships_subcategories(db: Session, subcategory_id):
 def get_tutorships_info(db: Session, tutoring_id):
     return db.query(models.Tutoring).filter_by(tutoring_id=tutoring_id).first()
 
+def get_tutorships_user(db: Session, public_id):
+    return db.query(models.Tutoring).filter_by(public_id=public_id).all()
 
 
 def get_tutorships_search(db: Session, category_id, subcategory_id, ut_value_min, ut_value_max):
-    result = {"Estado": "En Proceso aun no esta"}
     result = db.query(models.Tutoring)
     if category_id != "":
         result = result.filter_by(category_id = category_id)
