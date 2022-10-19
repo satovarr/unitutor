@@ -75,6 +75,11 @@ def get_tutorships_info(db: Session, tutoring_id):
 def get_tutorships_user(db: Session, public_id):
     return db.query(models.Tutoring).filter_by(public_id=public_id).all()
 
+def get_category_name(db: Session, cat_id):
+    return db.query(models.Category.name).filter_by(cat_id=cat_id).first()
+
+def get_subcategory_name(db: Session, subcat_id):
+    return db.query(models.Subcategory.name).filter_by(subcat_id=subcat_id).first()
 
 def get_tutorships_search(db: Session, category_id, subcategory_id, ut_value_min, ut_value_max):
     result = db.query(models.Tutoring)

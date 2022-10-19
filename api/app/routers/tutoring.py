@@ -146,3 +146,44 @@ def view_tutorship_user(
     """
     result = crud.get_tutorships_user(db, public_id)
     return result 
+
+@router.get(
+    path='/category/name/{cat_id}',
+    tags=['View',],
+    status_code=status.HTTP_200_OK,
+    summary= "View the category name in the app"
+    )
+def view_category_name(
+    cat_id: str,
+    db: Session = Depends(get_db)
+    ):
+    """
+    # View name of a category
+    
+    This path operation obtains the name of a category in the database and returns a json with it.
+    
+    Return a status 200 and Json with the info of a tutorship
+    """
+    result = crud.get_category_name(db, cat_id)
+    return result 
+
+@router.get(
+    path='/subcategory/name/{subcat_id}',
+    tags=['View',],
+    status_code=status.HTTP_200_OK,
+    summary= "View the category name in the app"
+    )
+def view_subcategory_name(
+    subcat_id: str,
+    db: Session = Depends(get_db)
+    ):
+    """
+    # View name of a subcategory
+    
+    This path operation obtains the name of a subcategory in the database and returns a json with it.
+    
+    Return a status 200 and Json with the info of a tutorship
+    """
+    result = crud.get_subcategory_name(db, subcat_id)
+    return result 
+
