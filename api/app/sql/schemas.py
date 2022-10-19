@@ -22,8 +22,12 @@ class Item(ItemBase):
 class User(BaseModel):
     user_id: str
     public_id: str
+    user_name: str
     is_tutor: bool
+    photo_url: str
+    telephone: str
     description: str
+
 
 
 class Category(BaseModel):

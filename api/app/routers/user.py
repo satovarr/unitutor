@@ -9,7 +9,7 @@ from ..sql import schemas
 router = APIRouter()
 
 
-@router.get('/signin-user')
+@router.post('/signin-user')
 def signin_user(token: dict = Body(...), db: Session = Depends(get_db)):
     uuid = validate_token(token)
     if uuid:
@@ -19,11 +19,16 @@ def signin_user(token: dict = Body(...), db: Session = Depends(get_db)):
 
 @router.post('/profile-user')
 def profile_user(token: dict = Body(...), db: Session = Depends(get_db)):
-    print(token)
     uuid = validate_token(token)
     if uuid:
         return crud.get_user_by_id(db, uuid)
     raise HTTPException(status_code=404, detail="Invalid user token")
+
+@router.post('/public-user')
+def public_user(token: dict = Body(...), db: Session = Depends(get_db)):
+    uuid = validate_token(token)
+    if uuid:
+        return crud.get_user_public_id(db, uuid) 
 
 
 @router.post('/create-user')
