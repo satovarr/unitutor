@@ -2,13 +2,23 @@ import axios from 'axios'
 const baseUrl = '/categories'
 
 const getCategories = async () => {
-    const response = await axios.get(baseUrl)
+    let response = await axios.get(baseUrl)
     return response.data
 }
 
 const getSubcategories = async (id) => {
-    const response = await axios.get(`${baseUrl}/${id}`)
+    let response = await axios.get(`${baseUrl}/${id}`)
     return response.data
 }
 
-export { getCategories, getSubcategories }
+const getCategorybyId = async (id) => {
+    let response = await axios.get(`/category/name/${id}`)
+    return response.data
+}
+
+const getSubcategorybyId = async (id) => {
+    let response = await axios.get(`/subcategory/name/${id}`)
+    return response.data
+}
+
+export { getCategories, getSubcategories, getCategorybyId, getSubcategorybyId }

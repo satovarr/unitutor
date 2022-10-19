@@ -1,18 +1,35 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import price from '../imgs/price.svg'
+import { getCategorybyId, getSubcategorybyId } from '../services/categories'
 import '../styles/componentStyles/tutorship.css'
 import Tag from './Tag'
 
 const Tutorship = ({ own, tutorship }) => {
 
-    const [user, setUser] = useState()
     const [category, setCategory] = useState()
     const [subcategory, setSubcategory] = useState()
 
     useEffect(() => {
         if(tutorship) {
-            //TODO: get user, category and subcategory after endpoint is ready
+            //TODO: get user after endpoint is ready
+            getCategorybyId(tutorship.category_id)
+                .then(response => {
+                    if(response) {
+                        setCategory(response)
+                    }
+                    
+                })
+                .catch()
+
+            getSubcategorybyId(tutorship.subcategory_id)
+                .then(response => {
+                    if (response) {
+                        setSubcategory(response)
+                    }
+                    
+                })
+                .catch()
         }
     }, [tutorship])
 
@@ -35,8 +52,8 @@ const Tutorship = ({ own, tutorship }) => {
                     <p>{`${tutorship?.ut_value || '???'} COP/h`}</p>
                 </div>
                 <div className="categories">
-                    <Tag type='primary' text={tutorship?.category || 'Category'}/>
-                    <Tag text={tutorship?.subcategory || 'Category'} />
+                    <Tag type='primary' text={category?.name || 'Category'}/>
+                    <Tag text={subcategory?.name || 'Subcategory'} />
                 </div>
             </div>
         </Link>

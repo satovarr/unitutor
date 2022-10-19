@@ -10,22 +10,18 @@ import price from '../imgs/price.svg'
 import Button from "../components/Button"
 import { getTutorshipbyId } from "../services/tutorships"
 import { useState } from "react"
+import { getCategorybyId, getSubcategorybyId } from "../services/categories"
 
 const TutorshipsInfo = () => {
 
     const navigate = useNavigate()
     const [tutorship, setTutorship] = useState()
+    const [category, setCategory] = useState()
+    const [subcategory, setSubcategory] = useState()
 
     const { id } = useParams()
 
     const defaultPic = 'https://firebasestorage.googleapis.com/v0/b/unitutor-f0c21.appspot.com/o/content%2Fdefault_avatar.png?alt=media&token=04f223db-eb55-4632-9fcf-5a4457cdd655'
-
-    //Redirect to home if there isn't an active session
-    useEffect(() => {
-        if (localStorage.getItem('activeSession') === 'false') {
-            navigate('/')
-        }
-    }, [navigate])
 
     //Get tutorship info
     useEffect(() => {
@@ -33,6 +29,25 @@ const TutorshipsInfo = () => {
             .then(tutorshipData => {
                 if(tutorshipData) {
                     setTutorship(tutorshipData)
+
+                    //TODO: get user after endpoint is ready
+                    getCategorybyId(tutorshipData.category_id)
+                        .then(response => {
+                            if (response) {
+                                setCategory(response)
+                            }
+
+                        })
+                        .catch()
+
+                    getSubcategorybyId(tutorshipData.subcategory_id)
+                        .then(response => {
+                            if (response) {
+                                setSubcategory(response)
+                            }
+
+                        })
+                        .catch()
                 }
             })
     }, [])
@@ -43,7 +58,7 @@ const TutorshipsInfo = () => {
 
     const contactTutor = () => {
         //TODO: add logic when chat functionality is ready
-        console.log('open chat with user', tutorship.user.publicId)
+        console.log('open chat with user')
     }
 
     //TODO: double check link after defining profile routing
@@ -117,8 +132,8 @@ const TutorshipsInfo = () => {
                             <p>{tutorship?.rating || 'sin calificaciones'}</p>
                         </div>
                         <div className="categories">
-                            <Tag type='primary' text={tutorship?.category || 'Category'} />
-                            <Tag text={tutorship?.subcategory || 'Category'} />
+                            <Tag type='primary' text={category?.name || 'Category'} />
+                            <Tag text={subcategory?.name || 'Subcategory'} />
                         </div>
                         <div className="price">
                             <img src={price} alt="price"></img>
