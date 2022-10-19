@@ -95,6 +95,7 @@ def view_tutorships_search(
     subcategory_id: str = "",
     ut_value_min: int = 0,
     ut_value_max: int = 10000000,
+    name_tutoring: str = "",
     db: Session = Depends(get_db)
     ):
     """
@@ -104,7 +105,7 @@ def view_tutorships_search(
     
     Return a status 200 and Json with the tutorships
     """
-    result = crud.get_tutorships_search(db, category_id, subcategory_id, ut_value_min, ut_value_max)
+    result = crud.get_tutorships_search(db, category_id, subcategory_id, ut_value_min, ut_value_max, name_tutoring)
     return result 
 
 @router.get(
@@ -187,3 +188,22 @@ def view_subcategory_name(
     result = crud.get_subcategory_name(db, subcat_id)
     return result 
 
+@router.get(
+    path='/profile_user/info/{public_id}',
+    tags=['View',],
+    status_code=status.HTTP_200_OK,
+    summary= "View the info of user in the app"
+    )
+def view_info_user_public_id(
+    public_id: str,
+    db: Session = Depends(get_db)
+    ):
+    """
+    # View info of a user
+    
+    This path operation obtains the info of a user in the database and returns a json with it.
+    
+    Return a status 200 and Json with the info of a user
+    """
+    result = crud.get_user_info_public_id(db, public_id)
+    return result 

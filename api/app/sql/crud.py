@@ -78,15 +78,20 @@ def get_tutorships_user(db: Session, public_id):
 def get_category_name(db: Session, cat_id):
     return db.query(models.Category.name).filter_by(cat_id=cat_id).first()
 
+def get_user_info_public_id(db: Session, public_id):
+    return db.query(models.User).filter_by(public_id=public_id).first()
+
 def get_subcategory_name(db: Session, subcat_id):
     return db.query(models.Subcategory.name).filter_by(subcat_id=subcat_id).first()
 
-def get_tutorships_search(db: Session, category_id, subcategory_id, ut_value_min, ut_value_max):
+def get_tutorships_search(db: Session, category_id, subcategory_id, ut_value_min, ut_value_max, name_tutoring):
     result = db.query(models.Tutoring)
     if category_id != "":
         result = result.filter_by(category_id = category_id)
     if subcategory_id != "":
         result = result.filter_by(subcategory_id = subcategory_id)
+    if name_tutoring != "":
+        result = result.filter(models.Tutoring.name.ilike(f'%{name_tutoring}%'))
     result = result.filter(models.Tutoring.ut_value <= ut_value_max, models.Tutoring.ut_value >= ut_value_min).all()
     
     #     if subcategory_id != "" 
