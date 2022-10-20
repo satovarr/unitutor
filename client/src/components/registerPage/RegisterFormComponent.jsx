@@ -52,7 +52,7 @@ export const RegisterFormComponent = ({ handleModalChange }) => {
 
         let payload = {
           token: {
-            acessToken: info?.userCredential?.accessToken || ''
+            accessToken: info?.userCredential?.accessToken || ''
           },
           user: {
             user_name: info?.name || '',
@@ -65,31 +65,31 @@ export const RegisterFormComponent = ({ handleModalChange }) => {
           }
         }
         console.log(payload)
-        // createUser(payload)
-        //   .then(success => {
-        //     if(success) {
-        //       handleModalChange({
-        //           active: true,
-        //           isSucessState: true,
-        //           success: true,
-        //           message: 'Registro exitoso',
-        //           message_description: 'Tu registro en UniTutor se ha completado, iniciando sesión...'
-        //         })
+        createUser(payload)
+           .then(success => {
+             if(success) {
+               handleModalChange({
+                   active: true,
+                   isSucessState: true,
+                   success: true,
+                   message: 'Registro exitoso',
+                   message_description: 'Tu registro en UniTutor se ha completado, iniciando sesión...'
+                 })
 
-        //       setTimeout(() => navigate('/'), 4000)
-        //     }
-        //     else {
-        //       handleModalChange({
-        //         active: true,
-        //         isSucessState: true,
-        //         success: false,
-        //         message: 'Ha ocurrido un error :(',
-        //         message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
-        //         isCloseable: true,
-        //         acceptButtonText: 'Vale'
-        //       })
-        //     }
-        //   })
+               setTimeout(() => navigate('/'), 4000)
+             }
+             else {
+               handleModalChange({
+                 active: true,
+                 isSucessState: true,
+                 success: false,
+                 message: 'Ha ocurrido un error :(',
+                 message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                 isCloseable: true,
+                 acceptButtonText: 'Vale'
+               })
+             }
+           })
          
         
        })

@@ -26,7 +26,7 @@ def profile_user(token: dict = Body(...), db: Session = Depends(get_db)):
 
 @router.post('/public-user')
 def public_user(token: dict = Body(...), db: Session = Depends(get_db)):
-    uuid = validate_token(token)
+    uuid = validate_token(token["accessToken"])
     if uuid:
         return crud.get_user_public_id(db, uuid) 
 

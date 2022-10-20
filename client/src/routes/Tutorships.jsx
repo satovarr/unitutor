@@ -35,12 +35,12 @@ const Tutorships = () => {
                 .then(public_id => {
                     if (public_id) {
                         console.log(public_id)
-                        // getUserTutorships(public_id)
-                        //     .then(response => {
-                        //         if (response) {
-                        //             setTutorships(response)
-                        //         }
-                        //     })
+                        getUserTutorships(public_id)
+                            .then(response => {
+                                if (response) {
+                                    setTutorships(response)
+                                }
+                            })
                     } 
                 })
         }

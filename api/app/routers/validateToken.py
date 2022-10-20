@@ -9,11 +9,9 @@ firebase_admin.initialize_app(cred)
 
 def validate_token(id_token):
     try:
-        decoded_token = auth.verify_id_token(id_token["accessToken"])
-        print(decoded_token)
+        decoded_token = auth.verify_id_token(id_token)
         uid = decoded_token['uid']
-        print(uid)
         return uid
     except Exception as e:
-        print("Invalid firebase Token. default value returned. ", e)
+        print("Invalid firebase Token. default value returned: 4. ", e)
         return "4"
