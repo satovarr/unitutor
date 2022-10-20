@@ -33,13 +33,12 @@ function App() {
         if (!localStorage.getItem('activeSession') || localStorage.getItem('activeSession') === 'false') {
           localStorage.setItem('activeSession', 'true')
         }
-
-        setCurrentUser({ uid: user.uid, name: user.displayName, profilePic: user.photoURL })
+        setCurrentUser({ accessToken: user.accessToken, name: user.displayName, profilePic: user.photoURL })
       }
 
       // Else if to tackle a problem when creating account with email and password
       else if(!currentUser.name) {
-        setCurrentUser({ uid: user.uid, name: user.displayName, profilePic: user.photoURL })
+        setCurrentUser({ accessToken: user.accessToken, name: user.displayName, profilePic: user.photoURL })
       }
 
     } else {

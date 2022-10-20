@@ -31,8 +31,7 @@ const TutorshipsInfo = () => {
             .then(tutorshipData => {
                 if(tutorshipData) {
                     setTutorship(tutorshipData)
-
-                    //TODO: get user after endpoint is ready
+                    
                     getCategorybyId(tutorshipData.category_id)
                         .then(response => {
                             if (response) {
@@ -82,7 +81,7 @@ const TutorshipsInfo = () => {
                     <div className="tutorshipInfo content">
                         <div className="userInfo">
                             <img src={user?.photo_url || defaultPic} alt='' load='lazy' referrerPolicy="no-referrer"/>
-                            <Link to={`/profile/${tutorship?.publicId}`}>{user?.user_name || '???'}</Link>
+                            <Link to={`/profile/${tutorship?.public_id}`}>{user?.user_name || '???'}</Link>
                         </div>
                         <p className="tutorshipInfo description">{tutorship.description || '???'}</p>
                         <div className="tutorshipInfo rating">

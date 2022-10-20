@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import TutorshipsContainer from "../components/TutorshipsContainer"
 import book from '../imgs/book.svg'
@@ -7,83 +7,16 @@ import '../styles/Tutorships.css'
 import Footer from "../components/Footer"
 import { useState } from "react"
 import { getUserTutorships } from "../services/tutorships"
+import { getUserPublicId } from "../services/users"
+import { UserContext } from "../App"
 
 const Tutorships = () => {
     
     const navigate = useNavigate()
 
-    //TODO: change get tutorships from back
-    //Test tutorships
-    // const test = [
-    //     {
-    //         id: 1,
-    //         name: 'Conceptos básicos de Python',
-    //         price: 20000,
-    //         category: 'Category',
-    //         subcategory: 'Subcategory',
-    //         user: {
-    //             name: 'John Doe',
-    //             photoURL: 'https://firebasestorage.googleapis.com/v0/b/unitutor-f0c21.appspot.com/o/user_content%2FH9E6LFjaB0Uf22g5QUIVg2iw1mF3.jpg?alt=media&token=9a060c08-5525-415f-8d2c-dac948b33fc9'
-    //         }
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'Conceptos básicos de Python',
-    //         price: 20000,
-    //         category: 'Category',
-    //         subcategory: 'Subcategory'
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'Conceptos básicos de Python',
-    //         price: 20000,
-    //         category: 'Category',
-    //         subcategory: 'Subcategory'
-    //     },
-    //     {
-    //         id: 4,
-    //         name: 'Conceptos básicos de Python',
-    //         price: 20000,
-    //         category: 'Category',
-    //         subcategory: 'Subcategory'
-    //     },
-    //     {
-    //         id: 5,
-    //         name: 'Conceptos básicos de Python',
-    //         price: 20000,
-    //         category: 'Category',
-    //         subcategory: 'Subcategory'
-    //     },
-    //     {
-    //         id: 6,
-    //         name: 'Conceptos básicos de Python',
-    //         price: 20000,
-    //         category: 'Category',
-    //         subcategory: 'Subcategory'
-    //     },
-    //     {
-    //         id: 7,
-    //         name: 'Conceptos básicos de Python',
-    //         price: 20000,
-    //         category: 'Category',
-    //         subcategory: 'Subcategory'
-    //     },
-    //     {
-    //         id: 8,
-    //         name: 'Conceptos básicos de Python',
-    //         price: 20000,
-    //         category: 'Programación',
-    //         subcategory: 'JavaScript'
-    //     },
-    //     {
-    //         id: 9,
-    //         name: 'Conceptos básicos de Python',
-    //         price: 20000,
-    //         category: 'Category',
-    //         subcategory: 'Subcategory'
-    //     },
-    // ]
-    // // const test = false
+    const { currentUser } = useContext(UserContext);
+
+    //TODO: finish getting tutorships after endpoint error is fixed
     const [tutorships, setTutorships] = useState()
 
     //Redirect to home if there isn't an active session
@@ -94,13 +27,25 @@ const Tutorships = () => {
     }, [navigate])
 
     useEffect(() => {
-        getUserTutorships(2)
-            .then(response => {
-                if(response) {
-                    setTutorships(response)
-                }
-            })
-    }, [])
+        
+        if(currentUser) {
+            let tokenObject = { accessToken: currentUser.accessToken }
+            console.log(tokenObject)
+            getUserPublicId(tokenObject)
+                .then(public_id => {
+                    if (public_id) {
+                        console.log(public_id)
+                        // getUserTutorships(public_id)
+                        //     .then(response => {
+                        //         if (response) {
+                        //             setTutorships(response)
+                        //         }
+                        //     })
+                    } 
+                })
+        }
+        
+    }, [currentUser])
 
     const createTutorship = () => {
         navigate('/tutorships/new')

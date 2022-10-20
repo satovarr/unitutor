@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App'
 import { auth, updateProfile } from '../../services/firebase';
+import { createUser } from '../../services/users';
 import { FormFirstStepComponent } from './FormFirstStepComponent';
 import { FormSecondStepComponent } from './FormSecondStepComponent';
 import ProgressBar from './ProgressBar';
@@ -48,16 +49,49 @@ export const RegisterFormComponent = ({ handleModalChange }) => {
       .then(() => {
 
         setCurrentUser({ ...currentUser, name: info.name, profilePic: info.profilePic })
-         
-        handleModalChange({
-          active: true,
-          isSucessState: true,
-          success: true,
-          message: 'Registro exitoso',
-          message_description: 'Tu registro en UniTutor se ha completado, iniciando sesión...'
-        })
 
-        setTimeout(() => navigate('/'), 4000)
+        let payload = {
+          token: {
+            acessToken: info?.userCredential?.accessToken || ''
+          },
+          user: {
+            user_name: info?.name || '',
+            is_tutor: false,
+            public_id: '',
+            user_id: '',
+            photo_url: info?.profilePic || '',
+            telephone: info?.tel || '',
+            description: ''
+          }
+        }
+
+        createUser(payload)
+          .then(success => {
+            if(success) {
+              handleModalChange({
+                  active: true,
+                  isSucessState: true,
+                  success: true,
+                  message: 'Registro exitoso',
+                  message_description: 'Tu registro en UniTutor se ha completado, iniciando sesión...'
+                })
+
+              setTimeout(() => navigate('/'), 4000)
+            }
+            else {
+              handleModalChange({
+                active: true,
+                isSucessState: true,
+                success: false,
+                message: 'Ha ocurrido un error :(',
+                message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                isCloseable: true,
+                acceptButtonText: 'Vale'
+              })
+            }
+          })
+         
+        
        })
       .catch(error => {
         handleModalChange({
@@ -70,11 +104,6 @@ export const RegisterFormComponent = ({ handleModalChange }) => {
           acceptButtonText: 'Vale'
         })
       })
-    //
-    //
-    //TODO: SEND INFO TO BACK.
-    //
-    //
   }
   return (
     <form onSubmit={onSubmit} autoComplete="off">
