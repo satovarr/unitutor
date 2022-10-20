@@ -12,6 +12,9 @@ import Footer from '../components/Footer'
 import { getCategories, getSubcategories } from '../services/categories'
 import Modal from '../components/Modal'
 import { createTutorship } from '../services/tutorships'
+import { useContext } from 'react'
+import { UserContext } from '../App'
+import { getUserPublicId } from '../services/users'
 
 const Tutorships_Create = () => {
 
@@ -21,6 +24,8 @@ const Tutorships_Create = () => {
     const [categories, setCategories] = useState(null)
     //object that contains selected category and its subcategories
     const [selectedCat_subcats, setSelectedCat_subcats] = useState(null)
+
+    const { currentUser } = useContext(UserContext)
 
     const navigate = useNavigate()
 
@@ -133,7 +138,13 @@ const Tutorships_Create = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         //TODO: change public id later
-        const tutorshipData = {
+        // getUserPublicId(currentUser?.accessToken)
+        //     .then(success => {
+        //         if(success) {
+        //             //code goes here
+        //         }
+        //     })
+        let tutorshipData = {
             category_id: formInfo.category,
             subcategory_id: formInfo.subcategory,
             public_id: 2,
@@ -166,7 +177,6 @@ const Tutorships_Create = () => {
                     })
                 }
             })
-        console.log(tutorshipData)
     }
 
     const allowContinue = () => {

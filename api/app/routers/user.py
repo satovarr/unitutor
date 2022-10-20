@@ -33,7 +33,7 @@ def public_user(token: dict = Body(...), db: Session = Depends(get_db)):
 
 @router.post('/create-user')
 def create_user(token: dict = Body(...), user: schemas.User = Body(...), db: Session = Depends(get_db)):
-    uuid = validate_token(token)
+    uuid = validate_token(token['accessToken'])
     if uuid:
         return crud.post_user(db, uuid, user)
     raise HTTPException(status_code=404, detail="Invalid register")
