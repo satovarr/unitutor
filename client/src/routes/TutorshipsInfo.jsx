@@ -11,6 +11,7 @@ import Button from "../components/Button"
 import { getTutorshipbyId } from "../services/tutorships"
 import { useState } from "react"
 import { getCategorybyId, getSubcategorybyId } from "../services/categories"
+import { getUserbyPublicId } from "../services/users"
 
 const TutorshipsInfo = () => {
 
@@ -18,6 +19,7 @@ const TutorshipsInfo = () => {
     const [tutorship, setTutorship] = useState()
     const [category, setCategory] = useState()
     const [subcategory, setSubcategory] = useState()
+    const [user, setUser] = useState()
 
     const { id } = useParams()
 
@@ -48,6 +50,15 @@ const TutorshipsInfo = () => {
 
                         })
                         .catch()
+
+                    getUserbyPublicId(tutorshipData.public_id)
+                        .then(response => {
+                            if (response) {
+                                setUser(response)
+                            }
+
+                        })
+                        .catch()
                 }
             })
     }, [])
@@ -70,8 +81,8 @@ const TutorshipsInfo = () => {
                 tutorship ?
                     <div className="tutorshipInfo content">
                         <div className="userInfo">
-                            <img src={tutorship.user?.photoURL || defaultPic} alt='' load='lazy' />
-                            <Link to={`/profile/${tutorship.user?.publicId}`}>{tutorship?.user?.name || '???'}</Link>
+                            <img src={user?.photo_url || defaultPic} alt='' load='lazy' referrerPolicy="no-referrer"/>
+                            <Link to={`/profile/${tutorship?.publicId}`}>{user?.user_name || '???'}</Link>
                         </div>
                         <p className="tutorshipInfo description">{tutorship.description || '???'}</p>
                         <div className="tutorshipInfo rating">

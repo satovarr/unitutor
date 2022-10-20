@@ -5,6 +5,8 @@ import book from '../imgs/book.svg'
 import Navbar from '../components/Navbar'
 import '../styles/Tutorships.css'
 import Footer from "../components/Footer"
+import { useState } from "react"
+import { getUserTutorships } from "../services/tutorships"
 
 const Tutorships = () => {
     
@@ -12,76 +14,77 @@ const Tutorships = () => {
 
     //TODO: change get tutorships from back
     //Test tutorships
-    const test = [
-        {
-            id: 1,
-            name: 'Conceptos básicos de Python',
-            price: 20000,
-            category: 'Category',
-            subcategory: 'Subcategory',
-            user: {
-                name: 'John Doe',
-                photoURL: 'https://firebasestorage.googleapis.com/v0/b/unitutor-f0c21.appspot.com/o/user_content%2FH9E6LFjaB0Uf22g5QUIVg2iw1mF3.jpg?alt=media&token=9a060c08-5525-415f-8d2c-dac948b33fc9'
-            }
-        },
-        {
-            id: 2,
-            name: 'Conceptos básicos de Python',
-            price: 20000,
-            category: 'Category',
-            subcategory: 'Subcategory'
-        },
-        {
-            id: 3,
-            name: 'Conceptos básicos de Python',
-            price: 20000,
-            category: 'Category',
-            subcategory: 'Subcategory'
-        },
-        {
-            id: 4,
-            name: 'Conceptos básicos de Python',
-            price: 20000,
-            category: 'Category',
-            subcategory: 'Subcategory'
-        },
-        {
-            id: 5,
-            name: 'Conceptos básicos de Python',
-            price: 20000,
-            category: 'Category',
-            subcategory: 'Subcategory'
-        },
-        {
-            id: 6,
-            name: 'Conceptos básicos de Python',
-            price: 20000,
-            category: 'Category',
-            subcategory: 'Subcategory'
-        },
-        {
-            id: 7,
-            name: 'Conceptos básicos de Python',
-            price: 20000,
-            category: 'Category',
-            subcategory: 'Subcategory'
-        },
-        {
-            id: 8,
-            name: 'Conceptos básicos de Python',
-            price: 20000,
-            category: 'Programación',
-            subcategory: 'JavaScript'
-        },
-        {
-            id: 9,
-            name: 'Conceptos básicos de Python',
-            price: 20000,
-            category: 'Category',
-            subcategory: 'Subcategory'
-        },
-    ]
-    // const test = false
+    // const test = [
+    //     {
+    //         id: 1,
+    //         name: 'Conceptos básicos de Python',
+    //         price: 20000,
+    //         category: 'Category',
+    //         subcategory: 'Subcategory',
+    //         user: {
+    //             name: 'John Doe',
+    //             photoURL: 'https://firebasestorage.googleapis.com/v0/b/unitutor-f0c21.appspot.com/o/user_content%2FH9E6LFjaB0Uf22g5QUIVg2iw1mF3.jpg?alt=media&token=9a060c08-5525-415f-8d2c-dac948b33fc9'
+    //         }
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Conceptos básicos de Python',
+    //         price: 20000,
+    //         category: 'Category',
+    //         subcategory: 'Subcategory'
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Conceptos básicos de Python',
+    //         price: 20000,
+    //         category: 'Category',
+    //         subcategory: 'Subcategory'
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Conceptos básicos de Python',
+    //         price: 20000,
+    //         category: 'Category',
+    //         subcategory: 'Subcategory'
+    //     },
+    //     {
+    //         id: 5,
+    //         name: 'Conceptos básicos de Python',
+    //         price: 20000,
+    //         category: 'Category',
+    //         subcategory: 'Subcategory'
+    //     },
+    //     {
+    //         id: 6,
+    //         name: 'Conceptos básicos de Python',
+    //         price: 20000,
+    //         category: 'Category',
+    //         subcategory: 'Subcategory'
+    //     },
+    //     {
+    //         id: 7,
+    //         name: 'Conceptos básicos de Python',
+    //         price: 20000,
+    //         category: 'Category',
+    //         subcategory: 'Subcategory'
+    //     },
+    //     {
+    //         id: 8,
+    //         name: 'Conceptos básicos de Python',
+    //         price: 20000,
+    //         category: 'Programación',
+    //         subcategory: 'JavaScript'
+    //     },
+    //     {
+    //         id: 9,
+    //         name: 'Conceptos básicos de Python',
+    //         price: 20000,
+    //         category: 'Category',
+    //         subcategory: 'Subcategory'
+    //     },
+    // ]
+    // // const test = false
+    const [tutorships, setTutorships] = useState()
 
     //Redirect to home if there isn't an active session
     useEffect(() => {
@@ -89,6 +92,15 @@ const Tutorships = () => {
             navigate('/')
         }
     }, [navigate])
+
+    useEffect(() => {
+        getUserTutorships(2)
+            .then(response => {
+                if(response) {
+                    setTutorships(response)
+                }
+            })
+    }, [])
 
     const createTutorship = () => {
         navigate('/tutorships/new')
@@ -105,8 +117,8 @@ const Tutorships = () => {
                     </h1>
                     <div className="tutorships cards-container">
                         {
-                            test ?
-                                <TutorshipsContainer tutorships={test} />
+                            tutorships ?
+                                <TutorshipsContainer tutorships={tutorships} own={true}/>
                                 : <p className="no_tutorships">
                                     Aún no has creado ninguna tutoría <Link to='/tutorships/new'>¿Quieres crear una?</Link>
                                 </p>

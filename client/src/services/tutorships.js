@@ -34,4 +34,14 @@ const getTutorshipbyId = async (tutorship_id) => {
     }
 }
 
-export { createTutorship, searchTutorships, getTutorshipbyId }
+const getUserTutorships = async (public_id) => {
+    try {
+        let response = await axios.get(baseUrl + '/user/' + public_id)
+        return response.data
+    }
+    catch {
+        return null
+    }
+}
+
+export { createTutorship, searchTutorships, getTutorshipbyId, getUserTutorships }

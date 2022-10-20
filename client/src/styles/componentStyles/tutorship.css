@@ -9,8 +9,10 @@
 
 .tutorship .container {
     min-width: 285px;
+    min-height: 224px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 15px;
     box-shadow: var(--card-box-shadow-small-1),
         var(--card-box-shadow-small-2),

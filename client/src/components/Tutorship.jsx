@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import price from '../imgs/price.svg'
 import { getCategorybyId, getSubcategorybyId } from '../services/categories'
+import { getUserbyPublicId } from '../services/users'
 import '../styles/componentStyles/tutorship.css'
 import Tag from './Tag'
 
@@ -9,6 +10,7 @@ const Tutorship = ({ own, tutorship }) => {
 
     const [category, setCategory] = useState()
     const [subcategory, setSubcategory] = useState()
+    const [user, setUser] = useState()
 
     useEffect(() => {
         if(tutorship) {
@@ -30,6 +32,15 @@ const Tutorship = ({ own, tutorship }) => {
                     
                 })
                 .catch()
+            
+            getUserbyPublicId(tutorship.public_id)
+                .then(response => {
+                    if (response) {
+                        setUser(response)
+                    }
+
+                })
+                .catch()
         }
     }, [tutorship])
 
@@ -43,8 +54,8 @@ const Tutorship = ({ own, tutorship }) => {
                     own ?
                         <></>
                     : <div className="userInfo">
-                            <img src={tutorship?.user?.photoURL || defaultPic} alt='' load='lazy' />
-                            <p>{tutorship?.user?.name || '???'}</p>
+                            <img src={user?.photo_url || defaultPic} alt='' load='lazy' referrerPolicy='no-referrer'/>
+                            <p>{user?.user_name || '???'}</p>
                         </div>
                 }
                 <div className="price">
