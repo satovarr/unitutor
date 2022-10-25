@@ -1,0 +1,153 @@
+.tutorships.main-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.tutorships.container {
+    width: 100%;
+    padding: 50px 100px;
+    display: flex;
+    flex-grow: 1;
+}
+
+.tutorships.content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.tutorships h1 {
+    display: flex;
+    gap: 10px;
+    color: var(--blueGrey-color-600);
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+
+
+.tutorships.cards-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-end;
+    flex-grow: 1;
+}
+
+.tutorships.add {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    border: none;
+    background-color: transparent;
+    fill: var(--secondary-color-300); 
+    stroke: var(--secondary-color-300);
+    cursor: pointer;
+    transition: fill stroke .3s ease-in-out;
+    padding: 0;
+}
+
+.tutorships.add:hover {
+    fill: var(--secondary-color-400);
+    stroke: var(--secondary-color-400);
+}
+
+.tutorships.add::after {
+    content:'Añade una tutoría';
+    position: absolute;
+    top: calc(50% - 22px);
+    left: -180px;
+    font-size: 16px;
+    color: var(--ink-color-80);
+    font-weight: 400;
+    width: 170px;
+    height: 40px;
+    background-color: var(--primary-color-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    pointer-events: none;
+}
+
+.tutorships.add::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 12px);
+    left: -10px;
+    width: 0px;
+    height: 0px;
+    border-top: 10px solid transparent;
+    border-left: 10px solid var(--primary-color-100);
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    pointer-events: none;
+}
+
+.tutorships.add:hover::after, .tutorships.add:hover::before {
+    opacity: 1;
+}
+
+.no_tutorships {
+    align-self: flex-start;
+    width: 100%;
+}
+
+.no_tutorships a {
+    text-decoration: none;
+    color: var(--secondary-color-300);
+    transition: color .3s ease-in-out;
+}
+
+.no_tutorships a:hover {
+    color: var(--secondary-color-400);
+}
+
+/* media queries */
+@media (max-width: 1200px) {
+    .tutorships.container {
+        padding: 50px 40px;
+    }
+
+    .tutorships.cards-container {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .tutorships.add {
+        width: 50px;
+        height: 50px;
+    }
+
+    .tutorships.cards-container {
+        gap: 5px;
+    }
+}
+
+@media (max-width: 400px) {
+    
+    .tutorships.container {
+        padding: 50px 20px;
+    }
+
+    .tutorships h1 {
+        font-size: 32px;
+    }
+    
+    .tutorships.cards-container {
+        gap: 0px;
+    }
+}
+
+@media (max-width: 330px) {
+    .tutorships.container {
+        padding: 40px 15px;
+    }
+}

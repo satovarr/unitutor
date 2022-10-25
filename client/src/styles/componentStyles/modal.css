@@ -1,0 +1,103 @@
+#modal {
+    visibility: visible;
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 780px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-card {
+    position: relative;
+    min-width: 345px;
+    min-height: 300px;
+    max-width: 460px;
+    max-height: 400px;
+    padding: 50px;
+    background-color: var(--blueGrey-color-white);
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink-color-80);
+    display: flex;
+    gap: 25px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 30px;
+    width: 30px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blueGrey-color-300);
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+}
+
+.modal_close:hover {
+    background-color: var(--blueGrey-color-400)
+}
+
+.modal_close img{
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+}
+
+#modal_load {
+    height: 80px;
+    animation: rotation 1.2s linear infinite;
+}
+
+#state-image {
+    width: 48px;
+    height: 48px;
+}
+
+.modal_succes {
+    color: var(--success-color-300);
+}
+
+.modal_error {
+    color: var(--error-color-300);
+}
+
+#modal_message-description {
+    color: var(--ink-color-60);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* Animation for spinner */
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Media queries */
+@media (max-width: 450px) {
+    #modal-card {
+        min-width: 230px;
+        min-height: 200px;
+        max-width: 345px;
+        max-height: unset;
+    }
+}

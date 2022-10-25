@@ -1,0 +1,38 @@
+.form_content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form_content a {
+    margin-top: 30px;
+    color: var(--secondary-color-300);
+}
+
+.form_content a:hover {
+    color: var(--secondary-color-400);
+}
+
+.form-mail-input {
+    margin-bottom: 15px;
+}
+
+.error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: var(--error-color-300)
+}
+
+@media (max-width: 560px) {
+    .form_content, 
+    .form-mail-input,
+    .input-group {
+        width: 100%;
+    }
+
+}

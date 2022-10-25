@@ -1,0 +1,16 @@
+.tag {
+    padding: 5px 10px;
+    border-radius: 6px;
+    width: max-content;
+    font-size: 13px;
+    color: var(--ink-color-80);
+    font-weight: 500;
+}
+
+.tag.default {
+    background-color: var(--blueGrey-color-200);
+}
+
+.tag.primary {
+    background-color: var(--primary-color-50);
+}

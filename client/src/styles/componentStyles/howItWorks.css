@@ -1,0 +1,113 @@
+.how_it_works {
+    width:100%;
+    background-color: var(--blueGrey-color-100);
+    text-align: center;
+    padding: 50px 40px;
+}
+
+.how_it_works h2 {
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--ink-color-100);
+    margin-bottom: 50px;
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+
+.how_it_works div:nth-of-type(2n) {
+    flex-direction: row-reverse;
+}
+
+.step_description {
+    width: 320px;
+}
+
+.step_description h4 {
+    position: relative;
+    color: var(--ink-color-100);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    z-index: 1;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.step_description h4::before {
+    content: "";
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: -2px;
+    left: -9px;
+    background-color: var(--secondary-color-200);
+    z-index: -1;
+    border-radius: 50%;
+}
+
+.step_description p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--ink-color-100);
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.steps:nth-child(2n + 1) h4::before {
+    background-color: var(--primary-color-200)
+}
+
+.step_image_container {
+    height: 220px;
+    width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color-100);
+    border-radius: 10px;
+}
+
+.step_image_container img {
+    width: 130px;
+    height: 130px;
+}
+
+.steps:nth-child(2n + 1) .step_image_container {
+    background-color: var(--secondary-color-100);
+}
+
+/* Media queries */
+@media (max-width: 780px) {
+    .steps {
+        gap: 30px;
+    }
+
+    .step_description {
+        width: 280px;
+    }
+
+    .step_image_container {
+        height: 200px;
+        width: 280px;
+    }
+
+    .step_image_container img {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+@media (max-width: 579px) {
+    .steps {
+        flex-direction: column !important;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+}
