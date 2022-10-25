@@ -7,8 +7,10 @@
 .pnp.js
 .env
 venv/
+.venv/
+
 api/serviceAccountKey.json
-.env
+
 
 # testing
 /coverage
