@@ -24,3 +24,16 @@
 3. add .env to /client
 4. start development server
   > npm start 
+
+
+- missing requirements.txt
+
+## Activate virtual environment
+>> cd virtualenv/Scripts
+
+>> activate
+
+>> ../.. 
+
+## Develompent run
+>> uvicorn app:app --reload

@@ -8,6 +8,7 @@
 .env
 venv/
 api/serviceAccountKey.json
+.env
 
 # testing
 /coverage
