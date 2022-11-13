@@ -44,13 +44,15 @@ class Category(BaseModel):
 class SubCategory(BaseModel):
     category_id: str
     name: str
+    code_class: str
     image_url: str
-
+    
     class Config:
         schema_extra = {
             "example": {
                 "category_id": "beb98d3c1d9e4199835bc6a14832b041",
                 "name": "Calculo Diferencial",
+                "code_class": "1000004-B",
                 "image_url": "www.test.com"
             }
         }
@@ -75,3 +77,7 @@ class Tutorship(BaseModel):
                 "description": "La mejor tutoria!"
             }
         }
+
+
+class certificate(BaseModel):
+    code_class: str

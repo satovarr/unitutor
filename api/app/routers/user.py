@@ -1,10 +1,12 @@
-from fastapi import APIRouter, Body, Request, Depends, HTTPException,status
+from fastapi import APIRouter, Body, Request, Depends, HTTPException,status, File, UploadFile
 from http import HTTPStatus
 from sqlalchemy.orm import Session
 from .validateToken import validate_token
 from ..sql.database import get_db
 from ..sql import crud
 from ..sql import schemas
+import PyPDF2
+import codecs
 
 router = APIRouter()
 
@@ -84,7 +86,7 @@ def create_subcategory(subcategory: schemas.SubCategory = Body(...), db: Session
 
 @router.post(
     path='/create-tutorship',
-    status_code=status.HTTP_201_CREATED,
+    status_code=status.HTTP_200_OK,
     tags=['Create',],
     summary= "Create a tutorship in the app"
     )
@@ -102,3 +104,60 @@ def create_tutorship(tutorship: schemas.Tutorship = Body(...), db: Session = Dep
     """
     crud.post_tutorship(db, tutorship)
     return tutorship
+
+
+@router.post(
+    path='/verify_certificate',
+    status_code=status.HTTP_200_OK,
+    tags=['Validate',],
+    summary= "Validate if a tutor approved the subject to be tutored"
+    )
+async def verify_certificate(file: UploadFile, code_class: str):
+    """
+    # Verify certificade
+    
+    This path operation Validate if a tutor approved the subject to be tutored 
+    
+    Parameters:
+    - Request Body parameter:
+        - **file: UploadFile** -> The certificate of notes in pdf
+    - Path parameter:
+        - **code_class: str** -> code-class of the subcategory that will create the tutorial
+    
+    Return a status 200
+    """
+    #guardamos el archivo 
+    with open("certificate.pdf","wb") as myfile:
+        content = await file.read()
+        myfile.write(content)
+        #print("Cantidad de paginas:", pdfreader.numPages)
+        myfile.close()
+
+    valor = "no encontrado"
+    with open("certificate.pdf","rb") as myfile:
+        pdfreader = PyPDF2.PdfFileReader(myfile)
+        content = ""
+        #Guardamos el contenido del archivo
+        for x in range(0, pdfreader.numPages):
+            page = pdfreader.getPage(x)
+            content = content + "\n"+ page.extract_text()
+        content = content.split("\n")
+        #Buscamos la información
+        for x in range(len(content)):
+            if content[x].find(code_class) == 0:
+                valor = content[x]
+        valor = valor.split(" ")
+        valor = valor[-1]
+        valor = valor[0:3]
+        valor = float(valor)
+        myfile.close()
+
+    #Borramos la información del certificado
+    with open("certificate.pdf","wb") as myfile:
+        myfile.close()
+
+    if valor >= 3:
+        return {"result": "Meet requirements"}
+    else:
+        return {"result": "Does not meet the requirements or the file is not valid"}
+         

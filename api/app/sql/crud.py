@@ -49,6 +49,7 @@ def post_subcategory(db: Session, subcategory: schemas.SubCategory):
     db_subcategory = models.Subcategory(
         subcat_id=generate_uuid(),
         name=subcategory.name,
+        code_class=subcategory.code_class,
         category_id=subcategory.category_id,
         image_url=subcategory.image_url
     )
@@ -101,6 +102,8 @@ def get_user_info_public_id(db: Session, public_id):
 def get_subcategory_name(db: Session, subcat_id):
     return db.query(models.Subcategory.name).filter_by(subcat_id=subcat_id).first()
 
+def get_subcategory_code_class(db: Session, subcat_id):
+    return db.query(models.Subcategory.code_class).filter_by(subcat_id=subcat_id).first()
 
 def get_tutorships_search(db: Session, category_id, subcategory_id, ut_value_min, ut_value_max, name_tutoring):
     result = db.query(models.Tutoring)
