@@ -61,7 +61,8 @@ export const RegisterFormComponent = ({ handleModalChange }) => {
             user_id: '',
             photo_url: info?.profilePic || '',
             telephone: info?.tel || '',
-            description: ''
+            description: '',
+            payme_url: ''
           }
         }
         console.log(payload)

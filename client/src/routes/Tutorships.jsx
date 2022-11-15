@@ -30,11 +30,9 @@ const Tutorships = () => {
         
         if(currentUser) {
             let tokenObject = { accessToken: currentUser.accessToken }
-            console.log(tokenObject)
             getUserPublicId(tokenObject)
                 .then(public_id => {
                     if (public_id) {
-                        console.log(public_id)
                         getUserTutorships(public_id)
                             .then(response => {
                                 if (response) {
@@ -62,7 +60,7 @@ const Tutorships = () => {
                     </h1>
                     <div className="tutorships cards-container">
                         {
-                            tutorships ?
+                            tutorships?.length > 0?
                                 <TutorshipsContainer tutorships={tutorships} own={true}/>
                                 : <p className="no_tutorships">
                                     Aún no has creado ninguna tutoría <Link to='/tutorships/new'>¿Quieres crear una?</Link>

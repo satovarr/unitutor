@@ -122,8 +122,10 @@ const Search = () => {
         //Only change states if the options are different
         if (params[target.name] !== target.value) {
             //Clean subcategory selection if category changes
-            if (target.name === 'category') {
-                setParams({ ...params, [target.name]: target.value, subcategory: undefined })
+            if (target.name === 'category_id') {
+                let dropped = params
+                delete dropped['subcategory_id']
+                setParams({ ...dropped, [target.name]: target.value })
                 
             }
             else {

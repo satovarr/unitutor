@@ -49,6 +49,7 @@
 .tutorship-form textarea {
     margin-top: -10px;
     min-height: 100px;
+    resize: none;
 }
 
 .tutorship-form.actions {
