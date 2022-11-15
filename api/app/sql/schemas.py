@@ -27,6 +27,7 @@ class User(BaseModel):
     photo_url: str
     telephone: str
     description: str
+    payme_url: str
 
 
 

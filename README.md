@@ -9,6 +9,9 @@
   > pip install virtualenv
   > python -m virtualvenv .venv
   > venv/Scripts/activate
+  Ubuntu
+  > sudo apt-get install libmysqlclient-dev
+  > pip3 install mysqlclient
 3. install requirements
   (.venv)> pip install -r requirements.txt 
 4. add .env to /app (depending on your connection)

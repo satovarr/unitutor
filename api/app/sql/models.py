@@ -16,6 +16,7 @@ class User(Base):
     photo_url = Column(String(250), default="default_photo_url")
     telephone = Column(String(10), default="Sin Telefono")
     description = Column(String(200))
+    payme_url = Column(String(50))
     tutorings = relationship("Tutoring", backref="user")
 
 
