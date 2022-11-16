@@ -227,3 +227,23 @@ def view_subcategory_code_class(
     """
     result = crud.get_subcategory_code_class(db, subcat_id)
     return result 
+
+@router.get(
+    path='/score/{tutoring_id}',
+    tags=['View',],
+    status_code=status.HTTP_200_OK,
+    summary= "View the scorres of a tutorship in the app"
+    )
+def view_score(
+    tutoring_id: str,
+    db: Session = Depends(get_db)
+    ):
+    """
+    # View info of a user
+    
+    This path operation obtains the info of a user in the database and returns a json with it.
+    
+    Return a status 200 and Json with the info of a user
+    """
+    result = crud.get_scores(db, tutoring_id)
+    return result 

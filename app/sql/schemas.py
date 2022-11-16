@@ -77,3 +77,7 @@ class Tutorship(BaseModel):
                 "description": "La mejor tutoria!"
             }
         }
+
+class Score(BaseModel):
+    score: float
+    tutoring_id: str

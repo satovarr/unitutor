@@ -160,3 +160,24 @@ async def verify_certificate(file: UploadFile, code_class: str):
         return {"result": "Meet requirements"}
     else:
         return {"result": "Does not meet the requirements or the file is not valid"}
+
+@router.post(
+    path='/create-score',
+    status_code=status.HTTP_200_OK,
+    tags=['Create',],
+    summary= "Create a score in the app"
+    )
+def create_score(score: schemas.Score = Body(...), db: Session = Depends(get_db)):
+    """
+    # Create tutorship
+    
+    This path operation create a tutorship in the app and save the information in the database
+    
+    Parameters:
+    - Request Body parameter:
+        - **tutorship: Tutorship** -> A tutorshio model with the name, description, value, category_id, subcategory_id and public_id
+    
+    Return a status 201 
+    """
+    crud.post_score(db, score)
+    return score

@@ -71,6 +71,16 @@ def post_tutorship(db: Session, tutorship: schemas.Tutorship):
     db.add(db_tutorship)
     db.commit()
 
+def post_score(db: Session, score: schemas.Score):
+    db_score = models.Score(
+        score_id=generate_uuid(),
+        tutoring_id=score.tutoring_id,
+        score=score.score
+    )
+    db.add(db_score)
+    db.commit()
+
+
 
 def get_categories(db: Session):
     return db.query(models.Category).all()
@@ -107,6 +117,8 @@ def get_subcategory_name(db: Session, subcat_id):
 def get_subcategory_code_class(db: Session, subcat_id):
     return db.query(models.Subcategory.code_class).filter_by(subcat_id=subcat_id).first()
 
+def get_scores(db: Session, tutoring_id):
+    return db.query(models.Score).filter_by(tutoring_id=tutoring_id).all()
 
 def get_tutorships_search(db: Session, category_id, subcategory_id, ut_value_min, ut_value_max, name_tutoring):
     result = db.query(models.Tutoring)
