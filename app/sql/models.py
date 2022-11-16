@@ -16,7 +16,7 @@ class User(Base):
     photo_url = Column(String(250), default="default_photo_url")
     telephone = Column(String(10), default="Sin Telefono")
     description = Column(String(200))
-    payme_url = Column(String(50))
+    payme_url = Column(String(50), defaulr="Sin payme")
     tutorings = relationship("Tutoring", backref="user")
 
 
@@ -35,6 +35,7 @@ class Subcategory(Base):
     subcat_id = Column(String(50), primary_key=True,
                        unique=True, nullable=False)
     name = Column(String(50), nullable=False)
+    code_class = Column(String(50), nullable=False)
     image_url = Column(String(300))
     category_id = Column(String(50), ForeignKey("category.cat_id"))
     tutorias = relationship("Tutoring", backref="subcategory")
