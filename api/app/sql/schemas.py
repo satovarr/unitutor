@@ -79,5 +79,6 @@ class Tutorship(BaseModel):
         }
 
 
-class certificate(BaseModel):
-    code_class: str
+class Score(BaseModel):
+    score: float
+    tutoring_id: str

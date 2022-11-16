@@ -58,5 +58,4 @@ class Score(Base):
     score_id = Column(String(50), primary_key=True,
                       unique=True, nullable=False)
     score = Column(Float, nullable=False)
-    reviews_amount = Column(Integer, nullable=False)
     tutoring_id = Column(String(50), ForeignKey("tutoring.tutoring_id"))
