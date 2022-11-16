@@ -8,7 +8,6 @@ httptools
 httpx
 itsdangerous
 jinja2
-PyPDF2
 mysql-connector-python
 orjson
 pip-chill

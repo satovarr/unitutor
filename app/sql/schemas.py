@@ -45,7 +45,6 @@ class Category(BaseModel):
 class SubCategory(BaseModel):
     category_id: str
     name: str
-    code_class: str
     image_url: str
 
     class Config:
