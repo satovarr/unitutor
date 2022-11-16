@@ -207,3 +207,23 @@ def view_info_user_public_id(
     """
     result = crud.get_user_info_public_id(db, public_id)
     return result 
+
+@router.get(
+    path='/subcategory/codeclass/{subcat_id}',
+    tags=['View',],
+    status_code=status.HTTP_200_OK,
+    summary= "View the code_class in the app"
+    )
+def view_subcategory_code_class(
+    subcat_id: str,
+    db: Session = Depends(get_db)
+    ):
+    """
+    # View code_class of a subcategory
+    
+    This path operation obtains the code_class of a subcategory in the database and returns a json with it.
+    
+    Return a status 200 and Json with the info of a tutorship
+    """
+    result = crud.get_subcategory_code_class(db, subcat_id)
+    return result 
