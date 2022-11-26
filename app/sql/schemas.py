@@ -53,6 +53,7 @@ class SubCategory(BaseModel):
             "example": {
                 "category_id": "beb98d3c1d9e4199835bc6a14832b041",
                 "name": "Calculo Diferencial",
+                "code_class": "1000004-B",
                 "image_url": "www.test.com"
             }
         }

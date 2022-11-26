@@ -10,7 +10,12 @@ import PyPDF2
 router = APIRouter()
 
 
-@router.post('/signin-user')
+@router.post(
+    path='/signin-user',
+    tags=['Create',],
+    status_code=status.HTTP_200_OK,
+    summary= "the user enters the app"
+    )
 def signin_user(token: dict = Body(...), db: Session = Depends(get_db)):
     uuid = validate_token(token)
     if uuid:
@@ -18,14 +23,22 @@ def signin_user(token: dict = Body(...), db: Session = Depends(get_db)):
     raise HTTPException(status_code=404, detail="Invalid login")
 
 
-@router.post('/profile-user')
+@router.get(
+    path='/profile-user',
+    tags=['view',],
+    status_code=status.HTTP_200_OK
+    )
 def profile_user(token: dict = Body(...), db: Session = Depends(get_db)):
     uuid = validate_token(token)
     if uuid:
         return crud.get_user_by_id(db, uuid)
     raise HTTPException(status_code=404, detail="Invalid user token")
 
-@router.post('/public-user')
+@router.get(
+    path='/public-user',
+    tags=['view',],
+    status_code=status.HTTP_200_OK
+    )
 def public_user(token: dict = Body(...), db: Session = Depends(get_db)):
     uuid = validate_token(token["accessToken"])
     if uuid:
@@ -146,10 +159,13 @@ async def verify_certificate(file: UploadFile, code_class: str):
         for x in range(len(content)):
             if content[x].find(code_class) == 0:
                 valor = content[x]
-        valor = valor.split(" ")
-        valor = valor[-1]
-        valor = valor[0:3]
-        valor = float(valor)
+        if valor == "no encontrado":
+            valor = 0
+        else:
+            valor = valor.split(" ")
+            valor = valor[-1]
+            valor = valor[0:3]
+            valor = float(valor)
         myfile.close()
 
     #Borramos la información del certificado
