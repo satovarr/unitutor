@@ -146,10 +146,13 @@ async def verify_certificate(file: UploadFile, code_class: str):
         for x in range(len(content)):
             if content[x].find(code_class) == 0:
                 valor = content[x]
-        valor = valor.split(" ")
-        valor = valor[-1]
-        valor = valor[0:3]
-        valor = float(valor)
+        if valor == "no encontrado":
+            valor = 0
+        else:
+            valor = valor.split(" ")
+            valor = valor[-1]
+            valor = valor[0:3]
+            valor = float(valor)
         myfile.close()
 
     #Borramos la información del certificado
