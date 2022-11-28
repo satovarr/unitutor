@@ -60,7 +60,7 @@ const Tutorships = () => {
                     </h1>
                     <div className="tutorships cards-container">
                         {
-                            tutorships?.length > 0?
+                            Array.isArray(tutorships) && tutorships?.length > 0?
                                 <TutorshipsContainer tutorships={tutorships} own={true}/>
                                 : <p className="no_tutorships">
                                     Aún no has creado ninguna tutoría <Link to='/tutorships/new'>¿Quieres crear una?</Link>

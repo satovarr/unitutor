@@ -7,7 +7,7 @@ import SubCategory from "./SubCategory"
 
 const Category = ({ category, all, hideName }) => {
 
-    const [subcategories, setSubcategories] = useState()
+    const [subcategories, setSubcategories] = useState([])
 
     useEffect(() => {
         if(category) {
@@ -35,7 +35,7 @@ const Category = ({ category, all, hideName }) => {
             
             <div className='subcategories_container'>
                 {
-                    category && subcategories ?
+                    category && subcategories && Array.isArray(subcategories) ?
                         subcategories.map(subcategory => (
                             <SubCategory
                                 key={subcategory.subcat_id}

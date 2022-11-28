@@ -11,7 +11,7 @@ const SubCategory = ({ category, subcategory }) => {
                 '?category_id='+category?.cat_id +'&subcategory_id='+subcategory.subcat_id 
                 : ''}`
                 }>
-                <img src={subcategory.imgSrc || testPic} alt={subcategory.name} loading='lazy' />
+                <img src={subcategory.image_url || testPic} alt={subcategory.name} loading='lazy' />
                 <div className="subcategorie-name">
                     <p>{subcategory.name}</p>
                 </div>

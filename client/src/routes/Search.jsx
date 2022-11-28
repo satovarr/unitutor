@@ -88,7 +88,7 @@ const Search = () => {
     //Get subcategories info
     useEffect(() => {
         if (params.category_id !== '') {
-            if (!selectedCat_subcats || params.category_id !== selectedCat_subcats.category_id) {
+            if (!selectedCat_subcats) {
                 getSubcategories(params.category_id)
                     .then(response => {
                         setSelectedCat_subcats({ category_id: params.category_id, subcategories: response, loading: false })
@@ -258,7 +258,7 @@ const Search = () => {
                                 name={'category_id'}
                                 value={params.category_id}
                                 onChange={onOptionChange}
-                                options={categories ? categories.map(category => ({ value: category.cat_id, display: category.name })) : null}
+                                options={categories && Array.isArray(categories)? categories.map(category => ({ value: category.cat_id, display: category.name })) : null}
                             />
                             <InputGroup
                                 label="Subcategoría"
@@ -275,7 +275,7 @@ const Search = () => {
                                 value={params.subcategory_id}
                                 onChange={onOptionChange}
                                 options={
-                                    !selectedCat_subcats?.subcategories || selectedCat_subcats?.loading ?
+                                    !selectedCat_subcats?.subcategories || selectedCat_subcats?.loading || !Array.isArray(selectedCat_subcats?.subcategories) ?
                                         null
                                         : selectedCat_subcats.subcategories.map(subcategory => ({ value: subcategory.subcat_id, display: subcategory.name }))
                                 }
@@ -316,7 +316,7 @@ const Search = () => {
                         </form>
                     </div>
                     {
-                        searchResults.length > 0 ?
+                        searchResults.length > 0 && Array.isArray(searchResults)?
                             <TutorshipsContainer tutorships={searchResults} />
                         : <p className="no-results">No se encontraron tutorías</p>
                     }

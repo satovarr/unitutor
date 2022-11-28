@@ -246,7 +246,7 @@ const Tutorships_Create = () => {
               error={errorMessageObj.category}
               onChange={onOptionChange}
               options={
-                categories
+                categories && Array.isArray(categories)
                   ? categories.map((category) => ({
                       value: category.cat_id,
                       display: category.name,
@@ -271,7 +271,8 @@ const Tutorships_Create = () => {
               onChange={onOptionChange}
               options={
                 !selectedCat_subcats?.subcategories ||
-                selectedCat_subcats?.loading
+                selectedCat_subcats?.loading || 
+                !Array.isArray(selectedCat_subcats?.subcategories)
                   ? null
                   : selectedCat_subcats.subcategories.map((subcategory) => ({
                       value: subcategory.subcat_id,

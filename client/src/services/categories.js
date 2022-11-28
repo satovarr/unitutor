@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/categories'
+const baseUrl = 'https://unitutor-production.up.railway.app/categories'
 
 const getCategories = async () => {
     let response = await axios.get(baseUrl)
@@ -12,12 +12,12 @@ const getSubcategories = async (id) => {
 }
 
 const getCategorybyId = async (id) => {
-    let response = await axios.get(`/category/name/${id}`)
+    let response = await axios.get(`https://unitutor-production.up.railway.app/category/name/${id}`)
     return response.data
 }
 
 const getSubcategorybyId = async (id) => {
-    let response = await axios.get(`/subcategory/name/${id}`)
+    let response = await axios.get(`https://unitutor-production.up.railway.app/subcategory/name/${id}`)
     return response.data
 }
 

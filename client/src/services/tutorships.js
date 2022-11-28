@@ -1,11 +1,11 @@
 import axios from 'axios'
-const baseUrl = '/tutorships'
+const baseUrl = 'https://unitutor-production.up.railway.app/tutorships'
 
 const createTutorship = async (payload) => {
     //Creates a tutorship, returns true if creation succeded,
     //or false otherwise
     try {
-        await axios.post('/create-tutorship', payload)
+        await axios.post('https://unitutor-production.up.railway.app/create-tutorship', payload)
         return true
     }
     catch (error) {
