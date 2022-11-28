@@ -1,42 +1,66 @@
 # unitutor
 
-## API documentation
+## Development documentation
 
-### set-up and running
+### Backend
 
 1. cd ./api
-2. create and activate virtual environment (Windows)
-  > pip install virtualenv
-  > python -m virtualvenv .venv
-  > venv/Scripts/activate
-  Ubuntu
-  > sudo apt-get install libmysqlclient-dev
-  > pip3 install mysqlclient
+2. create and activate virtual environment 
+
+    (Windows)
+
+    `pip install virtualenv`
+
+    `python -m virtualvenv .env`
+
+    `env/Scripts/activate`
+  
+    (Ubuntu) - to-do
+  
+    `sudo apt-get install libmysqlclient-dev`
+  
+    `pip3 install mysqlclient`
+
 3. install requirements
-  (.venv)> pip install -r requirements.txt 
-4. add .env to /app (depending on your connection)
-5. add the firebase key to the path: /api/serviceAccountKey.json
+
+    (.env)> `pip install -r requirements.txt`
+
+4. add the firebase key to the path: /api/serviceAccountKey.json
+
 6. uvicorn app.main:app --reload
 
-## Front End documentation
+### Frontend 
 
-### set-up and running
 1. cd ./client
-2. install node packages (requires previous NodeJS installation)
-  > npm install
-3. add .env to /client
-4. start development server
-  > npm start 
 
+2. install node packages (requires previous NodeJS installation)
+    
+    `npm install`
+
+3. add .env to /client
+
+4. start development server
+
+    `npm start` 
 
 - missing requirements.txt
 
-## Activate virtual environment
->> cd virtualenv/Scripts
 
->> activate
+# Backend Deployment
+The changes needed from dev to dep branches are
 
->> ../.. 
+1. move /api/. to /
 
-## Develompent run
->> uvicorn app:app --reload
+2. create requirements.txt
+
+    `pip install pip-chill`
+
+    `pip-chill --no-versiom > requirements.txt`
+
+3. create Procfile with running command inside
+    
+    `web: uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+
+4. create .python-version file
+
+    `3.11`
