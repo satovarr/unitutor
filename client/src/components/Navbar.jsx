@@ -9,7 +9,7 @@ import { useContext } from 'react'
 import { UserContext } from '../App'
 import { auth } from '../services/firebase.js'
 
-const Navbar = ({ goRegister}) => {
+const Navbar = () => {
 
     const navigate = useNavigate()
 
@@ -47,6 +47,10 @@ const Navbar = ({ goRegister}) => {
 
     const handleLogin = () => {
         navigate('/login')
+    }
+
+    const goRegister = () => {
+        navigate('/register')
     }
 
     const handleLogout = () => {
@@ -110,7 +114,7 @@ const Navbar = ({ goRegister}) => {
                                     </span>
                                     <div className="nav_dropdown content profile hidden">
                                         <p>Hola {currentUser.name?.split(' ')[0] || 'Usuario'}!</p>
-                                        <Link to='/chats'>Mis Conversaciones</Link>
+                                        {/* <Link to='/chats'>Mis Conversaciones</Link> */}
                                         <Link to='/tutorships'>Mis Tutorías</Link>
                                         <Link to='/about'>Sobre Nosotros</Link>
                                         <button onClick={handleLogout}>

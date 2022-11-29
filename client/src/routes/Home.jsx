@@ -12,13 +12,9 @@ const Home = () => {
 
     const navigate = useNavigate()
 
-    const goToRegister = () => {
-        navigate('/register')
-    }
-
     return (
         <div className="home_body">
-            <Navbar goRegister={goToRegister} navigate={navigate} auth={auth}/>
+            <Navbar auth={auth}/>
             <Banner navigate={navigate}/>
             <HowItWorks />
             <MainCategories />
