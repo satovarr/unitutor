@@ -87,8 +87,8 @@ const Search = () => {
 
     //Get subcategories info
     useEffect(() => {
-        if (params.category_id !== '') {
-            if (!selectedCat_subcats) {
+        if (!selectedCat_subcats?.subcategories) {
+            if(params.category_id !== '') {
                 getSubcategories(params.category_id)
                     .then(response => {
                         setSelectedCat_subcats({ category_id: params.category_id, subcategories: response, loading: false })
@@ -105,13 +105,26 @@ const Search = () => {
                         })
                     })
             }
-
+            else if (selectedCat_subcats?.category_id) {
+                getSubcategories(selectedCat_subcats.category_id)
+                    .then(response => {
+                        setSelectedCat_subcats({ category_id: selectedCat_subcats.category_id, subcategories: response, loading: false })
+                    })
+                    .catch(() => {
+                        handleModalChange({
+                            active: true,
+                            isSucessState: true,
+                            success: false,
+                            message: 'Ha ocurrido un error :(',
+                            message_description: 'Revisa tu conexión a internet o intenta de nuevo más tarde',
+                            isCloseable: true,
+                            acceptButtonText: 'Vale'
+                        })
+                    })
+            }
         }
-        else {
-            setSelectedCat_subcats(null)
-        }
 
-    }, [params])
+    }, [params, selectedCat_subcats])
 
     //Function to set modal params
     const handleModalChange = (modalParams) => {
@@ -126,6 +139,7 @@ const Search = () => {
                 let dropped = params
                 delete dropped['subcategory_id']
                 setParams({ ...dropped, [target.name]: target.value })
+                setSelectedCat_subcats({category_id: target.value})
                 
             }
             else {
