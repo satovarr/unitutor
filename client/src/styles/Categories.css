@@ -56,3 +56,9 @@
     left: 0;
     background-color: var(--secondary-color-300);
 }
+
+@media screen and (max-width: 500px) {
+    .categories.container {
+        padding: 40px 20px !important;
+    }
+}
