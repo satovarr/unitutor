@@ -213,16 +213,16 @@ def view_subcategory_code_class(
     path='/score/{tutoring_id}',
     tags=['View',],
     status_code=status.HTTP_200_OK,
-    summary= "View the scorres of a tutorship in the app"
+    summary= "View the scores of a tutorship in the app"
     )
 def view_score(
     tutoring_id: str,
     db: Session = Depends(get_db)
     ):
     """
-    # View info of a user
+    # View scores for a tutorship
     
-    This path operation obtains the info of a user in the database and returns a json with it.
+    This path operation obtains the scores for a tutorship in the database and returns a json with it.
     
     Return a status 200 and Json with the info of a user
     """

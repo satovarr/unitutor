@@ -187,15 +187,15 @@ async def verify_certificate(file: UploadFile, code_class: str):
     )
 def create_score(score: schemas.Score = Body(...), db: Session = Depends(get_db)):
     """
-    # Create tutorship
+    # Create score
     
-    This path operation create a tutorship in the app and save the information in the database
+    This route operation creates a score for a tutorial in the application and saves the information in the database.
     
     Parameters:
     - Request Body parameter:
-        - **tutorship: Tutorship** -> A tutorshio model with the name, description, value, category_id, subcategory_id and public_id
+        - **score: score** -> A score model with the score, tutoring_id, value
     
-    Return a status 201 
+    Return a status 200 
     """
     crud.post_score(db, score)
     return score
