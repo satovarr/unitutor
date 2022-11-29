@@ -23,9 +23,9 @@ def signin_user(token: dict = Body(...), db: Session = Depends(get_db)):
     raise HTTPException(status_code=404, detail="Invalid login")
 
 
-@router.get(
+@router.post(
     path='/profile-user',
-    tags=['view',],
+    tags=['Create',],
     status_code=status.HTTP_200_OK
     )
 def profile_user(token: dict = Body(...), db: Session = Depends(get_db)):
@@ -34,9 +34,9 @@ def profile_user(token: dict = Body(...), db: Session = Depends(get_db)):
         return crud.get_user_by_id(db, uuid)
     raise HTTPException(status_code=404, detail="Invalid user token")
 
-@router.get(
+@router.post(
     path='/public-user',
-    tags=['view',],
+    tags=['Create',],
     status_code=status.HTTP_200_OK
     )
 def public_user(token: dict = Body(...), db: Session = Depends(get_db)):
@@ -45,7 +45,9 @@ def public_user(token: dict = Body(...), db: Session = Depends(get_db)):
         return crud.get_user_public_id(db, uuid) 
 
 
-@router.post('/create-user')
+@router.post(
+    path='/create-user',
+    tags=['Create',])
 def create_user(token: dict = Body(...), user: schemas.User = Body(...), db: Session = Depends(get_db)):
     uuid = validate_token(token['accessToken'])
     if uuid:
