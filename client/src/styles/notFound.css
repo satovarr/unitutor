@@ -1,0 +1,48 @@
+.notfound {
+    margin: 100px auto 0 auto;
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+}
+
+.notfound .logo {
+    width: 300px;
+}
+
+.brokenpage {
+    height: 150px;
+}
+
+.notfound div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.notfound .heading {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 630px){
+    .notfound {
+        flex-flow: column-reverse;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .notfound div {
+        gap: 20px;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .notfound .logo {
+        width: 250px;
+    }
+
+    .notfound p {
+        width: 300px;
+    }
+}
