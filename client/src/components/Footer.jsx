@@ -3,6 +3,7 @@ import logo from '../imgs/UniTutor_logo.svg'
 import twitter from '../imgs/twitter.svg'
 import instagram from '../imgs/instagram.svg'
 import linkedIn from '../imgs/linkedIn.svg'
+import paypal from '../imgs/paypal.svg'
 import '../styles/componentStyles/footer.css'
 
 const Footer = () => {
@@ -27,6 +28,12 @@ const Footer = () => {
                 </a>
                 <a target="blank" href="https://www.linkedin.com/in/unitutor-app-916040258/">
                     <img alt='LinkedIn' src={linkedIn}/>
+                </a>
+            </div>
+            <div className="footer_donate">
+                <p>¿Quieres apoyarnos? Dona aquí:</p>
+                <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=QD72WE6WPBXDA">
+                    <img alt='PayPal' src={paypal}/>
                 </a>
             </div>
         </footer>
