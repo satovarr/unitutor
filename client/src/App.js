@@ -12,6 +12,7 @@ import TutorshipsInfo from './routes/TutorshipsInfo'
 import Search from './routes/Search'
 import Categories from './routes/Categories'
 import CategoriesCategory from './routes/CategoriesCategory'
+import AboutUs from './routes/AboutUs'
 
 // Context
 const UserContext = createContext();
@@ -66,6 +67,7 @@ function App() {
         <Router>
           <Routes>
             <Route>
+              <Route path='about' element={<AboutUs />} />
               <Route path='categories' element={<Categories />} />
               <Route path='categories/:cat_id' element={<CategoriesCategory />} />
               <Route path='search' element={<Search />} />
