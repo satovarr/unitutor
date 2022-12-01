@@ -70,3 +70,52 @@
 .aboutUs p {
     text-align: justify;
 }
+
+.aboutUs ul {
+    list-style: none;
+}
+
+.aboutUs ul div {
+    transform: scaleY(0);
+    transition: transform .4s;
+    pointer-events: none;
+    transform-origin: top;
+    background-color: var(--blueGrey-color-200);
+    border-radius: 10px;
+    height: 0;
+    padding: 0px 30px;
+}
+
+.aboutUs ul {
+    padding: 0;
+}
+
+.aboutUs ul h4 {
+    margin: 15px 0 0 0;
+    padding: 10px 50px 10px 30px;
+    border: 1px solid var(--blueGrey-color-300);
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.aboutUs ul h4:after {
+    content: url(../imgs/down.svg);
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    transition: transform .3s;
+}
+
+.aboutUs li.expand h4::after {
+    transform: translateY(-60%) rotate(180deg);
+}
+
+.aboutUs li.expand div {
+    height: auto;
+    padding: 10px 30px;
+    transform: scaleY(1);
+}

@@ -3,6 +3,12 @@ import Navbar from "../components/Navbar"
 import '../styles/AboutUs.css'
 
 const AboutUs = () => {
+
+    const toggleQuestions = (event) => {
+        let container = event.target.parentNode
+        container.classList.toggle('expand')
+    }
+
     return (
       <div className="aboutUs">
         <Navbar />
@@ -20,16 +26,52 @@ const AboutUs = () => {
                     <h2>Preguntas frecuentes</h2>
                     <ul>
                         <li>
-                            <h4>Pregunta 1</h4>
-                            <div>Hidden content</div>
+                            <h4 onClick={toggleQuestions}>¿Qué servicios ofrece UniTutor?</h4>
+                            <div>
+                                <p>
+                                    Facilitamos los servicios de tutorías académicas remuneradas, en áreas del conocimiento abordadas en carreras universitarias de la Universidad Nacional Sede Bogotá, en una variedad de materias, que incluyen matemáticas, Química, Circuitos entre otros. 
+                                </p>
+                            </div>
                         </li>
                         <li>
-                            <h4>Pregunta 2</h4>
-                            <div>Hidden content</div>
+                            <h4 onClick={toggleQuestions}>¿Cuánto cuestan sus servicios?</h4>
+                            <div>
+                                <p>
+                                    Los precios varían según el tutor que presta el servicio y el tema. Por favor contacta al tutor que desees para más detalles.
+                                </p>
+                            </div>
                         </li>
                         <li>
-                            <h4>Pregunta 3</h4>
-                            <div>Hidden content</div>
+                            <h4 onClick={toggleQuestions}>¿Cómo sé si un tutor académico es adecuado para mí?</h4>
+                            <div>
+                                <p>
+                                    Cada tutor puede agregar una descripción para llamar tu atención. Además, tu primera hora con un tutor será gratis para que sirva como prueba y decidas si quieres continuar de forma remunerada o si prefieres buscar otro tutor.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <h4 onClick={toggleQuestions}>¿Qué tipos de tutorías ofrece UniTutor?</h4>
+                            <div>
+                                <p>
+                                    Mediante nuestra plataforma tutores de asignaturas Universitarias ofrecen sus servicios en una variedad de materias que incluyen matemáticas, Química, Circuitos entre otros. 
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <h4 onClick={toggleQuestions}>¿Cómo empiezo con la tutoría académica?</h4>
+                            <div>
+                                <p>
+                                    Una vez encuentres al tutor de tu preferencia, contácta con este para acordar los detalles. 
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <h4 onClick={toggleQuestions}>¿Cuánto duran las sesiones de tutoría?</h4>
+                            <div>
+                                <p>
+                                    La duración de las sesiones las acuerdas tú con tu tutor. Sin embargo, ten en cuenta que el precio listado en las tutorías es un precio por hora, no por sesión. Por ende, sesiones más largas serán más costosas.
+                                </p>
+                            </div>
                         </li>
                     </ul>
                 </section>
