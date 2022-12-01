@@ -73,6 +73,20 @@
     width: 40px;
 }
 
+.footer_contact {
+    text-align: center;
+}
+
+.footer_contact p {
+    margin: 10px 0;
+    color: var(--blueGrey-color-white);
+}
+
+.footer_contact p:last-child {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
 /* Media queries */
 @media (max-width: 725px) {
     .footer {

@@ -13,23 +13,30 @@ const Footer = () => {
             <img src={logo} alt="UniTutor" />
             <p className='copyright'>Copyright © 2022 UniTutor</p>
             <div className='footer_links'>
-                <Link to={'/about'}>Términos de Servicio</Link>
+                <a target="blank" href="https://drive.google.com/file/d/165vu4pzH5FIyzA36kX4PKr7HYd_6Z4uk/view?usp=sharing">Manual de Usuario</a>
                 <p>|</p>
-                <Link to={'/about'}>Política de Privacidad</Link>
+                <Link to={'/about#policies'}>Políticas de Unitutor</Link>
                 <p>|</p>
-                <Link to={'/about'}>Sobre Nosotros</Link>
+                <Link to={'/about#us'}>Sobre Nosotros</Link>
             </div>
-            <div className="footer_socials">
-                <a target="blank" href="https://twitter.com/unitutor_app">
-                    <img alt='Twitter' src={twitter}/>
-                </a>
-                <a target="blank" href="https://www.instagram.com/unitutor.app/">
-                    <img alt='Instagram' src={instagram}/>
-                </a>
-                <a target="blank" href="https://www.linkedin.com/in/unitutor-app-916040258/">
-                    <img alt='LinkedIn' src={linkedIn}/>
-                </a>
+            <div className="footer_contact">
+                <p>Contáctanos:</p>
+                <div className="footer_socials">
+                    <a target="blank" href="https://twitter.com/unitutor_app">
+                        <img alt='Twitter' src={twitter} />
+                    </a>
+                    <a target="blank" href="https://www.instagram.com/unitutor.app/">
+                        <img alt='Instagram' src={instagram} />
+                    </a>
+                    <a target="blank" href="https://www.linkedin.com/in/unitutor-app-916040258/">
+                        <img alt='LinkedIn' src={linkedIn} />
+                    </a>
+                </div>
+                <p>
+                    unitutor.contacto@gmail.com
+                </p>
             </div>
+            
             <div className="footer_donate">
                 <p>¿Quieres apoyarnos? Dona aquí:</p>
                 <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=QD72WE6WPBXDA">
