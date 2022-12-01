@@ -119,3 +119,8 @@
     padding: 10px 30px;
     transform: scaleY(1);
 }
+
+.aboutUs div.team__columns {
+    display: flex;
+    justify-content: space-evenly;
+}

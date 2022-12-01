@@ -77,13 +77,21 @@ const AboutUs = () => {
                 </section>
                 <section className="team">
                     <h2>Nuestro equipo</h2>
-                    <p>Parla</p>
-                    <h4 className="bullets">Santiago Londoño</h4>
-                    <p>Parla</p>
-                    <h4 className="bullets">Santiago Tovar</h4>
-                    <p>Parla</p>
-                    <h4 className="bullets">Julián Sánchez</h4>
-                    <p>Parla</p>
+                    <p>Somos un equipo Scrum con habilidades complementarias. UniTutor es una idea de estudiantes para estudiante. Buscamos que la comunidad universitaria se pueda beneficiar de UniTutor y brindamos una mejor experiencia con mejoras y nuevas funcionalidades agilmente</p>
+                    <div className="aboutUs team__columns">
+                        <div>
+                            <h4 className="bullets">Santiago Londoño</h4>
+                            <p>Programador Frontend - Diseño UI UX</p>
+                        </div>
+                        <div>
+                            <h4 className="bullets">Santiago Tovar</h4>
+                            <p>Programador Full Stack (BE heavy)</p>
+                        </div>
+                        <div>
+                            <h4 className="bullets">Julián Sánchez</h4>
+                            <p>Programador Backend - Data Manager</p>
+                        </div>
+                    </div>
                 </section>
                 <section className="policies" id="policies">
                     <h2>Nuestras Políticas</h2>
