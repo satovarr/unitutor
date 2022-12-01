@@ -1,5 +1,8 @@
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
+import santiagoL from '../imgs/londono-team.jpeg'
+import santiagoT from '../imgs/santiago-team.jpg'
+import julian from '../imgs/julian-team.jpeg'
 import '../styles/AboutUs.css'
 
 const AboutUs = () => {
@@ -13,7 +16,7 @@ const AboutUs = () => {
       <div className="aboutUs">
         <Navbar />
             <div className="aboutUs content">
-                <h1 id="us">Sobre UniTutor</h1>
+                <h1 id="us" name="us">Sobre UniTutor</h1>
                 <section className="who_we_are">
                     <h2>¿Quiénes somos?</h2>
                     <p>UniTutor es un proyecto que facilita a los estudiantes universitarios prestar sus servicios de tutorías académicas remuneradas en las áreas temáticas de sus carreras universitarias de la Universidad Nacional Sede Bogotá. Los tutores pueden establecer sus propios términos y tarifas para sus tutorías, así como buscar aquellas que satisfagan sus necesidades. Además, UniTutor conecta a los usuarios ofreciendo tutoriales a quienes estén interesados.</p>
@@ -80,26 +83,34 @@ const AboutUs = () => {
                     <p>Somos un equipo Scrum con habilidades complementarias. UniTutor es una idea de estudiantes para estudiante. Buscamos que la comunidad universitaria se pueda beneficiar de UniTutor y brindamos una mejor experiencia con mejoras y nuevas funcionalidades agilmente</p>
                     <div className="aboutUs team__columns">
                         <div>
+                            <img alt="" src={santiagoL} />
                             <h4 className="bullets">Santiago Londoño</h4>
                             <p>Programador Frontend - Diseño UI UX</p>
                         </div>
                         <div>
+                            <img alt="" src={santiagoT}/>
                             <h4 className="bullets">Santiago Tovar</h4>
                             <p>Programador Full Stack (BE heavy)</p>
                         </div>
                         <div>
+                            <img alt="" src={julian} />
                             <h4 className="bullets">Julián Sánchez</h4>
                             <p>Programador Backend - Data Manager</p>
                         </div>
                     </div>
                 </section>
-                <section className="policies" id="policies">
+                <section className="policies" id="policies" name="policies">
                     <h2>Nuestras Políticas</h2>
-                    <p>Parla</p>
+                    <p>Al usar nuestros servicios, estás aceptando la política de privacidad y los términos y condiciones que vamos a explicar. Por ello, es importante que las conozcas.</p>
                     <h4 className="bullets">Política de privacidad</h4>
-                    <p>Parla</p>
+                    <p>Al usar nuestros servicios, estás aceptando el decreto 1377 de 2013 y el Habeas Data en la cual tus datos personales podrán ser recolectados, tratados y protegidos conforme a lo que dispone la ley. De acuerdo a la ley 44 de 1993 sobre los derechos de autor, todo el desarrollo realizado tanto físico como virtual (software) están protegidos y patentados</p>
                     <h4 className="bullets">Términos & Condiciones</h4>
-                    <p>Parla</p>
+                    <p>1. Todas las sesiones de tutoría deben concertarse previamente con el tutor y aprobarse con anticipación.</p>
+                    <p>2. Todos los servicios de tutoría están sujetos a la disponibilidad del tutor.</p>
+                    <p>3. Las cancelaciones tardías (con menos de 24 horas de anticipación) de las sesiones de tutoría estarán sujetas a la discreción del tutor y pueden estar sujetas a una tarifa de cancelación.</p>
+                    <p>4. Los tutores no asesorarán ni orientarán sobre ninguna titulación académica o prueba que el alumno esté realizando o pretenda realizar.</p>
+                    <p>5. Los servicios de tutoría pueden ser rescindidos en cualquier momento por el tutor o el estudiante con notificación y entendimiento adecuados.</p>
+                    <p>6. La primera hora de los servicios de tutoría deben ser libres de costo para que los usuarios puedan decidir si invertir su dinero en un tutor o no.</p>
                 </section>
             </div>
         <Footer />

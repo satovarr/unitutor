@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    width: 1440px;
+    width: calc(100vw - 40px);
+    max-width: 1440px;
     margin: 40px auto;
-    padding-left: 40px;
+    padding: 0 40px;
 }
 
 .aboutUs h1 {
@@ -120,7 +121,36 @@
     transform: scaleY(1);
 }
 
+.aboutUs .team img{
+    display: block;
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
 .aboutUs div.team__columns {
     display: flex;
     justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.aboutUs .team__columns div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (max-width: 1023px) {
+    .aboutUs div.team__columns {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 429px) {
+    .aboutUs.content {
+       padding: 0 10px;
+    }
 }

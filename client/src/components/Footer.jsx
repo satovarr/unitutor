@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 import logo from '../imgs/UniTutor_logo.svg'
 import twitter from '../imgs/twitter.svg'
 import instagram from '../imgs/instagram.svg'
@@ -15,9 +15,9 @@ const Footer = () => {
             <div className='footer_links'>
                 <a target="blank" href="https://drive.google.com/file/d/165vu4pzH5FIyzA36kX4PKr7HYd_6Z4uk/view?usp=sharing">Manual de Usuario</a>
                 <p>|</p>
-                <Link to={'/about#policies'}>Políticas de Unitutor</Link>
+                <HashLink to={'/about#policies'}>Políticas de Unitutor</HashLink>
                 <p>|</p>
-                <Link to={'/about#us'}>Sobre Nosotros</Link>
+                <HashLink to={'/about/#us'}>Sobre Nosotros</HashLink>
             </div>
             <div className="footer_contact">
                 <p>Contáctanos:</p>
