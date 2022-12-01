@@ -5,6 +5,7 @@ import { InputGroup } from '../InputGroup'
 import { GoogleButton } from '../Button'
 import { auth, createUserWithEmailAndPassword, provider, signInWithRedirect, getRedirectResult } from '../../services/firebase'
 import { useNavigate } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 
 export const FormFirstStepComponent = ({ info, setInfo, setFirstStep, handleModalChange}) => {  
   
@@ -154,6 +155,8 @@ export const FormFirstStepComponent = ({ info, setInfo, setFirstStep, handleModa
             password_error = {errorMessageObj.password_error}
               confirmation_error={errorMessageObj.confirmation_error}
         />
+
+        <p>Al hacer uso de nuestros servicios, estás aceptando <HashLink to="/about#policies" target="blank">nuestras condiciones</HashLink></p>
 
         <div className='buttonsContainer line'>
                 <Button text={'Continuar con el correo'}

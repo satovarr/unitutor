@@ -80,7 +80,7 @@ const AboutUs = () => {
                 </section>
                 <section className="team">
                     <h2>Nuestro equipo</h2>
-                    <p>Somos un equipo Scrum con habilidades complementarias. UniTutor es una idea de estudiantes para estudiante. Buscamos que la comunidad universitaria se pueda beneficiar de UniTutor y brindamos una mejor experiencia con mejoras y nuevas funcionalidades agilmente</p>
+                    <p>Somos un equipo Scrum con habilidades complementarias. UniTutor es una idea de estudiantes para estudiantes. Buscamos que la comunidad universitaria se pueda beneficiar de UniTutor y brindamos una mejor experiencia con mejoras y nuevas funcionalidades agilmente</p>
                     <div className="aboutUs team__columns">
                         <div>
                             <img alt="" src={santiagoL} />
