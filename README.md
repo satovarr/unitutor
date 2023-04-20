@@ -47,7 +47,7 @@
 
 
 # Backend Deployment
-The changes needed from dev to dep branches are
+The changes needed from dev to dep branches are:
 
 1. move /api/. to /
 
